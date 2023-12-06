@@ -4,15 +4,17 @@
  */
 package ec.edu.espe.dailyDev.model;
 
+import java.util.Date;
+
 /**
  *
  * @author Olivier Paspuel
  */
 public class Reminder {
-    Sring name;
+    String name;
     String description;
     Date remindDate;
     Date deadline;
     Date creationTime;
-    Task = associatedTask;
+    Task task = associatedTask;
 }

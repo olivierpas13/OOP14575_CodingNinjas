@@ -4,6 +4,9 @@
  */
 package ec.edu.espe.dailyDev.model;
 
+import java.util.Date;
+import java.util.UUID;
+
 /**
  *
  * @author Olivier Paspuel
