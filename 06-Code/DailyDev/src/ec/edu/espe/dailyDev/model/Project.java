@@ -41,6 +41,18 @@ public class Project {
     public Task[] getTasks() {
         return tasks;
     }
+
+    public void setAssignedTeam(Team AssignedTeam) {
+        this.AssignedTeam = AssignedTeam;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTasks(Task[] tasks) {
+        this.tasks = tasks;
+    }
     
     
     
