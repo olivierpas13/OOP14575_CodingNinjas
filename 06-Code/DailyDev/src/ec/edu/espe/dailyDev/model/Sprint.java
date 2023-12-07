@@ -14,9 +14,23 @@ import java.util.UUID;
  */
 public class Sprint {
 
-    UUID id;
-    String name;
-    Date startDate;
-    Date endDate;
-    List<Task> tasks;
+    private UUID id;
+    private String name;
+    private Date startDate;
+    private Date endDate;
+    private List<Task> tasks;
+
+    public Sprint(UUID id, String name, Date startDate, Date endDate, List<Task> tasks) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tasks = tasks;
+    }
+
+    @Override
+    public String toString() {
+        return "Sprint{" + "id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", tasks=" + tasks + '}';
+    }
+    
 }

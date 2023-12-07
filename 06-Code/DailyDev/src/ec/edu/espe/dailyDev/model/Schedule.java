@@ -12,7 +12,19 @@ import java.util.List;
  * @author Olivier Paspuel
  */
 public class Schedule {
-    List<Task> tasks;
-    List<Reminder> reminders;
-    List<Date> dates;
+    private List<Task> tasks;
+    private List<Reminder> reminders;
+    private List<Date> dates;
+
+    public Schedule(List<Task> tasks, List<Reminder> reminders, List<Date> dates) {
+        this.tasks = tasks;
+        this.reminders = reminders;
+        this.dates = dates;
+    }
+
+    @Override
+    public String toString() {
+        return "Schedule{" + "tasks=" + tasks + ", reminders=" + reminders + ", dates=" + dates + '}';
+    }
+
 }
