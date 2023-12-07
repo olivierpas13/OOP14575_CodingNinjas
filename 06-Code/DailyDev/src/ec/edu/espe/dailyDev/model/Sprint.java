@@ -30,7 +30,78 @@ public class Sprint {
 
     @Override
     public String toString() {
-        return "Sprint{" + "id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", tasks=" + tasks + '}';
+        return "Sprint{" + "id=" + getId() + ", name=" + getName() + ", startDate=" + getStartDate() + ", endDate=" + getEndDate() + ", tasks=" + getTasks() + '}';
     }
+
+    /**
+     * @return the id
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    /**
+     * @return the endDate
+     */
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    /**
+     * @param endDate the endDate to set
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * @return the tasks
+     */
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    /**
+     * @param tasks the tasks to set
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+    
     
 }
