@@ -15,6 +15,13 @@ public class Project {
         this.name = name;
         this.tasks = tasks;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" + "AssignedTeam=" + AssignedTeam + ", name=" + name + ", tasks=" + tasks + '}';
+    }
+    
+    
     
     
 }
