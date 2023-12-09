@@ -1,6 +1,7 @@
 package ec.edu.espe.dailyDev.view;
 
-import ec.edu.espe.dailyDev.model.User;
+import ec.edu.espe.dailyDev.utils.LandingPage;
+
 
 /**
  *
@@ -8,7 +9,7 @@ import ec.edu.espe.dailyDev.model.User;
  */
 public class DailyDevSystem {
     public static void main(String[] args) {
-        User user1 = new User("Olivier", "Paspuel");
-        System.out.println(user1);
+
+        LandingPage.showLandingPage();
     }
 }

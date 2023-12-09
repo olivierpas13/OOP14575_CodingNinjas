@@ -4,6 +4,8 @@
  */
 package ec.edu.espe.dailyDev.model;
 
+import ec.edu.espe.dailyDev.utils.PasswordHandler;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -13,19 +15,33 @@ import java.util.UUID;
 public class User {
 
     private final UUID id;
-    private String name;
-    private String lastName;
-    Task[] assignedTasks;
+    private String username;
+    private String encryptedPassword;
+    private ArrayList<Task> assignedTasks;
 
-    public User(String name, String lastName) {
+    private User(String username, String password) {
         this.id = UUID.randomUUID();
-        this.name = name;
-        this.lastName = lastName;
+        this.username = username;
+        this.encryptedPassword = password;
     }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", lastName=" + lastName + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", encryptedPassword=" + encryptedPassword + ", assignedTasks=" + assignedTasks + '}';
+    }
+
+    public static User login(String username, String password) {
+        // TODO
+        PasswordHandler.decryptPassword(password);
+
+        System.out.println("Logged in\n");
+        return new User("test", "password");
+    }
+
+    public static User register(String username, String password) {
+        String encryptedPassword = PasswordHandler.encryptPassword(password);
+        return new User(username, encryptedPassword);
+
     }
 
     /**
@@ -36,31 +52,45 @@ public class User {
     }
 
     /**
-     * @return the name
+     * @return the username
      */
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param name the name to set
+     * @param username the username to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
-     * @return the lastName
+     * @return the encryptedPassword
      */
-    public String getLastName() {
-        return lastName;
+    public String getEncryptedPassword() {
+        return encryptedPassword;
     }
 
     /**
-     * @param lastName the lastName to set
+     * @param encryptedPassword the encryptedPassword to set
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
+    }
+
+    /**
+     * @return the assignedTasks
+     */
+    public ArrayList<Task> getAssignedTasks() {
+        return assignedTasks;
+    }
+
+    /**
+     * @param assignedTasks the assignedTasks to set
+     */
+    public void setAssignedTasks(ArrayList<Task> assignedTasks) {
+        this.assignedTasks = assignedTasks;
     }
 
 }
