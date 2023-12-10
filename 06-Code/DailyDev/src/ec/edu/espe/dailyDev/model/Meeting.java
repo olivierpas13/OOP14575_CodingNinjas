@@ -1,6 +1,8 @@
 
 package ec.edu.espe.dailyDev.model;
 
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,8 +25,10 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return "Meeting{" + "id=" + getId() + ", title=" + getTitle()  + ", startTime=" + getStartTime() + ", endTime=" + getEndTime() + ", participants=" + getParticipants()  + '}';
+        return "Meeting{" + "id=" + id + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime + ", participants=" + participants + '}';
     }
+
+
     
 
     public Meeting(UUID id, String title, String objective, Date startTime, Date endTime, List<User> participants, String sketck) {
@@ -93,10 +97,13 @@ public class Meeting {
     
     
     public void register(){ 
-        System.out.println("---Meeting register...");
         
-    String title = getUserInput("title");
-    Date startTime = getDateTimeInput("w");
+         
+        System.out.println("---Meeting register...");
+        String title = getUserInput("title");
+        Date startTime = getDateTimeInput("start time");
+        Date endTime = getDateTimeInput("end Time");
+    
         
         
      
@@ -106,15 +113,18 @@ public class Meeting {
         return consoleScanner.nextLine();
        
     }
+    
     public Date getDateTimeInput(String message){
+        System.out.println("Enter " + message + ":");
         SimpleDateFormat dateFormat = new SimpleDateFormat("DD/MM/YYY HH:mm");
-        Date dateTime = null;
-        
-        
-        
-        
-        
-        return dateTime;
+           
+        try{
+            return dateFormat.parse(consoleScanner.nextLine());
+        }catch(ParseException e){
+               e.printStackTrace();
+                return null;
+                
+                }
     
    }
 }
