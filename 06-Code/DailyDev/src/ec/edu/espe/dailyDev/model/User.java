@@ -1,16 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ec.edu.espe.dailyDev.model;
 
-import ec.edu.espe.dailyDev.utils.PasswordHandler;
+import ec.edu.espe.dailyDev.utils.PasswordHandler;  // Importa la clase PasswordHandler
 import java.util.ArrayList;
 import java.util.UUID;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author CodingNinjas 
  */
 public class User {
 
@@ -19,7 +15,7 @@ public class User {
     private String encryptedPassword;
     private ArrayList<Task> assignedTasks;
 
-    private User(String username, String password) {
+    User(String username, String password) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.encryptedPassword = password;
@@ -31,17 +27,20 @@ public class User {
     }
 
     public static User login(String username, String password) {
-        // TODO
-        PasswordHandler.decryptPassword(password);
+        // Necesitas proporcionar el valor de desplazamiento (shift) al desencriptar
+        int shift = 0; // Puedes ajustar este valor según tu lógica
+        String decryptedPassword = PasswordHandler.decryptPassword(password, shift);
 
         System.out.println("Logged in\n");
-        return new User("test", "password");
+        return new User(username, decryptedPassword);
     }
 
     public static User register(String username, String password) {
-        String encryptedPassword = PasswordHandler.encryptPassword(password);
-        return new User(username, encryptedPassword);
+        // Necesitas proporcionar el valor de desplazamiento (shift) al encriptar
+        int shift = 0; // Puedes ajustar este valor según tu lógica
+        String encryptedPassword = PasswordHandler.encryptPassword(password, shift);
 
+        return new User(username, encryptedPassword);
     }
 
     /**
