@@ -10,7 +10,7 @@ import java.util.UUID;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author CodingNinjas 
  */
 public class Sprint {
 

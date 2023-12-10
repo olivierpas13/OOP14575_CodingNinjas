@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author CodingNinjas 
  */
 public class LandingPage {
 

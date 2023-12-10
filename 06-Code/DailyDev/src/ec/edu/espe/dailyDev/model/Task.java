@@ -1,4 +1,3 @@
-
 package ec.edu.espe.dailyDev.model;
 
 import java.util.Date;
@@ -6,7 +5,7 @@ import java.util.UUID;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author CodingNinjas 
  */
 public class Task {
     private UUID id;

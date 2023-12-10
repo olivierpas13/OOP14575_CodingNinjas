@@ -5,7 +5,7 @@ import ec.edu.espe.dailyDev.utils.LandingPage;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author CodingNinjas 
  */
 public class DailyDevSystem {
     public static void main(String[] args) {
