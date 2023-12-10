@@ -12,7 +12,11 @@ public class Reminder {
     private Date remindDate;
     private Date deadline;
     private Date creationTime;
+<<<<<<< HEAD
     private Task task; //=associatedTask;
+=======
+ //   private Task task = associatedTask;
+>>>>>>> a3c3d14373b8cf26ec2b9bb0f6f98e67fefba536
 
     public Reminder(String name, String description, Date remindDate, Date deadline, Date creationTime) {
         this.name = name;
@@ -92,19 +96,6 @@ public class Reminder {
         this.creationTime = creationTime;
     }
 
-    /**
-     * @return the task
-     */
-    public Task getTask() {
-        return task;
-    }
-
-    /**
-     * @param task the task to set
-     */
-    public void setTask(Task task) {
-        this.task = task;
-    }
-    
+   
     
 }
