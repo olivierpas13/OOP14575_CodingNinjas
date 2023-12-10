@@ -9,7 +9,6 @@ import ec.edu.espe.dailyDev.utils.LandingPage;
  */
 public class DailyDevSystem {
     public static void main(String[] args) {
-
         LandingPage.showLandingPage();
     }
 }
