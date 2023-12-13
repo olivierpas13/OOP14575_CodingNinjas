@@ -12,8 +12,8 @@ public class Team {
     User[] users;
     String name;
     
-        public static ArrayList<Team> getFromFile() {
-        return FileHandler.readFile("artists.json", new TypeToken<ArrayList<Team>>() {
+        public static ArrayList<Team> getTeamsFromFile() {
+        return FileHandler.readFile("teams.json", new TypeToken<ArrayList<Team>>() {
         }.getType());
     }
 
