@@ -8,16 +8,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.TimeZone;
+
 import java.util.UUID;
 
-/**
- *
- * author CodingNinjas
- */
 public class Meeting {
 
-    static Scanner consoleScanner = new Scanner(System.in);
+    private static final Scanner consoleScanner = new Scanner(System.in);
+    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     private UUID id;
     private String title;
@@ -25,16 +22,15 @@ public class Meeting {
     private Date endTime;
     private List<User> participants;
 
-    // Nuevo: ArrayList para almacenar los registros de reuniones
-    private static List<Meeting> meetingsList = new ArrayList<>();
-    private static List<User> userList = new ArrayList<>();
+    private static final List<Meeting> meetingsList = new ArrayList<>();
+    private static final List<User> userList = new ArrayList<>();
 
     @Override
     public String toString() {
-        return "Meeting{" + "id=" + id + ", title='" + title + '\'' + ", startTime=" + startTime + ", endTime=" + endTime + ", participants=" + participants + '}';
+        return "Meeting{" + "id=" + id + ", title='" + title + '\'' + ", startTime=" + startTime +
+                ", endTime=" + endTime + ", participants=" + participants + '}';
     }
 
-    // Constructor privado para crear una reunión con ID aleatorio
     private Meeting(String title, Date startTime, Date endTime, List<User> participants) {
         this.id = UUID.randomUUID();
         this.title = title;
@@ -45,34 +41,34 @@ public class Meeting {
     
     public static void create() {
         System.out.println("Creating a new meeting...");
-        // Lógica para crear una reunión
+  
         System.out.println("Meeting created!");
     }
 
     public static void show() {
         System.out.println("Showing meetings...");
         // Lógica para mostrar reuniones
-        System.out.println("No meetings found.");  // Ajusta según tu lógica real
+        System.out.println("No meetings found.");  
         MenuUtils.backToMainMenu();
     }
 
     public static void update() {
         System.out.println("Updating a meeting...");
-        // Lógica para la actualización de reuniones
+ 
         System.out.println("Meeting updated!");
         MenuUtils.backToMainMenu();
     }
 
     public static void complete() {
         System.out.println("Completing a meeting...");
-        // Lógica para completar reuniones
+ 
         System.out.println("Meeting completed!");
         MenuUtils.backToMainMenu();
     }
 
     public static void delete() {
         System.out.println("Deleting a meeting...");
-        // Lógica para eliminar reuniones
+
         System.out.println("Meeting deleted!");
         MenuUtils.backToMainMenu();
     }
@@ -114,9 +110,15 @@ public class Meeting {
         this.participants = participants;
     }
 
-// Nuevo: Método para registrar una reunión con ID aleatorio
-    public static void register() {
+    private static List<Meeting> getMeetingsList() {
+        return meetingsList;
+    }
 
+    private static List<User> getUserList() {
+        return userList;
+    }
+
+    public static void register() {
         System.out.println("---Meeting register...");
         String title = getUserInput("title");
         Date startTime;
@@ -132,24 +134,19 @@ public class Meeting {
             endTime = getDateTimeInput("end Time");
             if (shouldExit(endTime)) {
                 System.out.println("Registration canceled. Exiting...");
-                return; // Salir si el usuario lo elige
+                return;
             }
 
-            if (endTime.before(startTime) || startTime.before(new Date())) {
+            if (!isValidMeetingTime(startTime, endTime)) {
                 System.out.println("Invalid dates. Make sure the end time is after start time and start time is not in the past.");
-            } else if (endTime.equals(startTime)) {
-                System.out.println("End time should be after start time. Please enter a valid end time.");
-            } else if (!areDatesInSameDay(startTime, endTime)) {
-                System.out.println("Start time and end time should be in the same day. Please enter valid dates.");
             }
-        } while (endTime.before(startTime) || startTime.before(new Date()) || endTime.equals(startTime) || !areDatesInSameDay(startTime, endTime));
+        } while (!isValidMeetingTime(startTime, endTime));
 
         List<User> participants = getParticipantsList();
 
         if (participants != null) {
-            Meeting newMeeting = new Meeting(title, startTime, endTime, participants);
-            meetingsList.add(newMeeting);
-            System.out.println("Meeting registered successfully!");
+            Meeting newMeeting = createMeeting(title, startTime, endTime, participants);
+            System.out.println("Meeting registered successfully! ID: " + newMeeting.getId());
         } else {
             System.out.println("Make sure to have registered participants before creating a meeting.");
         }
@@ -161,7 +158,16 @@ public class Meeting {
         return !userInput.isEmpty();
     }
 
-// Nuevo: Método para verificar si dos fechas están en el mismo día
+    private static boolean isValidMeetingTime(Date startTime, Date endTime) {
+        return !endTime.before(startTime) && startTime.after(new Date());
+    }
+
+    private static Meeting createMeeting(String title, Date startTime, Date endTime, List<User> participants) {
+        Meeting newMeeting = new Meeting(title, startTime, endTime, participants);
+        getMeetingsList().add(newMeeting);
+        return newMeeting;
+    }
+
     private static boolean areDatesInSameDay(Date date1, Date date2) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         return sdf.format(date1).equals(sdf.format(date2));
@@ -183,13 +189,12 @@ public class Meeting {
 
         return participants;
     }
-    // Método para seleccionar un usuario existente por nombre de usuario o ID
 
     private static User selectUser() {
         System.out.println("Select a user by name or ID:");
         String userInput = consoleScanner.nextLine();
 
-        for (User user : userList) {
+        for (User user : getUserList()) {
             if (user.getUsername().equalsIgnoreCase(userInput) || user.getId().toString().equalsIgnoreCase(userInput)) {
                 return user;
             }
@@ -197,7 +202,6 @@ public class Meeting {
         return null;
     }
 
-    // Método para obtener la entrada del usuario
     public static String getUserInput(String message) {
         System.out.println("Enter " + message + ": ");
         return consoleScanner.nextLine();
@@ -205,40 +209,24 @@ public class Meeting {
 
     public static Date getDateTimeInput(String message) {
         System.out.println("Enter " + message + " (format: DD/MM/YYYY HH:mm):");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT-5")); // Configurar la zona horaria de Ecuador
 
         while (true) {
             try {
                 String userInput = consoleScanner.nextLine();
                 if (userInput.trim().isEmpty()) {
-                    throw new ParseException("Empty input",0);
+                    throw new ParseException("Empty input", 0);
                 }
 
-                Date date = dateFormat.parse(userInput);
+                Date date = DATE_FORMATTER.parse(userInput);
 
-                // Verificar el rango de fechas (30 días)
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(date);
                 cal.add(Calendar.DAY_OF_MONTH, 30);
 
-                // Verificar el rango de minutos (60 minutos), meses (12 meses) y horas (24 horas)
-                Calendar calMaxMinutes = Calendar.getInstance();
-                calMaxMinutes.add(Calendar.MINUTE, 60);
-
-                Calendar calMaxMonths = Calendar.getInstance();
-                calMaxMonths.add(Calendar.MONTH, 12);
-
-                Calendar calMaxHours = Calendar.getInstance();
-                calMaxHours.add(Calendar.HOUR_OF_DAY, 24);
-
-                if (cal.getTime().after(new Date())
-                        && calMaxMinutes.getTime().after(date)
-                        && calMaxMonths.getTime().after(date)
-                        && calMaxHours.getTime().after(date)) {
+                if (isValidDateTimeRange(date, cal.getTime())) {
                     return date;
                 } else {
-                    throw new ParseException("Invalid date/time. Maximum allowed range is 30 days, 60 minutes, 12 months, and 24 hours from now.", 0);
+                    throw new ParseException("Invalid date/time. Maximum allowed range is 30 days from now.", 0);
                 }
             } catch (ParseException e) {
                 System.out.println("Invalid date/time format or out of range. Please enter the date/time in the correct format.");
@@ -246,18 +234,8 @@ public class Meeting {
         }
     }
 
-// Método para imprimir todas las reuniones registradas
-    public static void printAllMeetings() {
-        System.out.println("All Meetings:");
-        for (Meeting meeting : meetingsList) {
-            System.out.println(meeting);
-        }
+    private static boolean isValidDateTimeRange(Date date, Date maxDate) {
+        return date.after(new Date()) && date.before(maxDate);
     }
 
-    public static void printAllUsers() {
-        System.out.println("--- All Users ---");
-        for (User user : userList) {
-            System.out.println(user);
-        }
-    }
 }
