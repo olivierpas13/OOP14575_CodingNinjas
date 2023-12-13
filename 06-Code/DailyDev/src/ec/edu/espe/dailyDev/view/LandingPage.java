@@ -7,8 +7,7 @@ import ec.edu.espe.dailyDev.model.Sprint;
 import ec.edu.espe.dailyDev.model.Task;
 import ec.edu.espe.dailyDev.model.Team;
 import ec.edu.espe.dailyDev.model.User;
-import java.util.ArrayList;
-import java.util.List;
+import ec.edu.espe.dailyDev.utils.MenuUtils;
 import java.util.Scanner;
 
 
@@ -20,24 +19,28 @@ import java.util.Scanner;
 public class LandingPage {
 
     private static final Scanner scanner = new Scanner(System.in);
-
-    public static void showLandingPage() throws Exception {
+    
+        public static void showLandingPage() throws Exception {
         int option;
 
+        System.out.println("Daily Dev System\n");
+        System.out.println("Select one option please\n");
+        System.out.println("1. Login to an existing account\n2. Create a new account");
+
         do {
-            System.out.println("Daily Dev System\n");
-            System.out.println("Select one option please\n");
-            System.out.println("1. Login to an existing account\n2. Create a new account");
-
             option = scanner.nextInt();
-            scanner.nextLine();  // Consumir la nueva línea pendiente
-
-            switch (option) {
-                case 1 -> showLogin();
-                case 2 -> showRegistration();
-                default -> System.out.println("Invalid option. Please try again.");
-            }
+            scanner.nextLine(); // Consume la nueva línea pendiente después de nextInt
         } while (option != 1 && option != 2);
+
+        for (int i = 0; i < 50; i++) {
+            System.out.print("\n\n\n");
+        }
+
+        switch (option) {
+            case 1 -> showLogin();
+            case 2 -> showRegistration();
+            default -> throw new AssertionError();
+        }
     }
 
     private static void showLogin() throws Exception {
@@ -55,6 +58,7 @@ public class LandingPage {
             try {
                 user = User.login(username, password);
                 System.out.println("Login successful");
+                showMainMenu();
             } catch (IllegalArgumentException e) {
                 System.err.println(e.getMessage());
                 System.out.println("Invalid username or password. Please try again.");
@@ -82,79 +86,43 @@ public class LandingPage {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        showLandingPage();
-    }
-
-    public static void showLandingPage() {
-        int option;
-
-        System.out.println("Daily Dev System\n");
-        System.out.println("Select one option please\n");
-        System.out.println("1. Login to an existing account\n2. Create a new account");
-
-        do {
-            option = scanner.nextInt();
-            scanner.nextLine(); // Consume la nueva línea pendiente después de nextInt
-        } while (option != 1 && option != 2);
-
-        for (int i = 0; i < 50; i++) {
-            System.out.print("\n\n\n");
-        }
-
-        switch (option) {
-            case 1:
-                showLogin();
-                break;
-            case 2:
-                showRegistration();
-                break;
-            default:
-                throw new AssertionError();
-        }
-    }
-
-    private static void showLogin() {
-        // Implementa la lógica de login aquí
-    }
-
-    private static void showRegistration() {
-        User user = null;
-
-        do {
-            System.out.println("Registration\n");
-
-            System.out.println("Username:\n");
-            String username = scanner.nextLine();
-
-            // Verificar si el usuario ya existe en la lista en memoria
-            if (usernameExistsInMemory(username)) {
-                System.out.println("Username already exists. Please choose another username.");
-                continue;
-            }
-
-            try {
-                // Obtener una contraseña válida
-                String password = getPassword();
-
-                // Encriptar la contraseña antes de guardarla en el JSON
-                EncryptedPassword encryptedPassword = PasswordHandler.encryptPassword(password);
-
-                // Crear el objeto de usuario
-                user = new User(username, encryptedPassword.getEncryptedPassword());
-                user.setSalt(encryptedPassword.getSalt());
-
-                // Guardar el usuario en la lista en memoria y en el archivo JSON
-                users.add(user);
-                user.saveToFile();
-
-                System.out.println("Registration successful");
-            } catch (IllegalArgumentException e) {
-                System.err.println(e.getMessage());
-                System.out.println("Registration failed. Please try again.");
-            }
-        } while (user == null);
-    }
+//    private static void showRegistration() {
+//        User user = null;
+//
+//        do {
+//            System.out.println("Registration\n");
+//
+//            System.out.println("Username:\n");
+//            String username = scanner.nextLine();
+//
+//            // Verificar si el usuario ya existe en la lista en memoria
+//            if (usernameExistsInMemory(username)) {
+//                System.out.println("Username already exists. Please choose another username.");
+//                continue;
+//            }
+//
+//            try {
+//                // Obtener una contraseña válida
+//                String password = getPassword();
+//
+//                // Encriptar la contraseña antes de guardarla en el JSON
+//                EncryptedPassword encryptedPassword = PasswordHandler.encryptPassword(password);
+//
+//                // Crear el objeto de usuario
+//                user = new User(username, encryptedPassword.getEncryptedPassword());
+//                user.setSalt(encryptedPassword.getSalt());
+//
+//                // Guardar el usuario en la lista en memoria y en el archivo JSON
+//                users.add(user);
+//                user.saveToFile();
+//
+//                System.out.println("Registration successful");
+//            } catch (IllegalArgumentException e) {
+//                System.err.println(e.getMessage());
+//                System.out.println("Registration failed. Please try again.");
+//            }
+//        } while (user == null);
+//    }
     
     public static void showMainMenu() {
         int optionMain;
@@ -286,18 +254,18 @@ public class LandingPage {
             default -> System.out.println("Invalid option. Please try again.");
         }
     } while (optionTeam != 6);
-    }
+    }}
 
-    private static boolean usernameExistsInMemory(String username) {
-        return users.stream().anyMatch(user -> user.getUsername().equals(username));
-    }
+//    private static boolean usernameExistsInMemory(String username) {
+//        return users.stream().anyMatch(user -> user.getUsername().equals(username));
+//    }
 
-    private static String getPassword() {
-        String password;
-        do {
-            System.out.println("Password:\n");
-            password = scanner.nextLine();
-        } while (password == null || password.trim().isEmpty());
-        return password;
-    }
-}
+//    private static String getPassword() {
+//        String password;
+//        do {
+//            System.out.println("Password:\n");
+//            password = scanner.nextLine();
+//        } while (password == null || password.trim().isEmpty());
+//        return password;
+//    }
+//}

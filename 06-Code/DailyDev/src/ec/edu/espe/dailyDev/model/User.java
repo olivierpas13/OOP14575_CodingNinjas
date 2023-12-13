@@ -6,8 +6,6 @@ import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.PasswordHandler;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 
 
@@ -16,14 +14,6 @@ import java.security.NoSuchAlgorithmException;
  * @author CodingNinjas
  */
 public class User {
-
-    private static byte[] hexStringToBytes(String salt) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
-    private static User fromJson(String line) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     private final UUID id;
     private String username;
@@ -36,10 +26,9 @@ public class User {
     }
 
     public User(String username, String password) {
-    public User(String username, String encryptedPassword) {
         this.id = UUID.randomUUID();
         this.username = username;
-        this.encryptedPassword = PasswordHandler.encryptPassword(password, 1);
+        this.encryptedPassword = PasswordHandler.encryptPassword(password);
     }
 
     public static ArrayList<User> getUsersFromFile() {
@@ -50,7 +39,7 @@ public class User {
     public static User login(String username, String password) throws Exception {
         ArrayList<User> users = getUsersFromFile();
         for (User user : users) {
-            if (user.getUsername().equals(username) && user.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password, 1))) {
+            if (user.getUsername().equals(username) && user.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password))) {
                 return user;
             }
         }
@@ -65,6 +54,7 @@ public class User {
                 return true; // Username is taken
             }
         }
+        return false;
     }
 
     public static User register(String username, String password) throws Exception {

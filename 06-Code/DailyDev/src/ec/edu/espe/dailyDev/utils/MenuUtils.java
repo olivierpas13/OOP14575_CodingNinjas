@@ -8,9 +8,9 @@ import java.util.Scanner;
  */
 
 public class MenuUtils {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    static int getUserOption(String entityName) {
+    public static int getUserOption(String entityName) {
         System.out.println("\n" + entityName + " Menu\n");
         System.out.println("1. Create " + entityName + "\n2. Show " + entityName +
                 "s\n3. Update " + entityName + "\n4. Complete " + entityName +
