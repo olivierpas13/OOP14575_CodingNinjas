@@ -1,7 +1,10 @@
 package ec.edu.espe.dailyDev.model;
 
+import ec.edu.espe.dailyDev.utils.MenuUtils;
 import java.util.Date;
 import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,6 +16,8 @@ public class Task {
     private String description;
     private Date dueDate;
     private Date creationDate;
+    
+    private static List<String> taskList = new ArrayList<>();
 
     public Task(UUID id, String name, String description, Date dueDate, Date creationDate) {
         this.id = id;
@@ -21,12 +26,45 @@ public class Task {
         this.dueDate = dueDate;
         this.creationDate = creationDate;
     }
+    
+    public static void create() {
+        System.out.println("Creating a new task...");
+        // Lógica para crear una reunión
+        System.out.println("Task created!");
+    }
 
+    public static void show() {
+        System.out.println("Showing tasks...");
+        // Lógica para mostrar reuniones
+        System.out.println("No tasks found.");  // Ajusta según tu lógica real
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void update() {
+        System.out.println("Updating a task...");
+        // Lógica para la actualización de reuniones
+        System.out.println("Task updated!");
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void complete() {
+        System.out.println("Completing a task...");
+        // Lógica para completar reuniones
+        System.out.println("Task completed!");
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void delete() {
+        System.out.println("Deleting a task...");
+        // Lógica para eliminar reuniones
+        System.out.println("Task deleted!");
+        MenuUtils.backToMainMenu();
+    }
+    
     @Override
     public String toString() {
         return "Task{" + "id=" + getId() + ", name=" + getName() + ", description=" + getDescription() + ", dueDate=" + getDueDate() + ", creationDate=" + getCreationDate() + '}';
     }
-
     /**
      * @return the id
      */

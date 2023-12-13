@@ -1,5 +1,7 @@
 package ec.edu.espe.dailyDev.view;
 
+import ec.edu.espe.dailyDev.utils.LandingPage;
+
 
 /**
  *
@@ -10,5 +12,6 @@ public class DailyDevSystem {
         //LandingPage.showLandingPage();
        
 
+        LandingPage.showLandingPage();
     }
 }

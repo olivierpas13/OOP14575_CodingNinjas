@@ -1,5 +1,6 @@
 package ec.edu.espe.dailyDev.model;
 
+import ec.edu.espe.dailyDev.utils.MenuUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +42,41 @@ public class Meeting {
         this.endTime = endTime;
         this.participants = participants;
     }
+    
+    public static void create() {
+        System.out.println("Creating a new meeting...");
+        // Lógica para crear una reunión
+        System.out.println("Meeting created!");
+    }
+
+    public static void show() {
+        System.out.println("Showing meetings...");
+        // Lógica para mostrar reuniones
+        System.out.println("No meetings found.");  // Ajusta según tu lógica real
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void update() {
+        System.out.println("Updating a meeting...");
+        // Lógica para la actualización de reuniones
+        System.out.println("Meeting updated!");
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void complete() {
+        System.out.println("Completing a meeting...");
+        // Lógica para completar reuniones
+        System.out.println("Meeting completed!");
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void delete() {
+        System.out.println("Deleting a meeting...");
+        // Lógica para eliminar reuniones
+        System.out.println("Meeting deleted!");
+        MenuUtils.backToMainMenu();
+    }
+    
 
     public UUID getId() {
         return id;

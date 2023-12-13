@@ -1,6 +1,8 @@
 
 package ec.edu.espe.dailyDev.model;
 
+import ec.edu.espe.dailyDev.utils.MenuUtils;
+
 /**
  *
  * @author Olivier Paspuel
@@ -23,6 +25,41 @@ public class Project {
 
 
 
+ 
+    public static void create() {
+        System.out.println("Creating a new project...");
+        // Lógica para crear un proyecto
+        System.out.println("Project created!");
+    }
+
+    public static void show() {
+        System.out.println("Showing projects...");
+        // Lógica para mostrar proyectos
+        System.out.println("No projects found.");  // Ajusta según tu lógica real
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void update() {
+        System.out.println("Updating a project...");
+        // Lógica para la actualización de proyectos
+        System.out.println("Project updated!");
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void complete() {
+        System.out.println("Completing a project...");
+        // Lógica para completar proyectos
+        System.out.println("Project completed!");
+        MenuUtils.backToMainMenu();
+    }
+
+    public static void delete() {
+        System.out.println("Deleting a project...");
+        // Lógica para eliminar proyectos
+        System.out.println("Project deleted!");
+        MenuUtils.backToMainMenu();
+    }
+    
     /**
      * @return the AssignedTeam
      */
