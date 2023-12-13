@@ -7,8 +7,8 @@ package ec.edu.espe.dailyDev.view;
  */
 public class DailyDevSystem {
     public static void main(String[] args) {
-        LandingPage.showLandingPage();
-        
+        //LandingPage.showLandingPage();
+       
 
     }
 }

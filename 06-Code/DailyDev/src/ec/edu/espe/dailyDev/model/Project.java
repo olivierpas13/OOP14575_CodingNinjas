@@ -18,8 +18,10 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" + "AssignedTeam=" + getAssignedTeam() + ", name=" + getName() + ", tasks=" + getTasks() + '}';
+        return "Project{" + "AssignedTeam=" + AssignedTeam + ", name=" + name + ", tasks=" + tasks + '}';
     }
+
+
 
     /**
      * @return the AssignedTeam

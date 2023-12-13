@@ -26,8 +26,10 @@ public class Sprint {
 
     @Override
     public String toString() {
-        return "Sprint{" + "id=" + getId() + ", name=" + getName() + ", startDate=" + getStartDate() + ", endDate=" + getEndDate() + ", tasks=" + getTasks() + '}';
+        return "Sprint{" + "id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", tasks=" + tasks + '}';
     }
+
+
 
     /**
      * @return the id

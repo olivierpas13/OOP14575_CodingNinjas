@@ -18,4 +18,49 @@ public class Team {
     }
 
     
+    private User[] users;
+    private String name;
+
+    public Team(User[] users, String name) {
+        this.users = users;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" + "users=" + users + ", name=" + name + '}';
+    }
+
+    /**
+     * @return the users
+     */
+    public User[] getUsers() {
+        return users;
+    }
+
+    /**
+     * @param users the users to set
+     */
+    public void setUsers(User[] users) {
+        this.users = users;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
 }
+
+

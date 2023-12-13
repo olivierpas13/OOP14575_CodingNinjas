@@ -12,8 +12,13 @@ public class Reminder {
     private Date remindDate;
     private Date deadline;
     private Date creationTime;
+<<<<<<< Updated upstream
 //    private Task task; //=associatedTask;
  //   private Task task = associatedTask;
+=======
+    private Task task; //=associatedTask;
+
+>>>>>>> Stashed changes
 
     public Reminder(String name, String description, Date remindDate, Date deadline, Date creationTime) {
         this.name = name;
@@ -21,6 +26,11 @@ public class Reminder {
         this.remindDate = remindDate;
         this.deadline = deadline;
         this.creationTime = creationTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Reminder{" + "name=" + name + ", description=" + description + ", remindDate=" + remindDate + ", deadline=" + deadline + ", creationTime=" + creationTime + ", task=" + task + '}';
     }
 
     /**

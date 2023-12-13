@@ -23,6 +23,12 @@ public class User {
     private String encryptedPassword;
     private ArrayList<Task> assignedTasks;
 
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", encryptedPassword=" + encryptedPassword + ", assignedTasks=" + assignedTasks + '}';
+    }
+    
+
     public User(String username, String password) {
         this.id = UUID.randomUUID();
         this.username = username;

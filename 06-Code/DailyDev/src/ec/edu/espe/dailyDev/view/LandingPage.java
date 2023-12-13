@@ -1,4 +1,6 @@
+
 package ec.edu.espe.dailyDev.view;
+
 import ec.edu.espe.dailyDev.model.User;
 import java.io.IOException;
 import java.util.Scanner;

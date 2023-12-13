@@ -20,8 +20,9 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return "Schedule{" + "tasks=" + getTasks() + ", reminders=" + getReminders() + ", dates=" + getDates() + '}';
+        return "Schedule{" + "tasks=" + tasks + ", reminders=" + reminders + ", dates=" + dates + '}';
     }
+
 
     /**
      * @return the tasks
