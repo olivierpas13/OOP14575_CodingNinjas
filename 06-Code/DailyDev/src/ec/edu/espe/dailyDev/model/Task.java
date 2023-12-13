@@ -1,10 +1,15 @@
 package ec.edu.espe.dailyDev.model;
 
+import com.google.gson.reflect.TypeToken;
+import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -27,10 +32,49 @@ public class Task {
         this.creationDate = creationDate;
     }
     
+    public static ArrayList<Task> getTasksFromFile(String fileAddress) {
+        return FileHandler.readFile(fileAddress, new TypeToken<ArrayList<Task>>() {}.getType());
+    }
+
+    public static void writeTasksToFile(String fileAddress, ArrayList<Task> tasks) {
+        FileHandler.writeFile(fileAddress, tasks);
+    }
+    
     public static void create() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.println("Creating a new task...");
-        // Lógica para crear una reunión
+
+        UUID taskId = UUID.randomUUID();
+
+        System.out.println("Enter the task name:");
+        String taskName = scanner.nextLine();
+
+        System.out.println("Enter the task description:");
+        String taskDescription = scanner.nextLine();
+
+        System.out.println("Enter the due date (yyyy-MM-dd):");
+        String dueDateInput = scanner.nextLine();
+        Date dueDate;
+        try {
+            dueDate = new SimpleDateFormat("yyyy-MM-dd").parse(dueDateInput);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Using the current date as the due date.");
+            dueDate = new Date();
+        }
+
+        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, new Date());
+
+        ArrayList<Task> existingTasks = getTasksFromFile("tasks.json");
+
+        existingTasks.add(newTask);
+
+        writeTasksToFile("tasks.json", existingTasks);
+
         System.out.println("Task created!");
+        System.out.println(newTask.toString());
+
+        MenuUtils.backToMainMenu();
     }
 
     public static void show() {
