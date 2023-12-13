@@ -11,7 +11,10 @@ import java.util.ArrayList;
 public class Team {
     private User[] users;
     private String name;
-
+        public static ArrayList<Team> getTeamsFromFile() {
+        return FileHandler.readFile("teams.json", new TypeToken<ArrayList<Team>>() {
+        }.getType());
+    }
     public Team(User[] users, String name) {
         this.users = users;
         this.name = name;

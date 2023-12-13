@@ -1,9 +1,9 @@
 package ec.edu.espe.dailyDev.model;
 
+import ec.edu.espe.dailyDev.view.LandingPage;
+import com.google.gson.reflect.TypeToken;
+import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.PasswordHandler;
-
-import com.google.gson.Gson;
-import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
 import java.security.MessageDigest;
@@ -13,9 +13,8 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author CodingNinjas 
+ * @author CodingNinjas
  */
-
 public class User {
 
     private static byte[] hexStringToBytes(String salt) {
@@ -28,89 +27,61 @@ public class User {
 
     private final UUID id;
     private String username;
-    private String encryptedPassword;
-    private String salt;
+    private final String encryptedPassword;
     private ArrayList<Task> assignedTasks;
 
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", username=" + username + ", encryptedPassword=" + encryptedPassword + ", assignedTasks=" + assignedTasks + '}';
     }
-    
 
     public User(String username, String password) {
     public User(String username, String encryptedPassword) {
         this.id = UUID.randomUUID();
         this.username = username;
-        this.encryptedPassword = encryptedPassword;
+        this.encryptedPassword = PasswordHandler.encryptPassword(password, 1);
     }
 
-    public void saveToFile() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("user_data.json", true))) {
-            // Guardar el usuario en el archivo JSON sin encriptar la contraseña
-            String jsonData = toJsonWithoutEncryption();
-            writer.println(jsonData);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String toJsonWithoutEncryption() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+    public static ArrayList<User> getUsersFromFile() {
+        return FileHandler.readFile("users.json", new TypeToken<ArrayList<User>>() {
+        }.getType());
     }
     
-    public static User login(String username, String password) {
-    try (BufferedReader reader = new BufferedReader(new FileReader("user_data.json"))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            User user = User.fromJson(line);
-
-            // Verificar si el usuario es nulo antes de acceder a sus propiedades
-            if (user != null && user.getUsername().equals(username)) {
-                // Verificar la contraseña
-                if (PasswordHandler.verifyPassword(password, user.getEncryptedPassword(), user.getSalt())) {
-                    return user;
-                }
+    public static User login(String username, String password) throws Exception {
+        ArrayList<User> users = getUsersFromFile();
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password, 1))) {
+                return user;
             }
         }
-    } catch (IOException e) {
-        e.printStackTrace();
+        System.err.println("Invalid credentials for username: " + username);
+        return null;
     }
-    throw new IllegalArgumentException("Invalid username or password");
-}
 
-
-    public static boolean verifyPassword(String password, String encryptedPassword, String salt) {
-        try {
-            String hashedPassword = encryptPasswordWithSalt(password, salt);
-            return hashedPassword.equals(encryptedPassword);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error verifying password.");
+    private static boolean isUsernameTaken(String username) {
+        ArrayList<User> users = getUsersFromFile();
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return true; // Username is taken
+            }
         }
     }
 
-    private static String encryptPasswordWithSalt(String password, String salt) {
-        try {
-            byte[] saltBytes = hexStringToBytes(salt);
-            byte[] passwordWithSalt = new byte[password.length() + saltBytes.length];
-            System.arraycopy(password.getBytes(), 0, passwordWithSalt, 0, password.length());
-            System.arraycopy(saltBytes, 0, passwordWithSalt, password.length(), saltBytes.length);
+    public static User register(String username, String password) throws Exception {
+        ArrayList<User> users = getUsersFromFile();
 
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedPassword = md.digest(passwordWithSalt);
-
-            StringBuilder hexPassword = new StringBuilder();
-            for (byte b : hashedPassword) {
-                hexPassword.append(String.format("%02x", b));
-            }
-
-            return hexPassword.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error encrypting password with salt.");
+        if (isUsernameTaken(username)) {
+            System.out.println("Username already exists. Please choose a different one.");
+            // Volver al menú principal
+            LandingPage.showLandingPage();
+            return null;  // Aseguramos que no se retorne un nuevo usuario en este caso
         }
+        User newUser = new User(username, password);
+
+        users.add(newUser);
+
+        FileHandler.writeFile("users.json", users);
+        return newUser;
     }
 
     public UUID getId() {
@@ -127,18 +98,6 @@ public class User {
 
     public String getEncryptedPassword() {
         return encryptedPassword;
-    }
-
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public ArrayList<Task> getAssignedTasks() {

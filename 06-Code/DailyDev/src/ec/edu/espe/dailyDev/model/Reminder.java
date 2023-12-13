@@ -13,12 +13,7 @@ public class Reminder {
     private Date remindDate;
     private Date deadline;
     private Date creationTime;
-//    private Task task; //=associatedTask;
- //   private Task task = associatedTask;
-    private Task task; //=associatedTask;
-
-    private Task task; 
-    //=associatedTask;
+    private Task task;
 
     public Reminder(String name, String description, Date remindDate, Date deadline, Date creationTime) {
         this.name = name;

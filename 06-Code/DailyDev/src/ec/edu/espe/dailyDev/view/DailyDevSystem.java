@@ -8,10 +8,7 @@ import ec.edu.espe.dailyDev.utils.LandingPage;
  * @author CodingNinjas 
  */
 public class DailyDevSystem {
-    public static void main(String[] args) {
-        //LandingPage.showLandingPage();
-       
-
+    public static void main(String[] args) throws Exception {
         LandingPage.showLandingPage();
     }
 }
