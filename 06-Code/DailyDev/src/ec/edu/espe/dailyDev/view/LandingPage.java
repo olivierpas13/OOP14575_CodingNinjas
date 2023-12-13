@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> a3c3d14373b8cf26ec2b9bb0f6f98e67fefba536
-package ec.edu.espe.dailyDev.utils;
-
+package ec.edu.espe.dailyDev.view;
 import ec.edu.espe.dailyDev.model.User;
 import java.io.IOException;
 import java.util.Scanner;

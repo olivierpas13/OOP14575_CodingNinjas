@@ -1,7 +1,7 @@
 package ec.edu.espe.dailyDev.model;
 
+import ec.edu.espe.dailyDev.view.LandingPage;
 import com.google.gson.Gson;
-import ec.edu.espe.dailyDev.utils.LandingPage;
 import ec.edu.espe.dailyDev.utils.PasswordHandler;
 import java.io.BufferedReader;
 import java.io.FileReader;
