@@ -47,7 +47,6 @@ public class Meeting {
 
     public static void show() {
         System.out.println("Showing meetings...");
-        // Lógica para mostrar reuniones
         System.out.println("No meetings found.");  
         MenuUtils.backToMainMenu();
     }
