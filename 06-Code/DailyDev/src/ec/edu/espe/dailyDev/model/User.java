@@ -7,8 +7,6 @@ import ec.edu.espe.dailyDev.utils.PasswordHandler;
 import java.util.ArrayList;
 import java.util.UUID;
 
-
-
 /**
  *
  * @author CodingNinjas
@@ -19,6 +17,7 @@ public class User {
     private String username;
     private final String encryptedPassword;
     private ArrayList<Task> assignedTasks;
+    private static User currentUser; 
 
     @Override
     public String toString() {
@@ -30,6 +29,17 @@ public class User {
         this.username = username;
         this.encryptedPassword = PasswordHandler.encryptPassword(password);
     }
+    
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+        
+    public static UUID getCurrentUserId() {
+        if (currentUser != null) {
+            return currentUser.getId();
+        }
+        return null;  
+    }
 
     public static ArrayList<User> getUsersFromFile() {
         return FileHandler.readFile("users.json", new TypeToken<ArrayList<User>>() {
@@ -40,6 +50,7 @@ public class User {
         ArrayList<User> users = getUsersFromFile();
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password))) {
+                currentUser = user;  // Almacena el usuario actualmente conectado
                 return user;
             }
         }
@@ -74,6 +85,10 @@ public class User {
         return newUser;
     }
 
+    public static void logout() {
+        currentUser = null;  
+    }
+        
     public UUID getId() {
         return id;
     }

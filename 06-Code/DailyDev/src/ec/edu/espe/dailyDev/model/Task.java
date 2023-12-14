@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * @author CodingNinjas 
  */
-public class Task {
+public class Task{
     private UUID id;
     private String name;
     private String description;
@@ -23,6 +23,7 @@ public class Task {
     private Date creationDate;
     
     private static List<String> taskList = new ArrayList<>();
+    private UUID userId;
 
     public Task(UUID id, String name, String description, Date dueDate, Date creationDate) {
         this.id = id;
@@ -30,6 +31,10 @@ public class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.creationDate = creationDate;
+    }
+    
+    public void setUserId(UUID userId) {
+        this.userId = userId;
     }
     
     public static ArrayList<Task> getTasksFromFile(String fileAddress) {
@@ -63,7 +68,11 @@ public class Task {
             dueDate = new Date();
         }
 
+        UUID userId = User.getCurrentUserId();
+
         Task newTask = new Task(taskId, taskName, taskDescription, dueDate, new Date());
+
+        newTask.setUserId(userId);
 
         ArrayList<Task> existingTasks = getTasksFromFile("tasks.json");
 
@@ -72,10 +81,11 @@ public class Task {
         writeTasksToFile("tasks.json", existingTasks);
 
         System.out.println("Task created!");
-        System.out.println(newTask.toString());
-
+        System.out.println("UserID: " + userId);  // Imprime el userID
+        System.out.println(newTask);
         MenuUtils.backToMainMenu();
     }
+
 
     public static void show() {
         System.out.println("Showing tasks...");
@@ -178,7 +188,4 @@ public class Task {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-
-    
-     
 }
