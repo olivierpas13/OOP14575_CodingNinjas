@@ -22,16 +22,44 @@ public class Task{
     private Date dueDate;
     private Date creationDate;
     private UUID userId;
-        
+    private boolean completed;
     private static List<String> taskList = new ArrayList<>();
     
-
-    public Task(UUID id, String name, String description, Date dueDate, Date creationDate) {
+    public Task(UUID id, String name, String description, Date dueDate, Date creationDate, UUID userId, boolean completed) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.creationDate = creationDate;
+        this.userId = userId;
+        this.completed = completed;
+    }
+    
+    public void showMenu() {
+        String[] taskOptions = {
+                "Create Task",
+                "Show Tasks",
+                "Update Task",
+                "Complete Task",
+                "Delete Task",
+                "Back to Main Menu"
+        };
+
+        int option;
+
+        do {
+            option = MenuUtils.getUserOption("Task", taskOptions);
+
+            switch (option) {
+                case 1 -> create();
+                case 2 -> show();
+                case 3 -> update();
+                case 4 -> complete();
+                case 5 -> delete();
+                case 6 -> MenuUtils.backToMainMenu();
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        } while (option != 6);
     }
     
     public void setUserId(UUID userId) {
@@ -39,13 +67,13 @@ public class Task{
     }
     
     public static void printFormattedTaskHeader() {
-        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s |%n";
-        System.out.format(format, "ID", "Name", "Description", "Due Date", "Creation Date");
+        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s | %-10s |%n";
+        System.out.format(format, "ID", "Name", "Description", "Due Date", "Creation Date", "Completed");
     }
 
     public void printFormattedTask() {
-        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s |%n";
-        System.out.format(format, getId(), getName(), getDescription(), getDueDate(), getCreationDate());
+        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s | %-10s |%n";
+        System.out.format(format, getId(), getName(), getDescription(), getDueDate(), getCreationDate(), isCompleted());
     }
     
     public static ArrayList<Task> getTasksFromFile(String fileAddress) {
@@ -79,6 +107,9 @@ public class Task{
             dueDate = new Date();
         }
 
+        // Estado de completitud predeterminado al crear una nueva tarea
+        boolean completed = false;
+
         UUID userId = User.getCurrentUserId();
 
         // Validar que la fecha de vencimiento sea después de la fecha de creación
@@ -89,7 +120,7 @@ public class Task{
             return;
         }
 
-        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, creationDate);
+        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, creationDate, userId, completed);
 
         newTask.setUserId(userId);
 
@@ -107,33 +138,33 @@ public class Task{
 
 
     public static void show() {
-       System.out.println("Showing tasks...");
+        System.out.println("Showing tasks...");
 
-       UUID userId = User.getCurrentUserId();
-       if (userId == null) {
-           System.out.println("No user logged in. Please log in to view tasks.");
-           MenuUtils.backToMainMenu();
-           return;
-       }
+        UUID userId = User.getCurrentUserId();
+        if (userId == null) {
+            System.out.println("No user logged in. Please log in to view tasks.");
+            MenuUtils.backToMainMenu();
+            return;
+        }
 
-       ArrayList<Task> tasks = getTasksFromFile("tasks.json");
+        ArrayList<Task> tasks = getTasksFromFile("tasks.json");
 
-       System.out.println("Tasks created by the current user:");
+        System.out.println("Tasks created by the current user:");
 
-       // Imprimir la cabecera una vez antes de las tareas
-       Task.printFormattedTaskHeader();
+        // Imprimir la cabecera una vez antes de las tareas
+        Task.printFormattedTaskHeader();
 
-       for (Task task : tasks) {
-           if (task.getUserId() != null && task.getUserId().equals(userId)) {
-               task.printFormattedTask();
-           }
-       }
+        for (Task task : tasks) {
+            if (task.getUserId() != null && task.getUserId().equals(userId)) {
+                task.printFormattedTask();
+            }
+        }
 
-       if (tasks.isEmpty()) {
-           System.out.println("No tasks found for the current user.");
-       }
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks found for the current user.");
+        }
 
-       MenuUtils.backToMainMenu();
+        MenuUtils.backToMainMenu();
     }
 
 
@@ -160,8 +191,10 @@ public class Task{
     
     @Override
     public String toString() {
-        return "Task{" + "id=" + getId() + ", name=" + getName() + ", description=" + getDescription() + ", dueDate=" + getDueDate() + ", creationDate=" + getCreationDate() + '}';
+        return "\nNew Task  " + "\nId = " + id + "\nName = " + name + "\nDescription = " + description + "\nDue Date = " + dueDate + "\nCreation Date = " + creationDate + "\nUser Id = " + userId + "\nCompleted = " + completed + '.';
     }
+    
+    
     /**
      * @return the id
      */
@@ -238,4 +271,34 @@ public class Task{
     public UUID getUserId() {
         return userId;
     }
+    
+    /**
+     * @return the completed
+     */
+
+    public boolean isCompleted() {
+        return completed;
+    }
+    
+    /**
+     * @param completed the completed to set
+     */
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    /**
+     * @return the taskList
+     */
+    public static List<String> getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * @param aTaskList the taskList to set
+     */
+    public static void setTaskList(List<String> aTaskList) {
+        taskList = aTaskList;
+    }
+    
 }

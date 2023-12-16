@@ -10,12 +10,14 @@ import java.util.Scanner;
 public class MenuUtils {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int getUserOption(String entityName) {
+    public static int getUserOption(String entityName, String[] options) {
         System.out.println("\n" + entityName + " Menu\n");
-        System.out.println("1. Create " + entityName + "\n2. Show " + entityName +
-                "s\n3. Update " + entityName + "\n4. Complete " + entityName +
-                "\n5. Delete " + entityName + "\n6. Back to Main Menu");
 
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
+
+        System.out.print("Select an option: ");
         return scanner.nextInt();
     }
 
