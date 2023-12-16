@@ -46,18 +46,24 @@ public class User {
         }.getType());
     }
     
-    public static User login(String username, String password) throws Exception {
+    
+    public static User login(String username, String password) throws InvalidCredentialsException {
         ArrayList<User> users = getUsersFromFile();
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password))) {
-                currentUser = user;  // Almacena el usuario actualmente conectado
+                currentUser = user;  
                 return user;
             }
         }
-        System.err.println("Invalid credentials for username: " + username);
-        return null;
+        throw new InvalidCredentialsException("Invalid credentials for username: " + username);
     }
 
+    public static class InvalidCredentialsException extends Exception {
+        public InvalidCredentialsException(String message) {
+            super(message);
+        }
+    }
+    
     private static boolean isUsernameTaken(String username) {
         ArrayList<User> users = getUsersFromFile();
         for (User user : users) {

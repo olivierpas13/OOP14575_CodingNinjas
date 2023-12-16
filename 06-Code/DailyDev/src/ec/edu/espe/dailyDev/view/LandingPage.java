@@ -57,9 +57,11 @@ public class LandingPage {
 
             try {
                 user = User.login(username, password);
-                System.out.println("Login successful");
-                showMainMenu();
-            } catch (IllegalArgumentException e) {
+                if (user != null) {
+                    System.out.println("Login successful");
+                    showMainMenu();
+                }
+            } catch (User.InvalidCredentialsException e) {
                 System.err.println(e.getMessage());
                 System.out.println("Invalid username or password. Please try again.");
             }

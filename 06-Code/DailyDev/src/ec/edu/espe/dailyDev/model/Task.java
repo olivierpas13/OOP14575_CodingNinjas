@@ -21,9 +21,10 @@ public class Task{
     private String description;
     private Date dueDate;
     private Date creationDate;
-    
-    private static List<String> taskList = new ArrayList<>();
     private UUID userId;
+        
+    private static List<String> taskList = new ArrayList<>();
+    
 
     public Task(UUID id, String name, String description, Date dueDate, Date creationDate) {
         this.id = id;
@@ -35,6 +36,16 @@ public class Task{
     
     public void setUserId(UUID userId) {
         this.userId = userId;
+    }
+    
+    public static void printFormattedTaskHeader() {
+        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s |%n";
+        System.out.format(format, "ID", "Name", "Description", "Due Date", "Creation Date");
+    }
+
+    public void printFormattedTask() {
+        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s |%n";
+        System.out.format(format, getId(), getName(), getDescription(), getDueDate(), getCreationDate());
     }
     
     public static ArrayList<Task> getTasksFromFile(String fileAddress) {
@@ -70,7 +81,15 @@ public class Task{
 
         UUID userId = User.getCurrentUserId();
 
-        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, new Date());
+        // Validar que la fecha de vencimiento sea después de la fecha de creación
+        Date creationDate = new Date();
+        if (dueDate.before(creationDate)) {
+            System.out.println("Error: Due date must be after the creation date.");
+            MenuUtils.backToMainMenu();
+            return;
+        }
+
+        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, creationDate);
 
         newTask.setUserId(userId);
 
@@ -81,18 +100,42 @@ public class Task{
         writeTasksToFile("tasks.json", existingTasks);
 
         System.out.println("Task created!");
-        System.out.println("UserID: " + userId);  // Imprime el userID
+        System.out.println("UserID: " + userId);
         System.out.println(newTask);
         MenuUtils.backToMainMenu();
     }
 
 
     public static void show() {
-        System.out.println("Showing tasks...");
-        // Lógica para mostrar reuniones
-        System.out.println("No tasks found.");  // Ajusta según tu lógica real
-        MenuUtils.backToMainMenu();
+       System.out.println("Showing tasks...");
+
+       UUID userId = User.getCurrentUserId();
+       if (userId == null) {
+           System.out.println("No user logged in. Please log in to view tasks.");
+           MenuUtils.backToMainMenu();
+           return;
+       }
+
+       ArrayList<Task> tasks = getTasksFromFile("tasks.json");
+
+       System.out.println("Tasks created by the current user:");
+
+       // Imprimir la cabecera una vez antes de las tareas
+       Task.printFormattedTaskHeader();
+
+       for (Task task : tasks) {
+           if (task.getUserId() != null && task.getUserId().equals(userId)) {
+               task.printFormattedTask();
+           }
+       }
+
+       if (tasks.isEmpty()) {
+           System.out.println("No tasks found for the current user.");
+       }
+
+       MenuUtils.backToMainMenu();
     }
+
 
     public static void update() {
         System.out.println("Updating a task...");
@@ -187,5 +230,12 @@ public class Task{
      */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    /**
+     * @return the userId
+     */
+    public UUID getUserId() {
+        return userId;
     }
 }
