@@ -138,7 +138,7 @@ public class Task{
 
 
     public static void show() {
-        System.out.println("Showing tasks...");
+        System.out.println("\nShowing tasks...");
 
         UUID userId = User.getCurrentUserId();
         if (userId == null) {
@@ -162,10 +162,57 @@ public class Task{
 
         if (tasks.isEmpty()) {
             System.out.println("No tasks found for the current user.");
+        } else {
+            System.out.println("\nOptions:");
+
+            int option = MenuUtils.getUserOption("Select an option", new String[]{" Complete Tasks", " Back to Menu"});
+
+            switch (option) {
+                case 1:
+                    completeTask(tasks);
+                    break;
+                case 2:
+                    MenuUtils.backToMainMenu();
+                    break;
+                default:
+                    System.out.println("Invalid option. Returning to the main menu.");
+                    MenuUtils.backToMainMenu();
+            }
+        }
+    }
+
+    public static void completeTask(ArrayList<Task> tasks) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nComplete Task:");
+
+        System.out.println("Enter the ID of the task to complete:");
+        UUID taskIdToComplete = UUID.fromString(scanner.nextLine());
+
+        // Buscar la tarea por ID
+        Task selectedTask = null;
+        for (Task task : tasks) {
+            if (task.getId().equals(taskIdToComplete)) {
+                selectedTask = task;
+                break;
+            }
         }
 
-        MenuUtils.backToMainMenu();
+        if (selectedTask != null) {
+            // Actualizar el estado de completitud de la tarea seleccionada
+            selectedTask.setCompleted(true);
+
+            // Guardar los cambios en el archivo
+            writeTasksToFile("tasks.json", tasks);
+
+            System.out.println("Task completed successfully!");
+        } else {
+            System.out.println("Task not found with the specified ID. Returning to the main menu.");
+        }
+
+        show();
     }
+
 
 
     public static void update() {
