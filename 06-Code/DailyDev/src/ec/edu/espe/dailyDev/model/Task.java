@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -53,7 +54,7 @@ public class Task{
             switch (option) {
                 case 1 -> create();
                 case 2 -> show();
-                case 3 -> update();
+                case 3 -> showTasksTodays();
                 case 4 -> complete();
                 case 5 -> delete();
                 case 6 -> MenuUtils.backToMainMenu();
@@ -67,13 +68,18 @@ public class Task{
     }
     
     public static void printFormattedTaskHeader() {
-        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s | %-10s |%n";
+        String format = "| %-36s | %-20s | %-35s | %-15s | %-15s | %-10s |%n";
         System.out.format(format, "ID", "Name", "Description", "Due Date", "Creation Date", "Completed");
     }
 
     public void printFormattedTask() {
-        String format = "| %-36s | %-20s | %-35s | %-29s | %-29s | %-10s |%n";
-        System.out.format(format, getId(), getName(), getDescription(), getDueDate(), getCreationDate(), isCompleted());
+        String format = "| %-36s | %-20s | %-35s | %-15s | %-15s | %-10s |%n";
+        System.out.format(format, getId(), getName(), getDescription(), formatDate(getDueDate()), formatDate(getCreationDate()), isCompleted());
+    }
+    
+    private String formatDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
     }
     
     public static ArrayList<Task> getTasksFromFile(String fileAddress) {
@@ -101,10 +107,10 @@ public class Task{
         String dueDateInput = scanner.nextLine();
         Date dueDate;
         try {
-            dueDate = new SimpleDateFormat("yyyy-MM-dd").parse(dueDateInput);
+            dueDate = truncateTime(new SimpleDateFormat("yyyy-MM-dd").parse(dueDateInput));
         } catch (ParseException e) {
             System.out.println("Invalid date format. Using the current date as the due date.");
-            dueDate = new Date();
+            dueDate = truncateTime(new Date());
         }
 
         // Estado de completitud predeterminado al crear una nueva tarea
@@ -113,7 +119,7 @@ public class Task{
         UUID userId = User.getCurrentUserId();
 
         // Validar que la fecha de vencimiento sea después de la fecha de creación
-        Date creationDate = new Date();
+        Date creationDate = truncateTime(new Date());
         if (dueDate.before(creationDate)) {
             System.out.println("Error: Due date must be after the creation date.");
             MenuUtils.backToMainMenu();
@@ -135,7 +141,6 @@ public class Task{
         System.out.println(newTask);
         MenuUtils.backToMainMenu();
     }
-
 
     public static void show() {
         System.out.println("\nShowing tasks...");
@@ -213,15 +218,57 @@ public class Task{
         show();
     }
 
+    public static void showTasksTodays() {
+        System.out.println("Showing tasks for today...");
 
+        UUID userId = User.getCurrentUserId();
+        if (userId == null) {
+            System.out.println("No user logged in. Please log in to view tasks.");
+            MenuUtils.backToMainMenu();
+            return;
+        }
 
-    public static void update() {
-        System.out.println("Updating a task...");
-        // Lógica para la actualización de reuniones
-        System.out.println("Task updated!");
+        ArrayList<Task> tasks = getTasksFromFile("tasks.json");
+
+        System.out.println("Tasks due today:");
+
+        // Imprimir la cabecera una vez antes de las tareas
+        Task.printFormattedTaskHeader();
+
+        // Obtener la fecha actual sin tener en cuenta la parte de hora
+        Date currentDate = truncateTime(new Date());
+
+        for (Task task : tasks) {
+            if (task.getUserId() != null && task.getUserId().equals(userId)
+                    && !task.isCompleted() && isSameDay(task.getDueDate(), currentDate)) {
+                task.printFormattedTask();
+            }
+        }
+
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks found for the current user.");
+        }
+
         MenuUtils.backToMainMenu();
     }
 
+    // Método auxiliar para verificar si dos fechas son del mismo día (sin tener en cuenta la parte de hora)
+    private static boolean isSameDay(Date date1, Date date2) {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        return fmt.format(truncateTime(date1)).equals(fmt.format(truncateTime(date2)));
+    }
+
+    // Método auxiliar para truncar la parte de hora de una fecha
+    private static Date truncateTime(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+    
     public static void complete() {
         System.out.println("Completing a task...");
         // Lógica para completar reuniones
@@ -238,9 +285,8 @@ public class Task{
     
     @Override
     public String toString() {
-        return "\nNew Task  " + "\nId = " + id + "\nName = " + name + "\nDescription = " + description + "\nDue Date = " + dueDate + "\nCreation Date = " + creationDate + "\nUser Id = " + userId + "\nCompleted = " + completed + '.';
+        return "\nNew Task  " + "\nId = " + id + "\nName = " + name + "\nDescription = " + description + "\nDue Date = " + formatDate(dueDate) + "\nCreation Date = " + formatDate(creationDate) + "\nUser Id = " + userId + "\nCompleted = " + completed + '.';
     }
-    
     
     /**
      * @return the id

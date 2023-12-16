@@ -116,7 +116,7 @@ public class LandingPage {
         String[] taskOptions = {
             "Create Task",
             "Show Tasks",
-            "Update Task",
+            "Show today's pending tasks",
             "Complete Task",
             "Delete Task",
             "Back to Main Menu"
@@ -130,7 +130,7 @@ public class LandingPage {
             switch (optionTask) {
                 case 1 -> Task.create();
                 case 2 -> Task.show();
-                case 3 -> Task.update();
+                case 3 -> Task.showTasksTodays();
                 case 4 -> Task.complete();
                 case 5 -> Task.delete();
                 case 6 -> MenuUtils.backToMainMenu();
