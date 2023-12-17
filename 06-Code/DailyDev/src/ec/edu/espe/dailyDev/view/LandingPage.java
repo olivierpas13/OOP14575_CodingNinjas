@@ -2,9 +2,12 @@ package ec.edu.espe.dailyDev.view;
 
 import ec.edu.espe.dailyDev.model.Administrator;
 import ec.edu.espe.dailyDev.model.Developer;
+import ec.edu.espe.dailyDev.model.Meeting;
+import ec.edu.espe.dailyDev.model.Message;
 import ec.edu.espe.dailyDev.model.Task;
 import ec.edu.espe.dailyDev.model.User;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -134,32 +137,38 @@ public class LandingPage {
             System.err.println(e.getMessage());
         }
     }
-
-    public static void showMainMenu() {
+    
+ public static void showMainMenu() {
         int optionMain;
 
         do {
-            System.out.println("\nMain Menu\n");
-            System.out.println("--Hello--\nSelect one option:\n");
+            System.out.println("\nMain Menu");
+
+            // Verificar el estado de las tareas y mostrar mensajes
+            ArrayList<Task> tasks = Task.getTasksFromFile("tasks.json");
+            if (Task.areAllTasksCompleted(tasks)) {
+                Message allTasksCompletedMessage = Task.createAllTasksCompletedMessage();
+                System.out.println("\nMessage: " + allTasksCompletedMessage.getTitle());
+                System.out.println(allTasksCompletedMessage.getDescription());
+            } else {
+                Message tasksPendingMessage = Task.createTasksPendingMessage();
+                System.out.println("\nMessage: " + tasksPendingMessage.getTitle());
+                System.out.println(tasksPendingMessage.getDescription());
+            }
+
+            System.out.println("\nSelect one option:\n");
             System.out.println("1. Task\n2. Meeting\n3. Logout");
 
             optionMain = scanner.nextInt();
             scanner.nextLine();
 
             switch (optionMain) {
-                case 1 ->
-                    taskMenu();
-//                case 2 -> meetingMenu();
-//                case 3 -> projectMenu();
-//                case 4 -> reminderMenu();
-//                case 5 -> sprintMenu();
-//                case 6 -> teamMenu();
-                case 7 ->
-                    System.out.println("Logging out...");
-                default ->
-                    System.out.println("Invalid option. Please try again.");
+                case 1 -> taskMenu();
+                case 2 -> meetingMenu(); 
+                case 3 -> System.out.println("Logging out...");
+                default -> System.out.println("Invalid option. Please try again.");
             }
-        } while (optionMain != 7);
+        } while (optionMain != 3);
     }
 
     private static void taskMenu() {
@@ -195,4 +204,33 @@ public class LandingPage {
             }
         } while (optionTask != 6);
     }
+    
+        private static void meetingMenu() {
+        String[] meetingOptions = {
+            "Create meeting",
+            "Show metings",
+            "Show today' meeting",
+            "Complete Task",
+            "Delete Task",
+            "Back to Main Menu"
+        };
+
+        int optionMeeting;
+
+        do {
+            optionMeeting = MenuUtils.getUserOption("Task", meetingOptions);
+
+            switch (optionMeeting) {
+                case 1 -> Meeting.create();
+                case 2 -> Meeting.show();
+                case 3 -> Meeting.showMeetingTodays();
+                case 4 -> Meeting.complete();
+                case 5 -> Meeting.delete();
+                case 6 -> MenuUtils.backToMainMenu();
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        } while (optionMeeting != 6);
+    }
+    
+    
 }

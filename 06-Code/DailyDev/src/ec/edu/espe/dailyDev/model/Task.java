@@ -67,6 +67,24 @@ public class Task{
         this.userId = userId;
     }
     
+    
+    public static Message createAllTasksCompletedMessage() {
+        return new Message(UUID.randomUUID(), "All Tasks Completed", "Congratulations! All tasks are completed.\n");
+    }
+
+    public static Message createTasksPendingMessage() {
+        return new Message(UUID.randomUUID(), "Tasks Pending", "You have tasks that are not completed yet.\n");
+    }
+
+    public static boolean areAllTasksCompleted(ArrayList<Task> tasks) {
+        for (Task task : tasks) {
+            if (!task.isCompleted()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     public static void printFormattedTaskHeader() {
         String format = "| %-36s | %-20s | %-35s | %-15s | %-15s | %-10s |%n";
         System.out.format(format, "ID", "Name", "Description", "Due Date", "Creation Date", "Completed");

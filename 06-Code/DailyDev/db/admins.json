@@ -19,5 +19,12 @@
     "id": "33fc99b2-5421-4016-b8d5-3d2ac5ba9e6a",
     "username": "vier",
     "encryptedPassword": "qbttxpse"
+  },
+  {
+    "role": "admin",
+    "organizationCode": "ac023a4b-850f-4cf4-a26d-22949d3bd348",
+    "id": "cb8071f4-938a-4dff-8474-cf9b617bac0a",
+    "username": "123",
+    "encryptedPassword": "234"
   }
 ]
