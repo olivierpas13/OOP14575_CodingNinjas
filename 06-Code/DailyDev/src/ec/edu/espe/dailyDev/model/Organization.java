@@ -21,12 +21,12 @@ public class Organization {
         this.name = name;
         this.organizationCode = UUID.randomUUID();
     }
+
     public static ArrayList<Organization> getOrganizationsFromFile() {
-        return FileHandler.readFile("./db/organizations.json", new TypeToken<ArrayList<Organization>>() {}.getType());
+        return FileHandler.readFile("./db/organizations.json", new TypeToken<ArrayList<Organization>>() {
+        }.getType());
     }
 
-    
-    
     public static Organization createOrganization() {
         Scanner scanner = new Scanner(System.in);
 
@@ -34,8 +34,15 @@ public class Organization {
 
         //TODO check organizationName is unique;
         String orgName = scanner.nextLine();
+        Organization newOrg = new Organization(orgName);
 
-        return new Organization(orgName);
+        ArrayList<Organization> orgs = getOrganizationsFromFile();
+        
+        orgs.add(newOrg);
+        
+        FileHandler.writeFile("./db/organizations.json", orgs);
+    
+        return  newOrg;
     }
 
     /**

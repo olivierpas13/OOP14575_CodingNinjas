@@ -54,7 +54,7 @@ public class Developer extends User {
 
         devs.add(newDeveloper);
 
-        FileHandler.writeFile("./db/admins.json", devs);
+        FileHandler.writeFile("./db/devs.json", devs);
         return newDeveloper;
     }
 
