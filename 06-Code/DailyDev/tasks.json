@@ -1,8 +1,8 @@
 [
   {
     "id": "0fce82b2-499a-402f-9dac-3d129298e140",
-    "name": "asdears",
-    "description": "asdg",
+    "name": "Caratula",
+    "description": "Realizar la caratual",
     "dueDate": "Dec 18, 2023, 12:00:00 AM",
     "creationDate": "Dec 16, 2023, 1:38:24 PM",
     "userId": "7c7ba2bf-def9-44e6-8df4-c5bac837c7fb",
@@ -14,6 +14,15 @@
     "description": "Crear el protafolio",
     "dueDate": "Dec 16, 2023, 12:00:00 AM",
     "creationDate": "Dec 16, 2023, 12:00:00 AM",
+    "userId": "7c7ba2bf-def9-44e6-8df4-c5bac837c7fb",
+    "completed": true
+  },
+  {
+    "id": "17896f20-7279-4c06-a4d2-6bb52fae762a",
+    "name": "Crear cuaderno OOP",
+    "description": "Pasar a limpio el cuaderno de OOP",
+    "dueDate": "Dec 19, 2023, 12:00:00 AM",
+    "creationDate": "Dec 17, 2023, 12:00:00 AM",
     "userId": "7c7ba2bf-def9-44e6-8df4-c5bac837c7fb",
     "completed": false
   }
