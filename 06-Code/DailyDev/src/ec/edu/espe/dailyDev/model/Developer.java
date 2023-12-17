@@ -1,45 +1,76 @@
-
 package ec.edu.espe.dailyDev.model;
 
+import ec.edu.espe.dailyDev.utils.FileHandler;
+import ec.edu.espe.dailyDev.utils.PasswordHandler;
+import static ec.edu.espe.dailyDev.utils.ValidationHandler.isUsernameUnique;
+import static ec.edu.espe.dailyDev.utils.ValidationHandler.orgCodeExists;
+import ec.edu.espe.dailyDev.view.LandingPage;
+import java.util.ArrayList;
+import java.util.UUID;
+
 /**
+ * Developer class, extends User
  *
  * @author Olivier Paspuel
  */
 public class Developer extends User {
-    String role = "dev";
-    Team team;
 
-    public Developer(Team team, String username, String password) {
+    private final String role = "developer";
+    private final UUID organizationCode;
+
+    public Developer(String username, String password, UUID organizationCode) {
         super(username, password);
-        this.team = team;
-    }
-    
-     /**
-     * @return the role
-     */
-    public String getRole() {
-        return role;
+        this.organizationCode = organizationCode;
+
     }
 
-    /**
-     * @param role the role to set
-     */
-    public void setRole(String role) {
-        this.role = role;
+    @Override
+    public String toString() {
+        return "Developer{" + "role=" + role + ", organizationCode=" + organizationCode + '}';
     }
 
-    /**
-     * @return the team
-     */
-    public Team getTeam() {
-        return team;
+    public static ArrayList<Developer> getDevsFromFile() {
+
+        return User.getUsersFromFile("dev");
     }
 
-    /**
-     * @param team the team to set
-     */
-    public void setTeam(Team team) {
-        this.team = team;
+    public static Developer registerDev(String username, String password, UUID orgCode) throws Exception {
+        ArrayList<Developer> devs = getDevsFromFile();
+
+        if (!isUsernameUnique(username, "dev")) {
+            System.out.println("Username already exists. Please choose a different one.");
+            LandingPage.showLandingPage();
+            return null;
+        }
+
+        if (!orgCodeExists(orgCode)) {
+            System.out.println("Organization doesn't exist.");
+            LandingPage.showLandingPage();
+            return null;
+
+        }
+
+        Developer newDeveloper = new Developer(username, password, orgCode);
+
+        devs.add(newDeveloper);
+
+        FileHandler.writeFile("./db/admins.json", devs);
+        return newDeveloper;
     }
-    
+
+    public static User loginDev(String username, String password) throws InvalidCredentialsException {
+        ArrayList<Developer> devs = getDevsFromFile();
+        for (Developer dev : devs) {
+            if (dev.getUsername().equals(username) && dev.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password))) {
+                currentUser = dev;
+                return dev;
+            }
+        }
+        throw new InvalidCredentialsException("Invalid credentials for username: " + username);
+    }
+
+    public UUID getOrganizationCode() {
+        return organizationCode;
+    }
+
 }
