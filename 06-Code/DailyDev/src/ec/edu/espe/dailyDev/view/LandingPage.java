@@ -198,33 +198,52 @@ public class LandingPage {
             }
         } while (optionTask != 4);
     }
-    
-        private static void meetingMenu() {
-        String[] meetingOptions = {
-            "Create meeting",
-            "Show metings",
-            "Show today' meeting",
-            "Complete Task",
-            "Delete Task",
-            "Back to Main Menu"
-        };
+         public static void meetingMenu() {
+        while (true) {
+            displayMenu();
+            int choice = getUserChoice();
 
-        int optionMeeting;
-
-        do {
-            optionMeeting = MenuUtils.getUserOption("Task", meetingOptions);
-
-            switch (optionMeeting) {
-                case 1 -> Meeting.create();
-                case 2 -> Meeting.show();
-                case 3 -> Meeting.showMeetingTodays();
-                case 4 -> Meeting.complete();
-                case 5 -> Meeting.delete();
-                case 6 -> MenuUtils.backToMainMenu();
-                default -> System.out.println("Invalid option. Please try again.");
+            switch (choice) {
+                case 1:
+                    Meeting.create();
+                    break;
+                case 2:
+                    Meeting.show();
+                    break;
+                case 3:
+                    Meeting.update();
+                    break;
+                case 4:
+                    Meeting.delete();
+                    break;
+                case 5:
+                    MenuUtils.backToMainMenu();   
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
-        } while (optionMeeting != 6);
+        }
+    }
+
+    private static void displayMenu() {
+        System.out.println("Main Menu");
+        System.out.println("1. Create a meeting");
+        System.out.println("2. Show meetings");
+        System.out.println("3. Update a meeting");
+        System.out.println("4. Delete a meeting");
+        System.out.println("5. Exit");
+    }
+
+    private static int getUserChoice() {
+        System.out.print("Enter your choice: ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            System.out.print("Enter your choice: ");
+            scanner.next();
+        }
+        return scanner.nextInt();
     }
     
+    
+
     
 }
