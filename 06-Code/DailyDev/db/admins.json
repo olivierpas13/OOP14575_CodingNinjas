@@ -5,5 +5,12 @@
     "id": "1b944e09-cc57-438f-90a6-bee4f4468157",
     "username": "Antonio",
     "encryptedPassword": "Sfwjmmb"
+  },
+  {
+    "role": "admin",
+    "organizationCode": "73bdf556-218b-4663-9607-98ade73af094",
+    "id": "b2f1c45a-209a-4ec3-a71e-0ca663d7f437",
+    "username": "123",
+    "encryptedPassword": "qbttxpse"
   }
 ]

@@ -25,3 +25,4 @@ replay_pid*
 /06-Code/DailyDev/nbproject/private/
 /06-Code/DailyDev/build/
 /06-Code/DailyDev/dist/
+.env

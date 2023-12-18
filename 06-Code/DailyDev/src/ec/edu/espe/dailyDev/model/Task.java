@@ -182,7 +182,7 @@ public class Task{
             return;
         }
 
-        ArrayList<Task> tasks = getTasksFromFile("tasks.json");
+        ArrayList<Task> tasks = getTasksFromFile("./db/tasks.json");
 
         System.out.println("Tasks created by the current user:");
 

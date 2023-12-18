@@ -6,6 +6,7 @@ import ec.edu.espe.dailyDev.model.Meeting;
 import ec.edu.espe.dailyDev.model.Message;
 import ec.edu.espe.dailyDev.model.Task;
 import ec.edu.espe.dailyDev.model.User;
+import ec.edu.espe.dailyDev.utils.GPTHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -157,15 +158,16 @@ public class LandingPage {
             }
 
             System.out.println("\nSelect one option:\n");
-            System.out.println("1. Task\n2. Meeting\n3. Logout");
+            System.out.println("1. Task\n2. Meeting\n3. Create daily message\n4. Logout");
 
             optionMain = scanner.nextInt();
             scanner.nextLine();
 
             switch (optionMain) {
                 case 1 -> taskMenu();
-                case 2 -> meetingMenu(); 
-                case 3 -> System.out.println("Logging out...");
+                case 2 -> meetingMenu();
+                case 3 -> System.out.println(GPTHandler.getDailyMessage(tasks));
+                case 4 -> System.out.println("Logging out...");
                 default -> System.out.println("Invalid option. Please try again.");
             }
         } while (optionMain != 3);
