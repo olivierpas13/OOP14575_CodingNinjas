@@ -1,0 +1,20 @@
+[
+  {
+    "id": "6e3e4ef8-e92a-47e4-a158-9f56bdea7d2c",
+    "name": "Crear diseño web",
+    "description": "Realizar el diseño web oficial",
+    "dueDate": "Dec 19, 2023, 12:00:00 AM",
+    "creationDate": "Dec 17, 2023, 12:00:00 AM",
+    "userId": "1b944e09-cc57-438f-90a6-bee4f4468157",
+    "completed": true
+  },
+  {
+    "id": "8a64e33c-4d0d-4243-b9d8-30176be70922",
+    "name": "Crear los diagramas de clase",
+    "description": "Realizar los diagramas en visual paradigm",
+    "dueDate": "Dec 17, 2023, 12:00:00 AM",
+    "creationDate": "Dec 17, 2023, 12:00:00 AM",
+    "userId": "1b944e09-cc57-438f-90a6-bee4f4468157",
+    "completed": true
+  }
+]

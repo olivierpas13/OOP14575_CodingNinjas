@@ -3,6 +3,11 @@ package ec.edu.espe.dailyDev.model;
 import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,8 +46,6 @@ public class Task{
                 "Create Task",
                 "Show Tasks",
                 "Update Task",
-                "Complete Task",
-                "Delete Task",
                 "Back to Main Menu"
         };
 
@@ -55,12 +58,10 @@ public class Task{
                 case 1 -> create();
                 case 2 -> show();
                 case 3 -> showTasksTodays();
-                case 4 -> complete();
-                case 5 -> delete();
-                case 6 -> MenuUtils.backToMainMenu();
+                case 4 -> MenuUtils.backToMainMenu();
                 default -> System.out.println("Invalid option. Please try again.");
             }
-        } while (option != 6);
+        } while (option != 4);
     }
     
     public void setUserId(UUID userId) {
@@ -102,10 +103,6 @@ public class Task{
     
     public static ArrayList<Task> getTasksFromFile(String fileAddress) {
         return FileHandler.readFile(fileAddress, new TypeToken<ArrayList<Task>>() {}.getType());
-    }
-
-    public static void writeTasksToFile(String fileAddress, ArrayList<Task> tasks) {
-        FileHandler.writeFile(fileAddress, tasks);
     }
     
     public static void create() {
@@ -158,6 +155,21 @@ public class Task{
         System.out.println("UserID: " + userId);
         System.out.println(newTask);
         MenuUtils.backToMainMenu();
+    }
+    
+    public static void writeTasksToFile(String filePath, ArrayList<Task> tasks) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(tasks);
+
+        try {
+            File file = new File("./db/" + filePath); // Ruta completa al archivo
+            file.getParentFile().mkdirs(); // Asegura que la carpeta exista
+            FileWriter writer = new FileWriter(file);
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("Error writing tasks to file: " + e.getMessage());
+        }
     }
 
     public static void show() {

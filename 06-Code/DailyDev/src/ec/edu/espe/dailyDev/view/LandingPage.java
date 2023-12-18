@@ -176,8 +176,6 @@ public class LandingPage {
             "Create Task",
             "Show Tasks",
             "Show today's pending tasks",
-            "Complete Task",
-            "Delete Task",
             "Back to Main Menu"
         };
 
@@ -194,15 +192,11 @@ public class LandingPage {
                 case 3 ->
                     Task.showTasksTodays();
                 case 4 ->
-                    Task.complete();
-                case 5 ->
-                    Task.delete();
-                case 6 ->
                     MenuUtils.backToMainMenu();
                 default ->
                     System.out.println("Invalid option. Please try again.");
             }
-        } while (optionTask != 6);
+        } while (optionTask != 4);
     }
     
         private static void meetingMenu() {
