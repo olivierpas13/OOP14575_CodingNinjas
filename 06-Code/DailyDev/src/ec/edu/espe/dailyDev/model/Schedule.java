@@ -5,8 +5,9 @@ import java.util.List;
 
 /**
  *
- * @author CodingNinjas 
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Schedule {
     private List<Task> tasks;
     private List<Reminder> reminders;

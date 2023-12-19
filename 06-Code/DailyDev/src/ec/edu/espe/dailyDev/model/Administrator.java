@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Admin class, extends User
  *
- * @author Olivier Paspuel
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Administrator extends User {
 
     private final String role = "admin";

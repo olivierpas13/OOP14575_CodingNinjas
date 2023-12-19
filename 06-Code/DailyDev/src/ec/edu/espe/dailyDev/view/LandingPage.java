@@ -6,7 +6,7 @@ import ec.edu.espe.dailyDev.model.Meeting;
 import ec.edu.espe.dailyDev.model.Message;
 import ec.edu.espe.dailyDev.model.Task;
 import ec.edu.espe.dailyDev.model.User;
-import ec.edu.espe.dailyDev.utils.GPTHandler;
+//import ec.edu.espe.dailyDev.utils.GPTHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,6 +16,7 @@ import java.util.UUID;
  *
  * @author CodingNinjas
  */
+
 public class LandingPage {
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -29,7 +30,7 @@ public class LandingPage {
 
         do {
             option = scanner.nextInt();
-            scanner.nextLine(); // Consume la nueva línea pendiente después de nextInt
+            scanner.nextLine(); 
         } while (option != 1 && option != 2);
 
         for (int i = 0; i < 50; i++) {
@@ -49,11 +50,23 @@ public class LandingPage {
     private static void showLogin() throws Exception {
         User user = null;
         int option;
+
         do {
             System.out.println("Select your user type:\n");
             System.out.println("1. Developer\n2. Administrator");
+            System.out.println("3. Back to top");
             option = scanner.nextInt();
             scanner.nextLine(); // Consume la nueva línea pendiente después de nextInt
+
+            if (option == 3) {
+                try {
+                    showLandingPage();
+                } catch (Exception e) {
+                    System.err.println("Error displaying Landing Page: " + e.getMessage());
+                }
+                return; // Salir del método showLogin si el usuario decide regresar al menú principal
+            }
+
         } while (option != 1 && option != 2);
 
         do {
@@ -69,7 +82,7 @@ public class LandingPage {
                 user = User.login(username, password, option == 1 ? "dev": "admin");
                 if (user != null) {
                     System.out.println("Login successful");
-                    showMainMenu();
+                    showMainMenu(); // Aquí deberías tener una función que muestre el menú principal para el usuario
                 }
             } catch (User.InvalidCredentialsException e) {
                 System.err.println(e.getMessage());
@@ -82,21 +95,32 @@ public class LandingPage {
         int option;
 
         System.out.println("Registration Menu\n");
-        System.out.println("1. Register as an administrator\n");
+        System.out.println("1. Register as an administrator");
         System.out.println("2. Register as a developer");
+        System.out.println("3. Back to top\n");
+
         do {
             option = scanner.nextInt();
             scanner.nextLine(); // Consume la nueva línea pendiente después de nextInt
-        } while (option != 1 && option != 2);
 
-        switch (option) {
-            case 1 ->
-                showAdminRegistration();
-            case 2 ->
-                showDevRegistration();
-            default ->
-                throw new AssertionError();
-        }
+            switch (option) {
+                case 1:
+                    showAdminRegistration();
+                    break;
+                case 2:
+                    showDevRegistration();
+                    break;
+                case 3:
+                try {
+                    showLandingPage();
+                } catch (Exception e) {
+                    System.err.println("Error displaying Landing Page: " + e.getMessage());
+                }
+                return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        } while (option != 1 && option != 2);
     }
 
     private static void showAdminRegistration() {
@@ -144,9 +168,8 @@ public class LandingPage {
 
         do {
             System.out.println("\nMain Menu");
-
-            // Verificar el estado de las tareas y mostrar mensajes
-            ArrayList<Task> tasks = Task.getTasksFromFile("tasks.json");
+            
+            ArrayList<Task> tasks = Task.getTasksFromFile("./db/tasks.json");
             if (Task.areAllTasksCompleted(tasks)) {
                 Message allTasksCompletedMessage = Task.createAllTasksCompletedMessage();
                 System.out.println("\nMessage: " + allTasksCompletedMessage.getTitle());
@@ -166,7 +189,7 @@ public class LandingPage {
             switch (optionMain) {
                 case 1 -> taskMenu();
                 case 2 -> meetingMenu();
-                case 3 -> System.out.println(GPTHandler.getDailyMessage(tasks));
+          //      case 3 -> System.out.println(GPTHandler.getDailyMessage(tasks));
                 case 4 -> System.out.println("Logging out...");
                 default -> System.out.println("Invalid option. Please try again.");
             }
@@ -244,8 +267,5 @@ public class LandingPage {
         }
         return scanner.nextInt();
     }
-    
-    
-
     
 }

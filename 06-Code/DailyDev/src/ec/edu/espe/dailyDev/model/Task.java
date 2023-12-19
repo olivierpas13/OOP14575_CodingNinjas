@@ -19,8 +19,9 @@ import java.util.Scanner;
 
 /**
  *
- * @author CodingNinjas 
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Task{
     private UUID id;
     private String name;
@@ -145,7 +146,7 @@ public class Task{
 
         newTask.setUserId(userId);
 
-        ArrayList<Task> existingTasks = getTasksFromFile("tasks.json");
+        ArrayList<Task> existingTasks = getTasksFromFile("./db/tasks.json");
 
         existingTasks.add(newTask);
 
@@ -258,7 +259,7 @@ public class Task{
             return;
         }
 
-        ArrayList<Task> tasks = getTasksFromFile("tasks.json");
+        ArrayList<Task> tasks = getTasksFromFile("./db/tasks.json");
 
         System.out.println("Tasks due today:");
 
@@ -282,7 +283,6 @@ public class Task{
         MenuUtils.backToMainMenu();
     }
 
-    // Método auxiliar para verificar si dos fechas son del mismo día (sin tener en cuenta la parte de hora)
     private static boolean isSameDay(Date date1, Date date2) {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
         return fmt.format(truncateTime(date1)).equals(fmt.format(truncateTime(date2)));
@@ -297,20 +297,6 @@ public class Task{
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTime();
-    }
-    
-    public static void complete() {
-        System.out.println("Completing a task...");
-        // Lógica para completar reuniones
-        System.out.println("Task completed!");
-        MenuUtils.backToMainMenu();
-    }
-
-    public static void delete() {
-        System.out.println("Deleting a task...");
-        // Lógica para eliminar reuniones
-        System.out.println("Task deleted!");
-        MenuUtils.backToMainMenu();
     }
     
     @Override

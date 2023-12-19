@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author CodingNinjas 
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Team {
     private User[] users;
     private String name;

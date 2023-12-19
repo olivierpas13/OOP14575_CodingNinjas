@@ -21,6 +21,12 @@ import java.util.Scanner;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+
+/**
+ *
+ * @author Team Number: 4 - CodingNinjas  
+ */
+
 public class Meeting {
 
         private static final Scanner consoleScanner = new Scanner(System.in);

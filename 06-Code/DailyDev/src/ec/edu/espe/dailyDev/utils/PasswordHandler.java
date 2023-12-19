@@ -2,7 +2,7 @@ package ec.edu.espe.dailyDev.utils;
 
 /**
  *
- * @author CodingNinjas
+ * @author Team Number: 4 - CodingNinjas  
  */
 
 public class PasswordHandler {

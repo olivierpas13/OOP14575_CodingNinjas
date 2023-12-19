@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author CodingNinjas
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class FileHandler {
 
     public static <T> ArrayList<T> readFile(String fileAdress, Type type) {

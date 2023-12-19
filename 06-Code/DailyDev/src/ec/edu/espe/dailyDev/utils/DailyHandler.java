@@ -9,8 +9,9 @@ import java.util.List;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class DailyHandler {
  
     

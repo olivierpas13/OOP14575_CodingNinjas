@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Developer class, extends User
  *
- * @author Olivier Paspuel
+ * @author Team Number: 4 - CodingNinjas  
  */
 public class Developer extends User {
+
+    public static User login(String username, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     private final String role = "developer";
     private final UUID organizationCode;

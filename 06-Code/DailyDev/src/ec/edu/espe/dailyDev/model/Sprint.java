@@ -7,8 +7,9 @@ import java.util.UUID;
 
 /**
  *
- * @author CodingNinjas 
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Sprint {
 
     private UUID id;

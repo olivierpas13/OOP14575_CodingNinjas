@@ -5,8 +5,9 @@ import java.util.Date;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Reminder {
     private String name;
     private String description;

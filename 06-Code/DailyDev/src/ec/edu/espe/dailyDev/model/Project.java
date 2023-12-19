@@ -5,8 +5,9 @@ import ec.edu.espe.dailyDev.utils.MenuUtils;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Project {
     private Team AssignedTeam;
     private String name;

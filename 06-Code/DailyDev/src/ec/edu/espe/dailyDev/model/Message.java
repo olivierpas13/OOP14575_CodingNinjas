@@ -4,7 +4,7 @@ import java.util.UUID;
 
 /**
  *
- * @author Olivier Paspuel
+ * @author Team Number: 4 - CodingNinjas  
  */
 
 public class Message {
