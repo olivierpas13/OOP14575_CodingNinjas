@@ -298,11 +298,12 @@ public class Task{
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTime();
     }
-    
+
     @Override
     public String toString() {
-        return "\nNew Task  " + "\nId = " + id + "\nName = " + name + "\nDescription = " + description + "\nDue Date = " + formatDate(dueDate) + "\nCreation Date = " + formatDate(creationDate) + "\nUser Id = " + userId + "\nCompleted = " + completed + '.';
+        return "Task{" + "name=" + name + ", description=" + description + ", dueDate=" + dueDate + ", completed=" + completed + '}';
     }
+    
     
     /**
      * @return the id

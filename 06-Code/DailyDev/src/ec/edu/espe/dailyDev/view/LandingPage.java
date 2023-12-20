@@ -3,20 +3,21 @@ package ec.edu.espe.dailyDev.view;
 import ec.edu.espe.dailyDev.model.Administrator;
 import ec.edu.espe.dailyDev.model.Developer;
 import ec.edu.espe.dailyDev.model.Meeting;
-import ec.edu.espe.dailyDev.model.Message;
 import ec.edu.espe.dailyDev.model.Task;
 import ec.edu.espe.dailyDev.model.User;
+import ec.edu.espe.dailyDev.utils.GPTHandler;
 //import ec.edu.espe.dailyDev.utils.GPTHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
  * @author CodingNinjas
  */
-
 public class LandingPage {
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -30,7 +31,7 @@ public class LandingPage {
 
         do {
             option = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
         } while (option != 1 && option != 2);
 
         for (int i = 0; i < 50; i++) {
@@ -79,7 +80,7 @@ public class LandingPage {
             String password = scanner.nextLine();
 
             try {
-                user = User.login(username, password, option == 1 ? "dev": "admin");
+                user = User.login(username, password, option == 1 ? "dev" : "admin");
                 if (user != null) {
                     System.out.println("Login successful");
                     showMainMenu(); // Aquí deberías tener una función que muestre el menú principal para el usuario
@@ -150,8 +151,7 @@ public class LandingPage {
 
         System.out.println("Password:\n");
         String password = scanner.nextLine();
-        
-        
+
         try {
             Developer dev = Developer.registerDev(username, password, UUID.fromString(orgCode));
             if (dev != null) {
@@ -162,23 +162,17 @@ public class LandingPage {
             System.err.println(e.getMessage());
         }
     }
-    
- public static void showMainMenu() {
+
+    public static void showMainMenu() throws Exception {
         int optionMain;
 
         do {
             System.out.println("\nMain Menu");
-            
+
             ArrayList<Task> tasks = Task.getTasksFromFile("./db/tasks.json");
-            if (Task.areAllTasksCompleted(tasks)) {
-                Message allTasksCompletedMessage = Task.createAllTasksCompletedMessage();
-                System.out.println("\nMessage: " + allTasksCompletedMessage.getTitle());
-                System.out.println(allTasksCompletedMessage.getDescription());
-            } else {
-                Message tasksPendingMessage = Task.createTasksPendingMessage();
-                System.out.println("\nMessage: " + tasksPendingMessage.getTitle());
-                System.out.println(tasksPendingMessage.getDescription());
-            }
+            List<Task> userTasks = tasks.stream()
+                    .filter(task -> task.getUserId().equals(User.getCurrentUser().getId()))
+                    .collect(Collectors.toList());
 
             System.out.println("\nSelect one option:\n");
             System.out.println("1. Task\n2. Meeting\n3. Create daily message\n4. Logout");
@@ -187,11 +181,16 @@ public class LandingPage {
             scanner.nextLine();
 
             switch (optionMain) {
-                case 1 -> taskMenu();
-                case 2 -> meetingMenu();
-          //      case 3 -> System.out.println(GPTHandler.getDailyMessage(tasks));
-                case 4 -> System.out.println("Logging out...");
-                default -> System.out.println("Invalid option. Please try again.");
+                case 1 ->
+                    taskMenu();
+                case 2 ->
+                    meetingMenu();
+                case 3 ->
+                    System.out.println(GPTHandler.getDailyMessage(userTasks));
+                case 4 ->
+                    showLandingPage();
+                default ->
+                    System.out.println("Invalid option. Please try again.");
             }
         } while (optionMain != 3);
     }
@@ -223,7 +222,8 @@ public class LandingPage {
             }
         } while (optionTask != 4);
     }
-         public static void meetingMenu() {
+
+    public static void meetingMenu() {
         while (true) {
             displayMenu();
             int choice = getUserChoice();
@@ -242,7 +242,7 @@ public class LandingPage {
                     Meeting.delete();
                     break;
                 case 5:
-                    MenuUtils.backToMainMenu();   
+                    MenuUtils.backToMainMenu();
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
@@ -267,5 +267,5 @@ public class LandingPage {
         }
         return scanner.nextInt();
     }
-    
+
 }
