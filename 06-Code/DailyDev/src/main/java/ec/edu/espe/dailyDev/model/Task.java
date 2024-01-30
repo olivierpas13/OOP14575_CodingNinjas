@@ -1,10 +1,11 @@
 package ec.edu.espe.dailyDev.model;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import ec.edu.espe.persistence.controller.MongoDBHandler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
+import org.bson.Document;
 
 /**
  *
@@ -146,11 +148,16 @@ public class Task{
 
         newTask.setUserId(userId);
 
-        ArrayList<Task> existingTasks = getTasksFromFile("./db/tasks.json");
+        MongoDBHandler mdbHandler = new MongoDBHandler();
+        mdbHandler.createDocument(Document.parse(new Gson().toJson(newTask)));
+        
+//        ArrayList<Task> existingTasks = getTasksFromFile("./db/tasks.json");
 
-        existingTasks.add(newTask);
+//        existingTasks.add(newTask);
 
-        writeTasksToFile("tasks.json", existingTasks);
+//        writeTasksToFile("tasks.json", existingTasks);
+
+    
 
         System.out.println("Task created!");
         System.out.println("UserID: " + userId);
