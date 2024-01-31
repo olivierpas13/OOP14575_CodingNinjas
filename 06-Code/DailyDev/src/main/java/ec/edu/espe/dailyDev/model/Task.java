@@ -5,7 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
 import com.google.gson.GsonBuilder;
-import ec.edu.espe.persistence.controller.MongoDBHandler;
+import ec.edu.espe.dailyDev.utils.MongoDBHandler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,6 +32,7 @@ public class Task{
     private Date creationDate;
     private UUID userId;
     private boolean completed;
+    private static String nameCollection;
     private static List<String> taskList = new ArrayList<>();
     
     public Task(UUID id, String name, String description, Date dueDate, Date creationDate, UUID userId, boolean completed) {
@@ -42,6 +43,7 @@ public class Task{
         this.creationDate = creationDate;
         this.userId = userId;
         this.completed = completed;
+        this.nameCollection = nameCollection;
     }
     
     public void showMenu() {
@@ -109,6 +111,8 @@ public class Task{
     }
     
     public static void create() {
+        String collectionName = "Tasks";
+        
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Creating a new task...");
@@ -149,7 +153,7 @@ public class Task{
         newTask.setUserId(userId);
 
         MongoDBHandler mdbHandler = new MongoDBHandler();
-        mdbHandler.createDocument(Document.parse(new Gson().toJson(newTask)));
+        mdbHandler.createDocument(nameCollection, Document.parse(new Gson().toJson(newTask)));
         
 //        ArrayList<Task> existingTasks = getTasksFromFile("./db/tasks.json");
 

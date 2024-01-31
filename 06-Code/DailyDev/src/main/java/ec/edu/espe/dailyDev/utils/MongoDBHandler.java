@@ -1,4 +1,4 @@
-package ec.edu.espe.persistence.controller;
+package ec.edu.espe.dailyDev.utils;
 
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
@@ -31,27 +31,28 @@ public class MongoDBHandler {
         return collection;
     }
 
-    public void createDocument(Document document) {
-
-        MongoCollection<Document> collection = connectToCollection( "Tasks");
+    public void createDocument(String collectionName, Document document) {
+        
+        MongoCollection<Document> collection = connectToCollection(collectionName);
 
         try {
-            
-            
             InsertOneResult result = collection.insertOne(document);
-            
-//            InsertOneResult result = collection.insertOne(new Document()
-//                    .append("_id", new ObjectId())
-//                    .append("title", title));
-
             System.out.println("Success! Inserted document id: " + result.getInsertedId());
-
+            
         } catch (MongoException me) {
             System.err.println("Unable to insert due to an error: " + me);
         }
     }
+}
 
 
+    
+    
+    
+    
+    
+    
+    
 //    @Override
 //    public String read(String filterKey, String filterValue, String table) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -72,4 +73,4 @@ public class MongoDBHandler {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //    }
 
-}
+

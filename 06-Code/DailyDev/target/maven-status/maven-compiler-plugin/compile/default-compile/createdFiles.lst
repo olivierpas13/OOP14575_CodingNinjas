@@ -7,6 +7,7 @@ ec\edu\espe\dailyDev\model\Team.class
 ec\edu\espe\dailyDev\model\Administrator.class
 ec\edu\espe\dailyDev\utils\PasswordHandler.class
 ec\edu\espe\dailyDev\model\Task$1.class
+ec\edu\espe\dailyDev\utils\MongoDBHandler.class
 ec\edu\espe\dailyDev\model\Reminder.class
 ec\edu\espe\dailyDev\utils\ValidationHandler.class
 ec\edu\espe\dailyDev\model\Meeting$1.class
@@ -22,7 +23,6 @@ ec\edu\espe\dailyDev\model\Sprint.class
 ec\edu\espe\dailyDev\model\Project.class
 ec\edu\espe\dailyDev\model\Message.class
 ec\edu\espe\dailyDev\model\User$InvalidCredentialsException.class
-ec\edu\espe\persistence\controller\MongoDBHandler.class
 ec\edu\espe\dailyDev\model\Team$1.class
 ec\edu\espe\dailyDev\model\Organization$1.class
 ec\edu\espe\dailyDev\model\User$2.class
