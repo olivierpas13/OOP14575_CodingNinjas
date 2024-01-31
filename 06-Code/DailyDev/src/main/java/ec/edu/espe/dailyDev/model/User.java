@@ -62,7 +62,6 @@ public class User {
             return loginDev(username, password);
         }
         return loginAdmin(username, password);
-
     }
 
     public static class InvalidCredentialsException extends Exception {

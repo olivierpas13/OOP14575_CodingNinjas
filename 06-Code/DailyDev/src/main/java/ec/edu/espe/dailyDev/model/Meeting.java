@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 public class Meeting {
 
-        private static final Scanner consoleScanner = new Scanner(System.in);
+    private static final Scanner consoleScanner = new Scanner(System.in);
     private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private static final Gson gson = new Gson();
     private UUID id;

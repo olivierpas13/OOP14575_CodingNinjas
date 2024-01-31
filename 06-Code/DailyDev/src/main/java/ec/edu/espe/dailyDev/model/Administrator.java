@@ -3,11 +3,12 @@ package ec.edu.espe.dailyDev.model;
 import com.google.gson.Gson;
 import static ec.edu.espe.dailyDev.model.User.currentUser;
 import ec.edu.espe.dailyDev.utils.PasswordHandler;
-import static ec.edu.espe.dailyDev.utils.ValidationHandler.isUsernameUnique;
+import static ec.edu.espe.dailyDev.utils.ValidationHandler.isUsernameUniqueInDatabase;
 import ec.edu.espe.dailyDev.view.LandingPage;
 import java.util.ArrayList;
 import java.util.UUID;
 import ec.edu.espe.dailyDev.utils.MongoDBHandler;
+import ec.edu.espe.dailyDev.utils.ValidationHandler;
 import org.bson.Document;
 
 /**
@@ -19,7 +20,7 @@ public class Administrator extends User {
     private final String role = "admin";
     private final UUID organizationCode;
     private static String nameCollection;
-    
+
     public Administrator(String username, String password, UUID orgCode) {
         super(username, password);
         this.organizationCode = orgCode;
@@ -27,7 +28,7 @@ public class Administrator extends User {
 
     @Override
     public String toString() {
-        return "Admin{" + "role=" + role + ", organizationCode=" + organizationCode + '}';
+        return "Admin{" + "role=" + getRole() + ", organizationCode=" + getOrganizationCode() + '}';
     }
 
     public static ArrayList<Administrator> getAdminsFromFile() {
@@ -37,29 +38,29 @@ public class Administrator extends User {
 
     public static Administrator registerAdmin(String username, String password) {
         String collectionName = "Admin";
-        ArrayList<Administrator> admins = getAdminsFromFile();
 
         try {
-            if (!isUsernameUnique(username, "admin")) {
+            if (!ValidationHandler.isUsernameUniqueInDatabase(username, collectionName)) {
                 System.out.println("Username already exists. Please choose a different one.");
                 LandingPage.showLandingPage();
                 return null;
             }
 
-            // TODO validate organizationName is unique;
             Organization org = Organization.createOrganization();
 
             Administrator newAdmin = new Administrator(username, password, org.getOrganizationCode());
 
-            admins.add(newAdmin);
-
             MongoDBHandler mdbHandler = new MongoDBHandler();
-            
-            Document adminDocument = new Document("username", newAdmin.getUsername())
-                    .append("password", newAdmin.getEncryptedPassword()) 
-                    .append("organizationCode", newAdmin.getOrganizationCode().toString());
-            
-                    mdbHandler.createDocument(collectionName,Document.parse(new Gson().toJson(newAdmin)));
+
+            UUID userId = UUID.randomUUID();
+
+            Document adminDocument = new Document("id", userId.toString())
+                    .append("username", newAdmin.getUsername())
+                    .append("password", newAdmin.getEncryptedPassword())
+                    .append("organizationCode", newAdmin.getOrganizationCode().toString())
+                    .append("role", newAdmin.getRole());
+
+            mdbHandler.createDocument(collectionName, adminDocument);
 
             return newAdmin;
         } catch (Exception e) {
@@ -69,18 +70,43 @@ public class Administrator extends User {
     }
 
     public static User loginAdmin(String username, String password) throws InvalidCredentialsException {
-        ArrayList<Administrator> admins = getAdminsFromFile();
-        for (Administrator admin : admins) {
-            if (admin.getUsername().equals(username) && admin.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password))) {
+        try {
+            MongoDBHandler mdbHandler = new MongoDBHandler();
+            if (mdbHandler.checkCredentials(username, password, "Admin")) {
+                Administrator admin = new Administrator(username, password, null); // Puedes modificar según sea necesario
                 currentUser = admin;
                 return admin;
             }
+        } catch (Exception e) {
+            System.err.println("Error during admin login: " + e.getMessage());
         }
+
         throw new InvalidCredentialsException("Invalid credentials for username: " + username);
     }
 
     public UUID getOrganizationCode() {
         return organizationCode;
+    }
+
+    /**
+     * @return the role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @return the nameCollection
+     */
+    public static String getNameCollection() {
+        return nameCollection;
+    }
+
+    /**
+     * @param aNameCollection the nameCollection to set
+     */
+    public static void setNameCollection(String aNameCollection) {
+        nameCollection = aNameCollection;
     }
 
 }

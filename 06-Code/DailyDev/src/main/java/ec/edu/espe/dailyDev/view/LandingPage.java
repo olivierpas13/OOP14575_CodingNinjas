@@ -57,7 +57,7 @@ public class LandingPage {
             System.out.println("1. Developer\n2. Administrator");
             System.out.println("3. Back to top");
             option = scanner.nextInt();
-            scanner.nextLine(); // Consume la nueva línea pendiente después de nextInt
+            scanner.nextLine(); 
 
             if (option == 3) {
                 try {
@@ -65,7 +65,7 @@ public class LandingPage {
                 } catch (Exception e) {
                     System.err.println("Error displaying Landing Page: " + e.getMessage());
                 }
-                return; // Salir del método showLogin si el usuario decide regresar al menú principal
+                return; 
             }
 
         } while (option != 1 && option != 2);
@@ -83,7 +83,7 @@ public class LandingPage {
                 user = User.login(username, password, option == 1 ? "dev" : "admin");
                 if (user != null) {
                     System.out.println("Login successful");
-                    showMainMenu(); // Aquí deberías tener una función que muestre el menú principal para el usuario
+                    showMainMenu(); 
                 }
             } catch (User.InvalidCredentialsException e) {
                 System.err.println(e.getMessage());
@@ -135,7 +135,7 @@ public class LandingPage {
             Administrator admin = Administrator.registerAdmin(username, password);
             if (admin != null) {
                 System.out.println("Successful registration");
-                showLogin();  // Después de registrar, permite iniciar sesión directamente
+                showLogin();  
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -156,7 +156,6 @@ public class LandingPage {
             Developer dev = Developer.registerDev(username, password, UUID.fromString(orgCode));
             if (dev != null) {
                 System.out.println("Successful registration");
-                showLogin();  // Después de registrar, permite iniciar sesión directamente
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());

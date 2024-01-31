@@ -2,7 +2,7 @@ package ec.edu.espe.dailyDev.model;
 
 import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.PasswordHandler;
-import static ec.edu.espe.dailyDev.utils.ValidationHandler.isUsernameUnique;
+import static ec.edu.espe.dailyDev.utils.ValidationHandler.isUsernameUniqueInDatabase;
 import static ec.edu.espe.dailyDev.utils.ValidationHandler.orgCodeExists;
 import ec.edu.espe.dailyDev.view.LandingPage;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.UUID;
  *
  * @author Team Number: 4 - CodingNinjas  
  */
+
 public class Developer extends User {
 
     public static User login(String username, String password) {
@@ -40,7 +41,7 @@ public class Developer extends User {
     public static Developer registerDev(String username, String password, UUID orgCode) throws Exception {
         ArrayList<Developer> devs = getDevsFromFile();
 
-        if (!isUsernameUnique(username, "dev")) {
+        if (!isUsernameUniqueInDatabase(username, "dev")) {
             System.out.println("Username already exists. Please choose a different one.");
             LandingPage.showLandingPage();
             return null;
