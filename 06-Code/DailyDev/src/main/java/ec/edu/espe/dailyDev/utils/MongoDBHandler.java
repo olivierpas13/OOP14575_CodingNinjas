@@ -1,14 +1,30 @@
 package ec.edu.espe.dailyDev.utils;
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoException;
+<<<<<<< Updated upstream
 import com.mongodb.client.FindIterable;
+=======
+import com.mongodb.ServerApi;
+import com.mongodb.ServerApiVersion;
+>>>>>>> Stashed changes
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.result.InsertOneResult;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.bson.Document;
+<<<<<<< Updated upstream
+=======
+import org.bson.UuidRepresentation;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+>>>>>>> Stashed changes
 
 /**
  * Clase que maneja la conexión y operaciones con MongoDB.
@@ -18,22 +34,30 @@ import org.bson.Document;
 
 public class MongoDBHandler {
 
-    private MongoClient mongoClient;
-
-    public MongoDBHandler() {
-        this.mongoClient = connect();
-    }
-
-    public MongoClient connect() {
+    public MongoDatabase connect() {
         Dotenv dotenv = Dotenv.load();
-        String MONGODB_URI = dotenv.get("MONGODB_URI");
+        CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
+        CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
 
-        MongoClient mongoClient = MongoClients.create(MONGODB_URI);
-        return mongoClient;
+        ServerApi serverApi = ServerApi.builder()
+                .version(ServerApiVersion.V1)
+                .build();
+
+        MongoClientSettings clientSettings = MongoClientSettings.builder()
+                .applyConnectionString(new ConnectionString(dotenv.get("MONGODB_URI")))
+                .serverApi(serverApi)
+                .codecRegistry(codecRegistry)
+                .uuidRepresentation(UuidRepresentation.STANDARD)
+                .build();
+
+        MongoClient mongoClient = MongoClients.create(clientSettings);
+        MongoDatabase db = mongoClient.getDatabase("DailyDevDB");
+
+        return db;
     }
 
     public MongoCollection<Document> connectToCollection(String collectionName) {
-        MongoDatabase db = mongoClient.getDatabase("DailyDevDB");
+        MongoDatabase db = connect();
         MongoCollection<Document> collection = db.getCollection(collectionName);
         return collection;
     }
@@ -43,7 +67,7 @@ public class MongoDBHandler {
 
         try {
             InsertOneResult result = collection.insertOne(document);
-            System.out.println("Success! Inserted document id: " + result.getInsertedId());
+            System.out.println("Succesfully created!\n");
 
         } catch (MongoException me) {
             System.err.println("Unable to insert due to an error: " + me);
@@ -72,3 +96,32 @@ public class MongoDBHandler {
         }
     }
 }
+    public Document findOneDoc(String key, Object value, String collectionName) {
+
+        MongoCollection<Document> collection = connectToCollection(collectionName);
+
+        return collection.find(eq(key, value)).first();
+
+    }
+}
+
+//    @Override
+//    public String read(String filterKey, String filterValue, String table) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public String readAll(String table) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public boolean update(String filterKey, String filterValue, String newData, String table) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+//
+//    @Override
+//    public boolean delete(String filterKey, String filterValue, String table) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+

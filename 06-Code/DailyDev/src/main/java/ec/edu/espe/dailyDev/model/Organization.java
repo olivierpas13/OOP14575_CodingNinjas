@@ -1,10 +1,13 @@
 package ec.edu.espe.dailyDev.model;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.dailyDev.utils.FileHandler;
+import ec.edu.espe.dailyDev.utils.MongoDBHandler;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
+import org.bson.Document;
 
 /**
  *
@@ -35,14 +38,13 @@ public class Organization {
 
         //TODO check organizationName is unique;
         String orgName = scanner.nextLine();
+        
         Organization newOrg = new Organization(orgName);
 
-        ArrayList<Organization> orgs = getOrganizationsFromFile();
+        MongoDBHandler mdbHandler = new MongoDBHandler();
         
-        orgs.add(newOrg);
+        mdbHandler.createDocument("Organizations", Document.parse(new Gson().toJson(newOrg)));
         
-        FileHandler.writeFile("./db/organizations.json", orgs);
-    
         return  newOrg;
     }
 

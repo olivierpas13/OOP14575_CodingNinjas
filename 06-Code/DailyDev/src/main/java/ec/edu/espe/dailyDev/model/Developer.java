@@ -1,16 +1,18 @@
 package ec.edu.espe.dailyDev.model;
 
-import ec.edu.espe.dailyDev.utils.FileHandler;
+import com.google.gson.Gson;
+import static ec.edu.espe.dailyDev.model.User.currentUser;
+import ec.edu.espe.dailyDev.utils.MongoDBHandler;
 import ec.edu.espe.dailyDev.utils.PasswordHandler;
-import static ec.edu.espe.dailyDev.utils.ValidationHandler.isUsernameUniqueInDatabase;
-import static ec.edu.espe.dailyDev.utils.ValidationHandler.orgCodeExists;
 import ec.edu.espe.dailyDev.view.LandingPage;
 import java.util.ArrayList;
 import java.util.UUID;
+import org.bson.Document;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
 /**
  *
- * @author Team Number: 4 - CodingNinjas  
+ * @author Team Number: 4 - CodingNinjas
  */
 
 public class Developer extends User {
@@ -18,11 +20,12 @@ public class Developer extends User {
     public static User login(String username, String password) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    private final static MongoDBHandler mdbHandler = new MongoDBHandler();
     private final String role = "developer";
-    private final UUID organizationCode;
+    @BsonProperty("organizationCode")
+    private final String organizationCode;
 
-    public Developer(String username, String password, UUID organizationCode) {
+    public Developer(String username, String password, String organizationCode) {
         super(username, password);
         this.organizationCode = organizationCode;
 
@@ -39,30 +42,28 @@ public class Developer extends User {
     }
 
     public static Developer registerDev(String username, String password, UUID orgCode) throws Exception {
-        ArrayList<Developer> devs = getDevsFromFile();
 
-        if (!isUsernameUniqueInDatabase(username, "dev")) {
+        if (mdbHandler.findOneDoc("username", username, "Devs") != null) {
             System.out.println("Username already exists. Please choose a different one.");
             LandingPage.showLandingPage();
             return null;
         }
 
-        if (!orgCodeExists(orgCode)) {
+        if (mdbHandler.findOneDoc("organizationCode", orgCode, "Organizations") == null) {
             System.out.println("Organization doesn't exist.");
             LandingPage.showLandingPage();
             return null;
 
         }
 
-        Developer newDeveloper = new Developer(username, password, orgCode);
+        Developer newDeveloper = new Developer(username, password, orgCode.toString());
 
-        devs.add(newDeveloper);
-
-        FileHandler.writeFile("./db/devs.json", devs);
+        Document developerDoc = Document.parse(new Gson().toJson(newDeveloper));
+        mdbHandler.createDocument("Devs", developerDoc);
         return newDeveloper;
     }
 
-    public static User loginDev(String username, String password) throws InvalidCredentialsException {
+    public static User loginDev(String username, String password) throws User.InvalidCredentialsException {
         ArrayList<Developer> devs = getDevsFromFile();
         for (Developer dev : devs) {
             if (dev.getUsername().equals(username) && dev.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password))) {
@@ -70,10 +71,10 @@ public class Developer extends User {
                 return dev;
             }
         }
-        throw new InvalidCredentialsException("Invalid credentials for username: " + username);
+        throw new User.InvalidCredentialsException("Invalid credentials for username: " + username);
     }
 
-    public UUID getOrganizationCode() {
+    public String getOrganizationCode() {
         return organizationCode;
     }
 
