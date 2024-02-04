@@ -1,40 +1,39 @@
 package ec.edu.espe.dailyDev.utils;
 
+import com.google.gson.Gson;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoException;
-<<<<<<< Updated upstream
 import com.mongodb.client.FindIterable;
-=======
 import com.mongodb.ServerApi;
 import com.mongodb.ServerApiVersion;
->>>>>>> Stashed changes
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.result.InsertOneResult;
+import ec.edu.espe.dailyDev.model.Task;
 import io.github.cdimascio.dotenv.Dotenv;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
-<<<<<<< Updated upstream
-=======
+
 import org.bson.UuidRepresentation;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
->>>>>>> Stashed changes
+import org.bson.conversions.Bson;
 
 /**
  * Clase que maneja la conexión y operaciones con MongoDB.
  *
  * @author Olivier Paspuel
  */
-
 public class MongoDBHandler {
 
-    public MongoDatabase connect() {
+    public static MongoDatabase connect() {
         Dotenv dotenv = Dotenv.load();
         CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
         CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
@@ -56,7 +55,7 @@ public class MongoDBHandler {
         return db;
     }
 
-    public MongoCollection<Document> connectToCollection(String collectionName) {
+    public static MongoCollection<Document> connectToCollection(String collectionName) {
         MongoDatabase db = connect();
         MongoCollection<Document> collection = db.getCollection(collectionName);
         return collection;
@@ -81,8 +80,10 @@ public class MongoDBHandler {
 
     public boolean checkCredentials(String username, String password, String collectionName) {
         try {
-            MongoDatabase database = mongoClient.getDatabase("DailyDevDB");
-            MongoCollection<Document> collection = database.getCollection(collectionName);
+//            MongoDatabase database = mongoClient.getDatabase("DailyDevDB");
+//            MongoCollection<Document> collection = database.getCollection(collectionName);
+
+            MongoCollection<Document> collection = connectToCollection(collectionName);
 
             Document query = new Document("username", username)
                     .append("password", PasswordHandler.encryptPassword(password));
@@ -95,7 +96,7 @@ public class MongoDBHandler {
             return false;
         }
     }
-}
+
     public Document findOneDoc(String key, Object value, String collectionName) {
 
         MongoCollection<Document> collection = connectToCollection(collectionName);
@@ -103,6 +104,45 @@ public class MongoDBHandler {
         return collection.find(eq(key, value)).first();
 
     }
+
+    public Document findDocWithFilter(Bson filter, String collectionName) {
+        MongoCollection<Document> collection = connectToCollection(collectionName);
+        return collection.find(filter).first();
+    }
+
+    public static FindIterable<Document> findAllDocs(Bson filter, String collectionName) {
+        MongoCollection<Document> collection = connectToCollection(collectionName);
+        return collection.find(filter);
+    }
+
+    public static List<Task> findAllTasks(Bson filter) {
+//        MongoCollection<Document> collection = connectToCollection(collectionName);
+        FindIterable<Document> documents = findAllDocs(filter, "Tasks");
+
+        System.out.println(documents);
+        List<Task> taskList = new ArrayList<>();
+
+        for (Document document : documents) {
+            // Convert each Document to a Task object
+            Task task = convertDocumentToTask(document);
+
+            // Add the Task object to the list
+            taskList.add(task);
+        }
+
+        return taskList;
+    }
+
+    private static Task convertDocumentToTask(Document document) {
+        // Implement logic to convert Document to Task object
+        Gson gson = new Gson();
+
+        String task = gson.toJson(document);
+        
+        return gson.fromJson(task, Task.class);
+        // Example: return new Task(document.getString("taskId"), document.getString("taskName"), ...);
+    }
+
 }
 
 //    @Override

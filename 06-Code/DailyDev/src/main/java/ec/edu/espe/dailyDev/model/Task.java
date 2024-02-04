@@ -21,37 +21,39 @@ import org.bson.Document;
 
 /**
  *
- * @author Team Number: 4 - CodingNinjas  
+ * @author Team Number: 4 - CodingNinjas
  */
+public class Task {
 
-public class Task{
     private UUID id;
     private String name;
     private String description;
+    private String priority;
     private Date dueDate;
     private Date creationDate;
     private UUID userId;
     private boolean completed;
-    private static String nameCollection;
     private static List<String> taskList = new ArrayList<>();
-    
-    public Task(UUID id, String name, String description, Date dueDate, Date creationDate, UUID userId, boolean completed) {
+
+    public Task(UUID id, String name, String description, String priority, Date dueDate, Date creationDate, UUID userId, boolean completed) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.priority = priority;
         this.dueDate = dueDate;
         this.creationDate = creationDate;
         this.userId = userId;
         this.completed = completed;
-        this.nameCollection = nameCollection;
     }
-    
+
+
+
     public void showMenu() {
         String[] taskOptions = {
-                "Create Task",
-                "Show Tasks",
-                "Update Task",
-                "Back to Main Menu"
+            "Create Task",
+            "Show Tasks",
+            "Update Task",
+            "Back to Main Menu"
         };
 
         int option;
@@ -60,20 +62,24 @@ public class Task{
             option = MenuUtils.getUserOption("Task", taskOptions);
 
             switch (option) {
-                case 1 -> create();
-                case 2 -> show();
-                case 3 -> showTasksTodays();
-                case 4 -> MenuUtils.backToMainMenu();
-                default -> System.out.println("Invalid option. Please try again.");
+//                case 1 ->
+//                    create();
+                case 2 ->
+                    show();
+                case 3 ->
+                    showTasksTodays();
+                case 4 ->
+                    MenuUtils.backToMainMenu();
+                default ->
+                    System.out.println("Invalid option. Please try again.");
             }
         } while (option != 4);
     }
-    
+
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
-    
-    
+
     public static Message createAllTasksCompletedMessage() {
         return new Message(UUID.randomUUID(), "All Tasks Completed", "Congratulations! All tasks are completed.\n");
     }
@@ -90,7 +96,7 @@ public class Task{
         }
         return true;
     }
-    
+
     public static void printFormattedTaskHeader() {
         String format = "| %-36s | %-20s | %-35s | %-15s | %-15s | %-10s |%n";
         System.out.format(format, "ID", "Name", "Description", "Due Date", "Creation Date", "Completed");
@@ -100,75 +106,71 @@ public class Task{
         String format = "| %-36s | %-20s | %-35s | %-15s | %-15s | %-10s |%n";
         System.out.format(format, getId(), getName(), getDescription(), formatDate(getDueDate()), formatDate(getCreationDate()), isCompleted());
     }
-    
+
     private String formatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
-    
+
     public static ArrayList<Task> getTasksFromFile(String fileAddress) {
-        return FileHandler.readFile(fileAddress, new TypeToken<ArrayList<Task>>() {}.getType());
+        return FileHandler.readFile(fileAddress, new TypeToken<ArrayList<Task>>() {
+        }.getType());
     }
-    
-    public static void create() {
-        String collectionName = "Tasks";
-        
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Creating a new task...");
+//    public static void create() {
+//        String collectionName = "Tasks";
+//
+//        Scanner scanner = new Scanner(System.in);
+//
+//        System.out.println("Creating a new task...");
+//
+//        UUID taskId = UUID.randomUUID();
+//
+//        System.out.println("Enter the task name:");
+//        String taskName = scanner.nextLine();
+//
+//        System.out.println("Enter the task description:");
+//        String taskDescription = scanner.nextLine();
+//
+//        System.out.println("Enter the due date (yyyy-MM-dd):");
+//        String dueDateInput = scanner.nextLine();
+//        Date dueDate;
+//        try {
+//            dueDate = truncateTime(new SimpleDateFormat("yyyy-MM-dd").parse(dueDateInput));
+//        } catch (ParseException e) {
+//            System.out.println("Invalid date format. Using the current date as the due date.");
+//            dueDate = truncateTime(new Date());
+//        }
+//
+//        // Estado de completitud predeterminado al crear una nueva tarea
+//        boolean completed = false;
+//
+//        UUID userId = User.getCurrentUserId();
+//
+//        // Validar que la fecha de vencimiento sea después de la fecha de creación
+//        Date creationDate = truncateTime(new Date());
+//        if (dueDate.before(creationDate)) {
+//            System.out.println("Error: Due date must be after the creation date.");
+//            MenuUtils.backToMainMenu();
+//            return;
+//        }
+//
+//        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, creationDate, userId, completed);
+//
+//        newTask.setUserId(userId);
+//
+//        MongoDBHandler mdbHandler = new MongoDBHandler();
+//        mdbHandler.createDocument("Tasks", Document.parse(new Gson().toJson(newTask)));
+//
+////        ArrayList<Task> existingTasks = getTasksFromFile("./db/tasks.json");
+////        existingTasks.add(newTask);
+////        writeTasksToFile("tasks.json", existingTasks);
+//        System.out.println("Task created!");
+//        System.out.println("UserID: " + userId);
+//        System.out.println(newTask);
+//        MenuUtils.backToMainMenu();
+//    }
 
-        UUID taskId = UUID.randomUUID();
-
-        System.out.println("Enter the task name:");
-        String taskName = scanner.nextLine();
-
-        System.out.println("Enter the task description:");
-        String taskDescription = scanner.nextLine();
-
-        System.out.println("Enter the due date (yyyy-MM-dd):");
-        String dueDateInput = scanner.nextLine();
-        Date dueDate;
-        try {
-            dueDate = truncateTime(new SimpleDateFormat("yyyy-MM-dd").parse(dueDateInput));
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Using the current date as the due date.");
-            dueDate = truncateTime(new Date());
-        }
-
-        // Estado de completitud predeterminado al crear una nueva tarea
-        boolean completed = false;
-
-        UUID userId = User.getCurrentUserId();
-
-        // Validar que la fecha de vencimiento sea después de la fecha de creación
-        Date creationDate = truncateTime(new Date());
-        if (dueDate.before(creationDate)) {
-            System.out.println("Error: Due date must be after the creation date.");
-            MenuUtils.backToMainMenu();
-            return;
-        }
-
-        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, creationDate, userId, completed);
-
-        newTask.setUserId(userId);
-
-        MongoDBHandler mdbHandler = new MongoDBHandler();
-        mdbHandler.createDocument(nameCollection, Document.parse(new Gson().toJson(newTask)));
-        
-//        ArrayList<Task> existingTasks = getTasksFromFile("./db/tasks.json");
-
-//        existingTasks.add(newTask);
-
-//        writeTasksToFile("tasks.json", existingTasks);
-
-    
-
-        System.out.println("Task created!");
-        System.out.println("UserID: " + userId);
-        System.out.println(newTask);
-        MenuUtils.backToMainMenu();
-    }
-    
     public static void writeTasksToFile(String filePath, ArrayList<Task> tasks) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(tasks);
@@ -314,8 +316,7 @@ public class Task{
     public String toString() {
         return "Task{" + "name=" + name + ", description=" + description + ", dueDate=" + dueDate + ", completed=" + completed + '}';
     }
-    
-    
+
     /**
      * @return the id
      */
@@ -392,15 +393,14 @@ public class Task{
     public UUID getUserId() {
         return userId;
     }
-    
+
     /**
      * @return the completed
      */
-
     public boolean isCompleted() {
         return completed;
     }
-    
+
     /**
      * @param completed the completed to set
      */
@@ -421,5 +421,19 @@ public class Task{
     public static void setTaskList(List<String> aTaskList) {
         taskList = aTaskList;
     }
-    
+
+    /**
+     * @return the priority
+     */
+    public String getPriority() {
+        return priority;
+    }
+
+    /**
+     * @param priority the priority to set
+     */
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
 }

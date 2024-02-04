@@ -1,20 +1,19 @@
 package ec.edu.espe.dailyDev.model;
 
 import com.google.gson.Gson;
-import static ec.edu.espe.dailyDev.model.User.currentUser;
+import ec.edu.espe.dailyDev.utils.FiltersHandler;
 import ec.edu.espe.dailyDev.utils.MongoDBHandler;
-import ec.edu.espe.dailyDev.utils.PasswordHandler;
 import ec.edu.espe.dailyDev.view.LandingPage;
 import java.util.ArrayList;
 import java.util.UUID;
 import org.bson.Document;
 import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.conversions.Bson;
 
 /**
  *
  * @author Team Number: 4 - CodingNinjas
  */
-
 public class Developer extends User {
 
     public static User login(String username, String password) {
@@ -49,7 +48,7 @@ public class Developer extends User {
             return null;
         }
 
-        if (mdbHandler.findOneDoc("organizationCode", orgCode, "Organizations") == null) {
+        if (mdbHandler.findOneDoc("organizationCode", orgCode.toString(), "Organizations") == null) {
             System.out.println("Organization doesn't exist.");
             LandingPage.showLandingPage();
             return null;
@@ -64,14 +63,18 @@ public class Developer extends User {
     }
 
     public static User loginDev(String username, String password) throws User.InvalidCredentialsException {
-        ArrayList<Developer> devs = getDevsFromFile();
-        for (Developer dev : devs) {
-            if (dev.getUsername().equals(username) && dev.getEncryptedPassword().equals(PasswordHandler.encryptPassword(password))) {
-                currentUser = dev;
-                return dev;
-            }
+        Bson filter = new FiltersHandler().createFilterForLogin(username, password);
+
+        Document user = mdbHandler.findDocWithFilter(filter, "Devs");
+        if (user == null) {
+            throw new User.InvalidCredentialsException("Invalid credentials for username: " + username);
+
         }
-        throw new User.InvalidCredentialsException("Invalid credentials for username: " + username);
+
+        Gson gson = new Gson();
+
+        String userS = gson.toJson(user);
+        return gson.fromJson(userS, User.class);
     }
 
     public String getOrganizationCode() {
