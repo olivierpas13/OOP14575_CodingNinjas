@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,13 +18,33 @@ import java.util.List;
  */
 public class GPTHandler {
 
+    public static String generateHtmlMessage(List<Task> tasks) {
+        StringBuilder tasksStr = new StringBuilder("");
+
+        // Iterate through tasks and append information to the HTML
+        for (Task task : tasks) {
+//            String taskHtml = String.format("<b>Title:</b> %s<br><b>Status:</b> %s<br><b>Priority:</b> %s<br><b>Due Date:</b> %s<br><br>",
+//                    task.getName(), (task.isCompleted() ? "Completed" : "Incomplete"), task.getPriority(), formatDate(task.getDueDate()));
+
+            tasksStr.append(task.getName()).append(task.isCompleted());
+            tasksStr.append("||");
+        }
+
+        return tasksStr.toString();
+    }
+
+    public static String formatDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
+    }
+
     // 
     public static String getDailyMessage(List<Task> tasks) {
 
         Dotenv dotenv = Dotenv.load();
         String GPT_KEY = dotenv.get("GPT_KEY");
-
-        String message = "Create a daily message that a developer would use to present what he has done, will do, and what is stopping him" + tasks.toString();
+        String htmlMessage = generateHtmlMessage(tasks);
+        String message = "Answer with html, using <br> instead of \n. Create a daily message that a developer would use to present his work status, make it short and concise" + htmlMessage;
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = GPT_KEY;
         String model = "gpt-3.5-turbo"; // current model of chatgpt api
@@ -58,7 +80,7 @@ public class GPTHandler {
         } catch (IOException e) {
             System.err.println(e);
         }
-return null;
+        return null;
     }
 
     public static String extractContentFromResponse(String response) {

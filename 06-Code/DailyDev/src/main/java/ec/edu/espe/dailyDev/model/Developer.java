@@ -64,7 +64,7 @@ public class Developer extends User {
 
     public static User loginDev(String username, String password) throws User.InvalidCredentialsException {
         Bson filter = new FiltersHandler().createFilterForLogin(username, password);
-
+        System.out.println(filter);
         Document user = mdbHandler.findDocWithFilter(filter, "Devs");
         if (user == null) {
             throw new User.InvalidCredentialsException("Invalid credentials for username: " + username);

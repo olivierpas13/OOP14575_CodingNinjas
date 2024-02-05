@@ -117,6 +117,10 @@ public class Task {
         }.getType());
     }
 
+//        public static void create(String title, String description, ) {
+//        
+//        }
+    
 //    public static void create() {
 //        String collectionName = "Tasks";
 //
@@ -170,6 +174,8 @@ public class Task {
 //        System.out.println(newTask);
 //        MenuUtils.backToMainMenu();
 //    }
+    
+    
 
     public static void writeTasksToFile(String filePath, ArrayList<Task> tasks) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

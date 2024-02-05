@@ -4,6 +4,11 @@
  */
 package ec.edu.espe.dailyDev.view;
 
+import ec.edu.espe.dailyDev.model.Developer;
+import ec.edu.espe.dailyDev.model.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author dvill
@@ -27,8 +32,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         layoutPnl = new javax.swing.JPanel();
-        nameLbl = new javax.swing.JLabel();
-        imageLbl = new javax.swing.JLabel();
         logoLbl = new javax.swing.JLabel();
         passwordLbl = new javax.swing.JLabel();
         signinlbl = new javax.swing.JLabel();
@@ -36,7 +39,7 @@ public class FrmLogin extends javax.swing.JFrame {
         userTxt = new javax.swing.JTextField();
         userSprt = new javax.swing.JSeparator();
         passwordSprt = new javax.swing.JSeparator();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        pwdTxt = new javax.swing.JPasswordField();
         loginPnl = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -46,47 +49,36 @@ public class FrmLogin extends javax.swing.JFrame {
         layoutPnl.setBackground(new java.awt.Color(255, 255, 255));
         layoutPnl.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nameLbl.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        nameLbl.setForeground(new java.awt.Color(217, 217, 217));
-        nameLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nameLbl.setText("DAILYDEV");
-        layoutPnl.add(nameLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 180, -1));
-
-        imageLbl.setBackground(new java.awt.Color(255, 255, 255));
-        imageLbl.setText("Image");
-        layoutPnl.add(imageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 480));
-
+        logoLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/dailyLogo.png"))); // NOI18N
         logoLbl.setText("LOGO");
-        layoutPnl.add(logoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 120, 30));
+        layoutPnl.add(logoLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 210, 50));
 
         passwordLbl.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         passwordLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         passwordLbl.setText("PASSWORD");
-        layoutPnl.add(passwordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 90, 30));
+        layoutPnl.add(passwordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 90, 30));
 
         signinlbl.setFont(new java.awt.Font("Roboto Medium", 0, 24)); // NOI18N
         signinlbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         signinlbl.setText("SIGN IN");
-        layoutPnl.add(signinlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, 170, 30));
+        layoutPnl.add(signinlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 170, 30));
 
         userLbl.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         userLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         userLbl.setText("USER");
-        layoutPnl.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 50, 30));
+        layoutPnl.add(userLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 50, 30));
 
         userTxt.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
         userTxt.setForeground(new java.awt.Color(204, 204, 204));
-        userTxt.setText("Enter your user ");
         userTxt.setBorder(null);
-        layoutPnl.add(userTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 320, -1));
-        layoutPnl.add(userSprt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 200, 310, -1));
-        layoutPnl.add(passwordSprt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 310, -1));
+        layoutPnl.add(userTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 320, -1));
+        layoutPnl.add(userSprt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 310, -1));
+        layoutPnl.add(passwordSprt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 310, -1));
 
-        jPasswordField1.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBorder(null);
-        layoutPnl.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 310, -1));
+        pwdTxt.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
+        pwdTxt.setForeground(new java.awt.Color(204, 204, 204));
+        pwdTxt.setBorder(null);
+        layoutPnl.add(pwdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 310, -1));
 
         loginPnl.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -95,6 +87,11 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LOGIN");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout loginPnlLayout = new javax.swing.GroupLayout(loginPnl);
         loginPnl.setLayout(loginPnlLayout);
@@ -107,27 +104,40 @@ public class FrmLogin extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        layoutPnl.add(loginPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 310, 120, 40));
+        layoutPnl.add(loginPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 120, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(layoutPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(layoutPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(layoutPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(layoutPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+
+        String username = userTxt.getText();
+        String pwd = pwdTxt.getText();
+        try {
+            User.login(username, pwd, "dev");
+        } catch (User.InvalidCredentialsException ex) {
+            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -165,15 +175,13 @@ public class FrmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel imageLbl;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPanel layoutPnl;
     private javax.swing.JPanel loginPnl;
     private javax.swing.JLabel logoLbl;
-    private javax.swing.JLabel nameLbl;
     private javax.swing.JLabel passwordLbl;
     private javax.swing.JSeparator passwordSprt;
+    private javax.swing.JPasswordField pwdTxt;
     private javax.swing.JLabel signinlbl;
     private javax.swing.JLabel userLbl;
     private javax.swing.JSeparator userSprt;
