@@ -32,9 +32,11 @@ ec\edu\espe\dailyDev\view\frmTasks.class
 ec\edu\espe\dailyDev\model\Schedule.class
 ec\edu\espe\dailyDev\utils\FileHandler.class
 ec\edu\espe\dailyDev\view\Dashboard$4.class
+ec\edu\espe\dailyDev\view\FrmLogin$1.class
 ec\edu\espe\dailyDev\model\Administrator.class
 ec\edu\espe\dailyDev\view\FrmMenu$3.class
 ec\edu\espe\dailyDev\utils\PasswordHandler.class
+ec\edu\espe\dailyDev\view\FrmLogin.class
 ec\edu\espe\dailyDev\view\FrmTask$4.class
 ec\edu\espe\dailyDev\model\Reminder.class
 ec\edu\espe\dailyDev\model\Meeting$1.class
