@@ -1,43 +1,4 @@
-<<<<<<< HEAD
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\CalendarEventCellRender.java
-=======
-<<<<<<< HEAD
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Message.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\Dashboard.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\PasswordHandler.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmAdmin.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\ImageDecore.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\ValidationHandler.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Task.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\GPTHandler.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Reminder.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\GPTRes.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\Splash.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Project.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\MenuUtils.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Sprint.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\MongoDBHandler.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\protoLogin.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Developer.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\FileHandler.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Meeting.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\LandingPage.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\FiltersHandler.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmMenu.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Team.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Organization.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Schedule.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Administrator.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmLogin.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmSchedule.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\DailyDevSystem.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\TasksTab.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\User.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\DailyHandler.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmTask.java
-C:\Users\Lenovo\OneDrive\Escritorio\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\ActionBtns.java
-=======
->>>>>>> 714f70fc0b200bce7aa380fdcb11e53cf120c9e9
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\ValidationHandler.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\TasksTab.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Team.java
@@ -48,6 +9,7 @@ C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\ed
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\PanelDateListener.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\PanelHeader.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\ModelDate.java
+C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmMeeting.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\scheduleTest.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\DefaultCalendarEventCellRender.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\DynamicCellListener.java
@@ -61,6 +23,7 @@ C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\ed
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Sprint.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Administrator.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\ModelMonth.java
+C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\Modal.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\MenuUtils.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\PanelDay.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\DailyHandler.java
@@ -72,6 +35,7 @@ C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\ed
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Reminder.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Organization.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\ActionBtns.java
+C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmSprint.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\User.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\utils\CellRenderCustom.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\DynamicCellRender.java
@@ -88,4 +52,3 @@ C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\ed
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Project.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\model\Schedule.java
 C:\Users\User\espeDev\OOP14575_CodingNinjas\06-Code\DailyDev\src\main\java\ec\edu\espe\dailyDev\view\FrmLogin.java
->>>>>>> 6d7111d36f1e1cd2f1d6fea813e953f46ba50c5e

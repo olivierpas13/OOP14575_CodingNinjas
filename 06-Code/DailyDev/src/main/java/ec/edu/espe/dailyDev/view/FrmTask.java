@@ -6,7 +6,13 @@ package ec.edu.espe.dailyDev.view;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;
+import com.google.gson.Gson;
+import ec.edu.espe.dailyDev.model.Task;
+import ec.edu.espe.dailyDev.utils.MongoDBHandler;
+import java.util.Date;
+import java.util.UUID;
 import javax.swing.JOptionPane;
+import org.bson.Document;
 
 /**
  *
@@ -193,7 +199,23 @@ public class FrmTask extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        UUID userId = UUID.randomUUID();
+        UUID taskId = UUID.randomUUID();
 //        Task
+        Task task = new Task(
+                taskId,
+                "Complete Project Proposal",
+                "Write and submit the project proposal for review",
+                "High",
+                new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000), // Due in 7 days
+                new Date(),
+                userId,
+                false
+        );
+        
+        MongoDBHandler mdbHandler = new MongoDBHandler();
+        mdbHandler.createDocument("Tasks", Document.parse(new Gson().toJson(task)));
+
         JOptionPane.showMessageDialog(rootPane, "Task created");
     }//GEN-LAST:event_jButton1ActionPerformed
 
