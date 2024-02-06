@@ -35,12 +35,12 @@ public class FrmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         layoutPnl = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        actionBar = new javax.swing.JPanel();
         exitBtn = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         minimizeBtn = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        draggablePnl = new javax.swing.JLabel();
         logoLbl = new javax.swing.JLabel();
         passwordLbl = new javax.swing.JLabel();
         signinlbl = new javax.swing.JLabel();
@@ -60,8 +60,8 @@ public class FrmLogin extends javax.swing.JFrame {
         layoutPnl.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         layoutPnl.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        actionBar.setBackground(new java.awt.Color(255, 255, 255));
+        actionBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         exitBtn.setBackground(new java.awt.Color(255, 255, 255));
         exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,7 +88,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
         );
 
-        jPanel1.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 40, 41));
+        actionBar.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 40, 41));
 
         minimizeBtn.setBackground(new java.awt.Color(255, 255, 255));
         minimizeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,21 +111,21 @@ public class FrmLogin extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
         );
 
-        jPanel1.add(minimizeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, -1));
+        actionBar.add(minimizeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, -1));
 
-        layoutPnl.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, -1));
+        layoutPnl.add(actionBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, -1));
 
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        draggablePnl.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel2MouseDragged(evt);
+                draggablePnlMouseDragged(evt);
             }
         });
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        draggablePnl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel2MousePressed(evt);
+                draggablePnlMousePressed(evt);
             }
         });
-        layoutPnl.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 80));
+        layoutPnl.add(draggablePnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 80));
 
         logoLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logoLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/dailyLogo.png"))); // NOI18N
@@ -212,7 +212,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
+    private void draggablePnlMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_draggablePnlMouseDragged
         int currentX = this.getLocation().x;
         int currentY = this.getLocation().y;
         int moveX = (currentX + evt.getX()) - (currentX + mPoint.x);
@@ -220,12 +220,12 @@ public class FrmLogin extends javax.swing.JFrame {
 
         int x = currentX + moveX;
         int y = currentY + moveY;
-        this.setLocation(x, y);    }//GEN-LAST:event_jLabel2MouseDragged
+        this.setLocation(x, y);        this.setLocation(x, y);    }//GEN-LAST:event_draggablePnlMouseDragged
 
-    private void jLabel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MousePressed
+    private void draggablePnlMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_draggablePnlMousePressed
         mPoint = evt.getPoint();
         getComponentAt(mPoint);
-    }//GEN-LAST:event_jLabel2MousePressed
+    }//GEN-LAST:event_draggablePnlMousePressed
 
     private void exitBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMousePressed
         System.exit(0);
@@ -271,12 +271,12 @@ public class FrmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel actionBar;
+    private javax.swing.JLabel draggablePnl;
     private javax.swing.JPanel exitBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel layoutPnl;
     private javax.swing.JPanel loginPnl;
     private javax.swing.JLabel logoLbl;
