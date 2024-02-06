@@ -9,13 +9,10 @@ import java.util.Scanner;
 import java.util.UUID;
 import org.bson.Document;
 
-
-
 /**
  *
- * @author Team Number: 4 - CodingNinjas  
+ * @author Team Number: 4 - CodingNinjas
  */
-
 public class Meeting {
 
     private static final Scanner consoleScanner = new Scanner(System.in);
@@ -30,10 +27,10 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return "Meeting{" + "id=" + id + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime + ", participants=" + participants + '}';
+        return "Meeting{" + "id=" + id + ", title=" + title + ", startTime=" + startTime + ", endTime=" + endTime + '}';
     }
 
-    private Meeting(String title, Date startTime, Date endTime, List<User> participants) {
+    private Meeting(String title, Date startTime, Date endTime) {
         this.id = UUID.randomUUID();
         this.title = title;
         this.startTime = startTime;
@@ -81,21 +78,28 @@ public class Meeting {
     private static List<User> getUserList() {
         return userList;
     }
-    
+
     public Document toDocument() {
 
         Document newMeetingDocument = new Document()
-                .append("title", getTitle() != null ? getTitle() : "")
-                .append("startTime", getStartTime() != null ? getStartTime() : "")
-                .append("endTime", getEndTime() != null ? getEndTime() : "");
-        
-        return newMeetingDocument;
+                .append("id", getId())
+                .append("title", getTitle() != null ? getTitle() : "");
+        if (getStartTime() != null) {
+            newMeetingDocument.append("startTime", getStartTime());
         }
-    
-        
+        if (getEndTime() != null) {
+            newMeetingDocument.append("endTime", getEndTime());
+        }
+        return newMeetingDocument;
     }
 
-    
+    public static Meeting fromDocument(Document document) {
+        UUID id = (UUID) document.get("id");
+        String title = document.getString("title");
+        Date startTime = document.getDate("startTime");
+        Date endTime = document.getDate("endTime");
+        Meeting meeting = new Meeting(title, startTime, endTime);
 
-    
-
+        return meeting;
+    }
+}
