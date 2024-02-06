@@ -1509,7 +1509,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="addMeeting" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="completeTaskBtn1" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="addSprint" alignment="1" max="32767" attributes="0"/>
                                   <Component id="completeTaskBtn3" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1522,7 +1522,7 @@
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Component id="addMeeting" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="completeTaskBtn1" min="-2" max="-2" attributes="0"/>
+                              <Component id="addSprint" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="completeTaskBtn3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="423" max="32767" attributes="0"/>
@@ -1574,14 +1574,14 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="completeTaskBtn1">
+                    <Container class="javax.swing.JPanel" name="addSprint">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="completeTaskBtn1MousePressed"/>
+                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSprintMousePressed"/>
                       </Events>
 
                       <Layout>

@@ -179,18 +179,18 @@ public class LandingPage {
             optionMain = scanner.nextInt();
             scanner.nextLine();
 
-            switch (optionMain) {
-                case 1 ->
-                    taskMenu();
-                case 2 ->
-                    meetingMenu();
-                case 3 ->
-                    System.out.println(GPTHandler.getDailyMessage(userTasks));
-                case 4 ->
-                    showLandingPage();
-                default ->
-                    System.out.println("Invalid option. Please try again.");
-            }
+//            switch (optionMain) {
+//                case 1 ->
+//                    taskMenu();
+//                case 2 ->
+////                    meetingMenu();
+//                case 3 ->
+//                    System.out.println(GPTHandler.getDailyMessage(userTasks));
+//                case 4 ->
+//                    showLandingPage();
+//                default ->
+//                    System.out.println("Invalid option. Please try again.");
+//            }
         } while (optionMain != 3);
     }
 
@@ -222,31 +222,31 @@ public class LandingPage {
         } while (optionTask != 4);
     }
 
-    public static void meetingMenu() {
-        while (true) {
-            displayMenu();
-            int choice = getUserChoice();
-
-            switch (choice) {
-                case 1:
-                    Meeting.create();
-                    break;
-                case 2:
-                    Meeting.show();
-                    break;
-                case 3:
-                    Meeting.update();
-                    break;
-                case 4:
-                    Meeting.delete();
-                    break;
-                case 5:
-                    MenuUtils.backToMainMenu();
-                default:
-                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
-            }
-        }
-    }
+//    public static void meetingMenu() {
+//        while (true) {
+//            displayMenu();
+//            int choice = getUserChoice();
+//
+//            switch (choice) {
+//                case 1:
+//                    Meeting.create();
+//                    break;
+//                case 2:
+//                    Meeting.show();
+//                    break;
+//                case 3:
+//                    Meeting.update();
+//                    break;
+//                case 4:
+//                    Meeting.delete();
+//                    break;
+//                case 5:
+//                    MenuUtils.backToMainMenu();
+//                default:
+//                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+//            }
+//        }
+//    }
 
     private static void displayMenu() {
         System.out.println("Main Menu");

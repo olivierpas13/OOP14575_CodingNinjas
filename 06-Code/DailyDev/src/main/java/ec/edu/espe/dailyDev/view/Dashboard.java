@@ -174,7 +174,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         addMeeting = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        completeTaskBtn1 = new javax.swing.JPanel();
+        addSprint = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         completeTaskBtn3 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -1000,10 +1000,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
         );
 
-        completeTaskBtn1.setBackground(new java.awt.Color(0, 0, 0));
-        completeTaskBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+        addSprint.setBackground(new java.awt.Color(0, 0, 0));
+        addSprint.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                completeTaskBtn1MousePressed(evt);
+                addSprintMousePressed(evt);
             }
         });
 
@@ -1012,18 +1012,18 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Add Sprint");
 
-        javax.swing.GroupLayout completeTaskBtn1Layout = new javax.swing.GroupLayout(completeTaskBtn1);
-        completeTaskBtn1.setLayout(completeTaskBtn1Layout);
-        completeTaskBtn1Layout.setHorizontalGroup(
-            completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout addSprintLayout = new javax.swing.GroupLayout(addSprint);
+        addSprint.setLayout(addSprintLayout);
+        addSprintLayout.setHorizontalGroup(
+            addSprintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addSprintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
         );
-        completeTaskBtn1Layout.setVerticalGroup(
-            completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        addSprintLayout.setVerticalGroup(
+            addSprintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 40, Short.MAX_VALUE)
-            .addGroup(completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addSprintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
         );
 
@@ -1064,7 +1064,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addMeeting, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(completeTaskBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addSprint, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(completeTaskBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1074,7 +1074,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(addMeeting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(completeTaskBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addSprint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(completeTaskBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(423, Short.MAX_VALUE))
@@ -1249,9 +1249,10 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_addMeetingMousePressed
 
-    private void completeTaskBtn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeTaskBtn1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_completeTaskBtn1MousePressed
+    private void addSprintMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSprintMousePressed
+        FrmSprint sprint = new FrmSprint();
+        sprint.setVisible(true);
+    }//GEN-LAST:event_addSprintMousePressed
 
     private void completeTaskBtn3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeTaskBtn3MousePressed
         // TODO add your handling code here:
@@ -1299,6 +1300,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTabbedPane TBPMain;
     private javax.swing.JPanel actionBar;
     private javax.swing.JPanel addMeeting;
+    private javax.swing.JPanel addSprint;
     private javax.swing.JPanel addTaskBtn;
     private javax.swing.JPanel adminActn;
     private javax.swing.JLabel adminLbl;
@@ -1306,7 +1308,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JPanel chartsPnl;
     private javax.swing.JPanel completeTaskBtn;
-    private javax.swing.JPanel completeTaskBtn1;
     private javax.swing.JPanel completeTaskBtn3;
     private javax.swing.JPanel currentTasksPnl;
     private javax.swing.JPanel dailyActn;
