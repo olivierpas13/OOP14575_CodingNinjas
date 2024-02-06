@@ -14,6 +14,7 @@ ec\edu\espe\dailyDev\view\FrmSchedule$1.class
 ec\edu\espe\dailyDev\model\User$InvalidCredentialsException.class
 ec\edu\espe\dailyDev\utils\FiltersHandler.class
 ec\edu\espe\dailyDev\view\FrmMenu.class
+ec\edu\espe\dailyDev\view\Dashboard$11.class
 ec\edu\espe\dailyDev\model\Schedule.class
 ec\edu\espe\dailyDev\view\Dashboard$4.class
 ec\edu\espe\dailyDev\view\FrmLogin$1.class
@@ -27,6 +28,7 @@ ec\edu\espe\dailyDev\model\User$1.class
 ec\edu\espe\dailyDev\view\DailyDevSystem.class
 ec\edu\espe\dailyDev\view\LandingPage.class
 ec\edu\espe\dailyDev\view\Dashboard.class
+ec\edu\espe\dailyDev\view\Dashboard$12.class
 ec\edu\espe\dailyDev\view\FrmAdmin$1.class
 ec\edu\espe\dailyDev\view\FrmMenu$6.class
 ec\edu\espe\dailyDev\view\FrmTask$5.class
@@ -40,8 +42,10 @@ ec\edu\espe\dailyDev\model\Developer.class
 ec\edu\espe\dailyDev\model\Team.class
 ec\edu\espe\dailyDev\model\Task$1.class
 ec\edu\espe\dailyDev\view\GPTRes$1.class
+ec\edu\espe\dailyDev\view\Dashboard$13.class
 ec\edu\espe\dailyDev\utils\ValidationHandler.class
 ec\edu\espe\dailyDev\view\FrmSchedule$2.class
+ec\edu\espe\dailyDev\view\Dashboard$10.class
 ec\edu\espe\dailyDev\view\FrmTask$3.class
 ec\edu\espe\dailyDev\view\FrmMenu$4.class
 ec\edu\espe\dailyDev\model\User.class
@@ -64,6 +68,7 @@ ec\edu\espe\dailyDev\model\Reminder.class
 ec\edu\espe\dailyDev\view\FrmLogin$5.class
 ec\edu\espe\dailyDev\view\Dashboard$8.class
 ec\edu\espe\dailyDev\view\protoLogin.class
+ec\edu\espe\dailyDev\utils\DataFormatter.class
 ec\edu\espe\dailyDev\view\FrmAdmin$3.class
 ec\edu\espe\dailyDev\view\TasksTab.class
 ec\edu\espe\dailyDev\view\Dashboard$1.class

@@ -6,16 +6,19 @@ package ec.edu.espe.dailyDev.view;
 
 import ec.edu.espe.dailyDev.model.Task;
 import ec.edu.espe.dailyDev.model.User;
+import ec.edu.espe.dailyDev.utils.DataFormatter;
 import static ec.edu.espe.dailyDev.utils.FiltersHandler.createFilterTasksById;
 import ec.edu.espe.dailyDev.utils.GPTHandler;
 import ec.edu.espe.dailyDev.utils.MongoDBHandler;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Point;
 import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 import org.bson.conversions.Bson;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -27,6 +30,8 @@ import org.jfree.data.general.DefaultPieDataset;
  * @author Olivier Paspuel
  */
 public class Dashboard extends javax.swing.JFrame {
+
+    private Point mPoint;
 
     /**
      * Creates new form Dashboard
@@ -42,8 +47,20 @@ public class Dashboard extends javax.swing.JFrame {
         if (!tasks.isEmpty()) {
             createChart(statusChartIFrm, "status", tasks);
             createChart(priorityChartIFrm, "priority", tasks);
-
         }
+        DefaultTableModel model = (DefaultTableModel) tasksTb.getModel();
+        for (Task task : tasks) {
+            String formattedDate = DataFormatter.formatDate(task.getDueDate(), "yyyy/MM/dd");
+
+            String completedStatus = DataFormatter.formatBooleanAsYesNo(task.isCompleted());
+
+            model.addRow(new Object[]{task.getName(), task.getPriority(), formattedDate, completedStatus});
+        }
+
+//        model.addRow(new Object[]{"Task Title", "High", "2024-02-10", false});
+//        model.addRow(new Object[]{"Task Title", "High", "2024-02-10", false});
+//        model.addRow(new Object[]{"Task Title", "High", "2024-02-10", false});
+//        model.addRow(new Object[]{"Task Title", "High", "2024-02-10", false});
     }
 
     public static void createChart(JInternalFrame frame, String type, List<Task> tasks) {
@@ -88,8 +105,13 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
         background = new javax.swing.JPanel();
+        actionBar = new javax.swing.JPanel();
+        exitBtn = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        minimizeBtn = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        draggablePnl = new javax.swing.JLabel();
         sidebar = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         username = new javax.swing.JLabel();
@@ -129,7 +151,15 @@ public class Dashboard extends javax.swing.JFrame {
         priorityChartIFrm = new javax.swing.JInternalFrame();
         jPanel10 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        tasksTab = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tasksTb = new javax.swing.JTable();
+        taskActions = new javax.swing.JPanel();
+        addTaskBtn = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
 
@@ -139,6 +169,73 @@ public class Dashboard extends javax.swing.JFrame {
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        actionBar.setBackground(new java.awt.Color(0, 0, 0));
+        actionBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        exitBtn.setBackground(new java.awt.Color(0, 0, 0));
+        exitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                exitBtnMousePressed(evt);
+            }
+        });
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/exitIconWhite.png"))); // NOI18N
+
+        javax.swing.GroupLayout exitBtnLayout = new javax.swing.GroupLayout(exitBtn);
+        exitBtn.setLayout(exitBtnLayout);
+        exitBtnLayout.setHorizontalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+            .addGroup(exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+        );
+        exitBtnLayout.setVerticalGroup(
+            exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 41, Short.MAX_VALUE)
+            .addGroup(exitBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+        );
+
+        actionBar.add(exitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 40, 41));
+
+        minimizeBtn.setBackground(new java.awt.Color(0, 0, 0));
+        minimizeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                minimizeBtnMousePressed(evt);
+            }
+        });
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/minimizeIconWhite.png"))); // NOI18N
+
+        javax.swing.GroupLayout minimizeBtnLayout = new javax.swing.GroupLayout(minimizeBtn);
+        minimizeBtn.setLayout(minimizeBtnLayout);
+        minimizeBtnLayout.setHorizontalGroup(
+            minimizeBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+        minimizeBtnLayout.setVerticalGroup(
+            minimizeBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+        );
+
+        actionBar.add(minimizeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, -1));
+
+        background.add(actionBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 0, -1, -1));
+
+        draggablePnl.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                draggablePnlMouseDragged(evt);
+            }
+        });
+        draggablePnl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                draggablePnlMousePressed(evt);
+            }
+        });
+        background.add(draggablePnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 860, 70));
 
         sidebar.setBackground(new java.awt.Color(0, 0, 0));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,6 +272,7 @@ public class Dashboard extends javax.swing.JFrame {
         dashboardLbl.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
         dashboardLbl.setForeground(new java.awt.Color(255, 255, 255));
         dashboardLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dashboardLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/dashboardIcon.png"))); // NOI18N
         dashboardLbl.setText("Dashboard");
         dashboardLbl.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         dashboardLbl.setIconTextGap(10);
@@ -207,20 +305,19 @@ public class Dashboard extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 taskActnMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                taskActnMousePressed(evt);
+            }
         });
 
         taskLbl.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
         taskLbl.setForeground(new java.awt.Color(255, 255, 255));
         taskLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        taskLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/taskIcon.png"))); // NOI18N
         taskLbl.setText("Tasks");
         taskLbl.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         taskLbl.setIconTextGap(10);
         taskLbl.setPreferredSize(new java.awt.Dimension(220, 60));
-        taskLbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                taskLblMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout taskActnLayout = new javax.swing.GroupLayout(taskActn);
         taskActn.setLayout(taskActnLayout);
@@ -254,6 +351,7 @@ public class Dashboard extends javax.swing.JFrame {
         scheduleLbl.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
         scheduleLbl.setForeground(new java.awt.Color(255, 255, 255));
         scheduleLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        scheduleLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/scheduleIcon.png"))); // NOI18N
         scheduleLbl.setText("Schedule");
         scheduleLbl.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         scheduleLbl.setIconTextGap(10);
@@ -293,6 +391,7 @@ public class Dashboard extends javax.swing.JFrame {
         dailyLbl.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
         dailyLbl.setForeground(new java.awt.Color(255, 255, 255));
         dailyLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dailyLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/dailyIcon.png"))); // NOI18N
         dailyLbl.setText("Daily Message");
         dailyLbl.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         dailyLbl.setIconTextGap(10);
@@ -336,6 +435,7 @@ public class Dashboard extends javax.swing.JFrame {
         adminLbl.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
         adminLbl.setForeground(new java.awt.Color(255, 255, 255));
         adminLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        adminLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/adminIcon.png"))); // NOI18N
         adminLbl.setText("User Administration");
         adminLbl.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 15, 0, 0));
         adminLbl.setIconTextGap(10);
@@ -689,18 +789,117 @@ public class Dashboard extends javax.swing.JFrame {
 
         TBPMain.addTab("tab1", dashboardTab);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel12.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        jLabel12.setText("Tasks");
+        jLabel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
         );
 
-        TBPMain.addTab("tab3", jPanel4);
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        tasksTb.setFont(new java.awt.Font("Roboto Light", 0, 14)); // NOI18N
+        tasksTb.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title", "Priority", "Due date", "Completed"
+            }
+        ));
+        jScrollPane1.setViewportView(tasksTb);
+
+        taskActions.setBackground(new java.awt.Color(255, 255, 255));
+
+        addTaskBtn.setBackground(new java.awt.Color(0, 0, 0));
+        addTaskBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addTaskBtnMousePressed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Add Task");
+
+        javax.swing.GroupLayout addTaskBtnLayout = new javax.swing.GroupLayout(addTaskBtn);
+        addTaskBtn.setLayout(addTaskBtnLayout);
+        addTaskBtnLayout.setHorizontalGroup(
+            addTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(addTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+        );
+        addTaskBtnLayout.setVerticalGroup(
+            addTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+            .addGroup(addTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout taskActionsLayout = new javax.swing.GroupLayout(taskActions);
+        taskActions.setLayout(taskActionsLayout);
+        taskActionsLayout.setHorizontalGroup(
+            taskActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskActionsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addTaskBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        taskActionsLayout.setVerticalGroup(
+            taskActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskActionsLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(addTaskBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(taskActions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+            .addComponent(taskActions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout tasksTabLayout = new javax.swing.GroupLayout(tasksTab);
+        tasksTab.setLayout(tasksTabLayout);
+        tasksTabLayout.setHorizontalGroup(
+            tasksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        tasksTabLayout.setVerticalGroup(
+            tasksTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tasksTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        TBPMain.addTab("tab3", tasksTab);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -818,11 +1017,38 @@ public class Dashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dailyLblMouseClicked
 
-    private void taskLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taskLblMouseClicked
+    private void exitBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitBtnMousePressed
+        System.exit(0);
+    }//GEN-LAST:event_exitBtnMousePressed
+
+    private void minimizeBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeBtnMousePressed
+        this.setState(Dashboard.ICONIFIED);
+    }//GEN-LAST:event_minimizeBtnMousePressed
+
+    private void draggablePnlMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_draggablePnlMouseDragged
+        int currentX = this.getLocation().x;
+        int currentY = this.getLocation().y;
+        int moveX = (currentX + evt.getX()) - (currentX + mPoint.x);
+        int moveY = (currentY + evt.getY()) - (currentY + mPoint.y);
+
+        int x = currentX + moveX;
+        int y = currentY + moveY;
+        this.setLocation(x, y);
+    }//GEN-LAST:event_draggablePnlMouseDragged
+
+    private void draggablePnlMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_draggablePnlMousePressed
+        mPoint = evt.getPoint();
+        getComponentAt(mPoint);
+    }//GEN-LAST:event_draggablePnlMousePressed
+
+    private void taskActnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taskActnMousePressed
+        TBPMain.setSelectedIndex(1);
+    }//GEN-LAST:event_taskActnMousePressed
+
+    private void addTaskBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTaskBtnMousePressed
         FrmTask frm = new FrmTask();
         frm.setVisible(true);
-
-    }//GEN-LAST:event_taskLblMouseClicked
+    }//GEN-LAST:event_addTaskBtnMousePressed
 
     /**
      * @param args the command line arguments
@@ -861,6 +1087,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TBPMain;
+    private javax.swing.JPanel actionBar;
+    private javax.swing.JPanel addTaskBtn;
     private javax.swing.JPanel adminActn;
     private javax.swing.JLabel adminLbl;
     private javax.swing.JPanel background;
@@ -873,8 +1101,14 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel dashboardTab;
     private javax.swing.JLabel dashboardTitleLbl;
     private javax.swing.JPanel dashboardTitlePnl;
+    private javax.swing.JLabel draggablePnl;
+    private javax.swing.JPanel exitBtn;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -888,21 +1122,26 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel minimizeBtn;
     private javax.swing.JInternalFrame priorityChartIFrm;
     private javax.swing.JPanel scheduleActn;
     private javax.swing.JLabel scheduleLbl;
     private javax.swing.JPanel sidebar;
     private javax.swing.JInternalFrame statusChartIFrm;
+    private javax.swing.JPanel taskActions;
     private javax.swing.JPanel taskActn;
     private javax.swing.JLabel taskLbl;
+    private javax.swing.JPanel tasksTab;
+    private javax.swing.JTable tasksTb;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }
