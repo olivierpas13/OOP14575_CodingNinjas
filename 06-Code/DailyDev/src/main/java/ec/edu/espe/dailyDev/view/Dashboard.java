@@ -4,6 +4,8 @@
  */
 package ec.edu.espe.dailyDev.view;
 
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import ec.edu.espe.dailyDev.model.Task;
 import ec.edu.espe.dailyDev.model.User;
 import ec.edu.espe.dailyDev.utils.DataFormatter;
@@ -36,12 +38,16 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
-    Bson filter = createFilterTasksById(User.getCurrentUserId().toString());
+//    Bson filter = createFilterTasksById(User.getCurrentUserId().toString());
+    Bson filter = createFilterTasksById("075dce30-9774-4ce0-800f-54fc24a821d0");
+
     List<Task> tasks = MongoDBHandler.findAllTasks(filter);
 
     public Dashboard() {
         initComponents();
-        Bson filter = createFilterTasksById(User.getCurrentUserId().toString());
+//        Bson filter = createFilterTasksById(User.getCurrentUserId().toString());
+        Bson filter = createFilterTasksById("075dce30-9774-4ce0-800f-54fc24a821d0");
+
         List<Task> tasks = MongoDBHandler.findAllTasks(filter);
         System.out.println(tasks);
         if (!tasks.isEmpty()) {
@@ -160,8 +166,19 @@ public class Dashboard extends javax.swing.JFrame {
         taskActions = new javax.swing.JPanel();
         addTaskBtn = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        completeTaskBtn = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        scheduleTab = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        addMeeting = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        completeTaskBtn1 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        completeTaskBtn3 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        adminTab = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -345,6 +362,9 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 scheduleActnMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                scheduleActnMousePressed(evt);
             }
         });
 
@@ -800,7 +820,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 16, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -845,9 +865,36 @@ public class Dashboard extends javax.swing.JFrame {
         );
         addTaskBtnLayout.setVerticalGroup(
             addTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 37, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
             .addGroup(addTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+        );
+
+        completeTaskBtn.setBackground(new java.awt.Color(0, 0, 0));
+        completeTaskBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                completeTaskBtnMousePressed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Complete Task");
+
+        javax.swing.GroupLayout completeTaskBtnLayout = new javax.swing.GroupLayout(completeTaskBtn);
+        completeTaskBtn.setLayout(completeTaskBtnLayout);
+        completeTaskBtnLayout.setHorizontalGroup(
+            completeTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 142, Short.MAX_VALUE)
+            .addGroup(completeTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+        );
+        completeTaskBtnLayout.setVerticalGroup(
+            completeTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+            .addGroup(completeTaskBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout taskActionsLayout = new javax.swing.GroupLayout(taskActions);
@@ -856,7 +903,9 @@ public class Dashboard extends javax.swing.JFrame {
             taskActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(taskActionsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addTaskBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(taskActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addTaskBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(completeTaskBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         taskActionsLayout.setVerticalGroup(
@@ -864,6 +913,8 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(taskActionsLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(addTaskBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(completeTaskBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -901,31 +952,165 @@ public class Dashboard extends javax.swing.JFrame {
 
         TBPMain.addTab("tab3", tasksTab);
 
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel15.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        jLabel15.setText("Schedule");
+        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        addMeeting.setBackground(new java.awt.Color(0, 0, 0));
+        addMeeting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                addMeetingMousePressed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Add Meeting");
+
+        javax.swing.GroupLayout addMeetingLayout = new javax.swing.GroupLayout(addMeeting);
+        addMeeting.setLayout(addMeetingLayout);
+        addMeetingLayout.setHorizontalGroup(
+            addMeetingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(addMeetingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+        );
+        addMeetingLayout.setVerticalGroup(
+            addMeetingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+            .addGroup(addMeetingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+        );
+
+        completeTaskBtn1.setBackground(new java.awt.Color(0, 0, 0));
+        completeTaskBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                completeTaskBtn1MousePressed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Add Sprint");
+
+        javax.swing.GroupLayout completeTaskBtn1Layout = new javax.swing.GroupLayout(completeTaskBtn1);
+        completeTaskBtn1.setLayout(completeTaskBtn1Layout);
+        completeTaskBtn1Layout.setHorizontalGroup(
+            completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+        );
+        completeTaskBtn1Layout.setVerticalGroup(
+            completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+            .addGroup(completeTaskBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+        );
+
+        completeTaskBtn3.setBackground(new java.awt.Color(0, 0, 0));
+        completeTaskBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                completeTaskBtn3MousePressed(evt);
+            }
+        });
+
+        jLabel20.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("Add Reminder");
+
+        javax.swing.GroupLayout completeTaskBtn3Layout = new javax.swing.GroupLayout(completeTaskBtn3);
+        completeTaskBtn3.setLayout(completeTaskBtn3Layout);
+        completeTaskBtn3Layout.setHorizontalGroup(
+            completeTaskBtn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 183, Short.MAX_VALUE)
+            .addGroup(completeTaskBtn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(completeTaskBtn3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)))
+        );
+        completeTaskBtn3Layout.setVerticalGroup(
+            completeTaskBtn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 52, Short.MAX_VALUE)
+            .addGroup(completeTaskBtn3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addMeeting, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(completeTaskBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(completeTaskBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(addMeeting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(completeTaskBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(completeTaskBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(423, Short.MAX_VALUE))
         );
 
-        TBPMain.addTab("tab4", jPanel5);
+        javax.swing.GroupLayout scheduleTabLayout = new javax.swing.GroupLayout(scheduleTab);
+        scheduleTab.setLayout(scheduleTabLayout);
+        scheduleTabLayout.setHorizontalGroup(
+            scheduleTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(scheduleTabLayout.createSequentialGroup()
+                .addGap(665, 665, 665)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        scheduleTabLayout.setVerticalGroup(
+            scheduleTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(scheduleTabLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        TBPMain.addTab("tab4", scheduleTab);
+
+        javax.swing.GroupLayout adminTabLayout = new javax.swing.GroupLayout(adminTab);
+        adminTab.setLayout(adminTabLayout);
+        adminTabLayout.setHorizontalGroup(
+            adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 860, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        adminTabLayout.setVerticalGroup(
+            adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 655, Short.MAX_VALUE)
         );
 
-        TBPMain.addTab("tab5", jPanel6);
+        TBPMain.addTab("tab5", adminTab);
 
         background.add(TBPMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 860, 690));
 
@@ -1050,6 +1235,28 @@ public class Dashboard extends javax.swing.JFrame {
         frm.setVisible(true);
     }//GEN-LAST:event_addTaskBtnMousePressed
 
+    private void completeTaskBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeTaskBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_completeTaskBtnMousePressed
+
+    private void scheduleActnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scheduleActnMousePressed
+        TBPMain.setSelectedIndex(2);
+    }//GEN-LAST:event_scheduleActnMousePressed
+
+    private void addMeetingMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMeetingMousePressed
+        FrmMeeting meeting = new FrmMeeting();
+        meeting.setVisible(true);
+
+    }//GEN-LAST:event_addMeetingMousePressed
+
+    private void completeTaskBtn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeTaskBtn1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_completeTaskBtn1MousePressed
+
+    private void completeTaskBtn3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeTaskBtn3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_completeTaskBtn3MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -1059,22 +1266,25 @@ public class Dashboard extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+
+        FlatLaf.registerCustomDefaultsSource("view");
+        FlatLightLaf.setup();
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
 
         /* Create and display the form */
@@ -1088,11 +1298,16 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TBPMain;
     private javax.swing.JPanel actionBar;
+    private javax.swing.JPanel addMeeting;
     private javax.swing.JPanel addTaskBtn;
     private javax.swing.JPanel adminActn;
     private javax.swing.JLabel adminLbl;
+    private javax.swing.JPanel adminTab;
     private javax.swing.JPanel background;
     private javax.swing.JPanel chartsPnl;
+    private javax.swing.JPanel completeTaskBtn;
+    private javax.swing.JPanel completeTaskBtn1;
+    private javax.swing.JPanel completeTaskBtn3;
     private javax.swing.JPanel currentTasksPnl;
     private javax.swing.JPanel dailyActn;
     private javax.swing.JLabel dailyLbl;
@@ -1109,7 +1324,12 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1124,8 +1344,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -1135,6 +1355,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JInternalFrame priorityChartIFrm;
     private javax.swing.JPanel scheduleActn;
     private javax.swing.JLabel scheduleLbl;
+    private javax.swing.JPanel scheduleTab;
     private javax.swing.JPanel sidebar;
     private javax.swing.JInternalFrame statusChartIFrm;
     private javax.swing.JPanel taskActions;

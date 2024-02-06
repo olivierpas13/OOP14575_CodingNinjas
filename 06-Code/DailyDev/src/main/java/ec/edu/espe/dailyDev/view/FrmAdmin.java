@@ -131,8 +131,6 @@ public class FrmAdmin extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         this.setVisible(false);
-        FrmMenu menu = new FrmMenu();
-        menu.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
