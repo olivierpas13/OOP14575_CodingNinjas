@@ -6,10 +6,14 @@ import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
 import com.google.gson.GsonBuilder;
 import static com.mongodb.client.model.Updates.set;
+import static ec.edu.espe.dailyDev.utils.MongoDBHandler.createDocument;
+import static ec.edu.espe.dailyDev.utils.MongoDBHandler.deleteDocument;
+import static ec.edu.espe.dailyDev.utils.MongoDBHandler.replaceDocument;
 import static ec.edu.espe.dailyDev.utils.MongoDBHandler.updateDocument;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -228,6 +232,20 @@ public class Task {
 //            }
 //        }
 //    }
+    public static Document updateTask(String taskId, String newTitle, String newDescription, String newStatus) {
+        // Construct the query to find the task document by its ID
+        Document query = new Document("id", taskId);
+
+        // Construct the replacement document with updated fields
+        Document replacement = new Document();
+        replacement.put("title", newTitle);
+        replacement.put("description", newDescription);
+        replacement.put("status", newStatus);
+
+        // Call the replaceDocument method to update the task document
+        return replaceDocument(query, replacement, "Tasks");
+    }
+
     public static Document completeTask(String taskId) {
         // Construct the query to find the task document by its ID
         Document query = new Document("id", taskId);
@@ -236,22 +254,45 @@ public class Task {
         Bson updates = set("completed", true);
 
         // Call the updateDocument method to update the task document
-        Document updatedDocument = updateDocument(query, updates);
+        Document updatedDocument = updateDocument(query, updates, "Tasks");
 
         return updatedDocument;
     }
 
-    public static Document deleteTask(String taskId) {
+    public static boolean deleteTask(String taskId) {
         // Construct the query to find the task document by its ID
         Document query = new Document("id", taskId);
 
-        // Construct the update to set the completed field to true
-        Bson updates = set("completed", true);
+        // Call the deleteDocument method to delete the task document
+        return deleteDocument(query, "Tasks");
+    }
 
-        // Call the updateDocument method to update the task document
-        Document updatedDocument = updateDocument(query, updates);
+    public static boolean createTask(String title, String description, String priority, String dueDate) {
+        // Convert due date string to Date object
+        UUID id = UUID.randomUUID();
 
-        return updatedDocument;
+        Date dueDateObj = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy"); // Adjust date format as per your formatted field
+            dueDateObj = dateFormat.parse(dueDate);
+        } catch (ParseException e) {
+            System.err.println("Error parsing due date: " + e.getMessage());
+            return false;
+        }
+        System.out.println(dueDateObj);
+
+        // Create a Document representing the new task
+        Document newTask = new Document("id", id)
+                .append("name", title)
+                .append("description", description)
+                .append("priority", priority.toLowerCase())
+                .append("dueDate", dueDateObj)
+                .append("userId", User.getCurrentUserId().toString())
+                .append("creationDate", new Date())
+                .append("completed", false);
+
+        // Call the createDocument method to insert the task document into the "Tasks" collection
+        return createDocument(newTask, "Tasks");
     }
 
     public static void showTasksTodays() {

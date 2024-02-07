@@ -14,10 +14,9 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.model.ReturnDocument;
-import static com.mongodb.client.model.Updates.combine;
-import static com.mongodb.client.model.Updates.currentDate;
-import static com.mongodb.client.model.Updates.set;
+import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertOneResult;
+import com.mongodb.client.result.UpdateResult;
 import ec.edu.espe.dailyDev.model.Task;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.util.ArrayList;
@@ -148,8 +147,8 @@ public class MongoDBHandler {
         // Example: return new Task(document.getString("taskId"), document.getString("taskName"), ...);
     }
 
-    public static Document updateDocument(Document query, Bson updates) {
-        MongoCollection<Document> collection = connectToCollection("Tasks");
+    public static Document updateDocument(Document query, Bson updates, String collectionName) {
+        MongoCollection<Document> collection = connectToCollection(collectionName);
         try {
             Document updatedDocument = collection.findOneAndUpdate(query, updates,
                     new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER));
@@ -159,6 +158,72 @@ public class MongoDBHandler {
         } catch (MongoException me) {
             System.err.println("Unable to update due to an error: " + me);
             return null;
+        }
+    }
+
+    public static Document replaceDocument(Document query, Document replacement, String collectionName) {
+        MongoCollection<Document> collection = connectToCollection(collectionName);
+        if (collection == null) {
+            System.err.println("Failed to connect to collection: " + collectionName);
+            return null;
+        }
+
+        try {
+            UpdateResult result = collection.replaceOne(query, replacement);
+
+            // Check if the document was replaced successfully
+            if (result.getModifiedCount() > 0) {
+                System.out.println("Document replaced successfully");
+                return query;
+            } else {
+                System.out.println("No document found matching the query: " + query);
+                return null;
+            }
+        } catch (MongoException me) {
+            System.err.println("Unable to replace document due to an error: " + me);
+            return null;
+        }
+    }
+
+    public static boolean deleteDocument(Document query, String collectionName) {
+        MongoCollection<Document> collection = connectToCollection(collectionName);
+        if (collection == null) {
+            System.err.println("Failed to connect to collection: " + collectionName);
+            return false;
+        }
+
+        try {
+            // Call the deleteOne method to delete the document
+            DeleteResult result = collection.deleteOne(query);
+
+            // Check if the document was deleted successfully
+            if (result.getDeletedCount() == 1) {
+                System.out.println("Document deleted successfully");
+                return true; // Document deletion was successful
+            } else {
+                System.out.println("No document found matching the query: " + query);
+                return false;
+            }
+        } catch (MongoException me) {
+            System.err.println("Unable to delete document due to an error: " + me);
+            return false;
+        }
+    }
+
+    public static boolean createDocument(Document document, String collectionName) {
+        MongoCollection<Document> collection = connectToCollection(collectionName);
+        if (collection == null) {
+            System.err.println("Failed to connect to collection: " + collectionName);
+            return false;
+        }
+
+        try {
+            collection.insertOne(document);
+            System.out.println("Document created successfully");
+            return true;
+        } catch (MongoException me) {
+            System.err.println("Unable to create document due to an error: " + me);
+            return false;
         }
     }
 

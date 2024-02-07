@@ -19,6 +19,7 @@ public class FrmDeleteTask extends javax.swing.JFrame {
      */
     public FrmDeleteTask() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -39,13 +40,14 @@ public class FrmDeleteTask extends javax.swing.JFrame {
         draggablePnl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         idTxt = new javax.swing.JTextField();
-        completeBtn = new javax.swing.JPanel();
+        deleteBtn = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         cancelBtn = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,11 +124,11 @@ public class FrmDeleteTask extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 62, -1, -1));
         jPanel1.add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 59, 390, -1));
 
-        completeBtn.setBackground(new java.awt.Color(51, 51, 51));
-        completeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        completeBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        deleteBtn.setBackground(new java.awt.Color(51, 51, 51));
+        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        deleteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                completeBtnMousePressed(evt);
+                deleteBtnMousePressed(evt);
             }
         });
 
@@ -135,18 +137,18 @@ public class FrmDeleteTask extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("DELETE");
 
-        javax.swing.GroupLayout completeBtnLayout = new javax.swing.GroupLayout(completeBtn);
-        completeBtn.setLayout(completeBtnLayout);
-        completeBtnLayout.setHorizontalGroup(
-            completeBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout deleteBtnLayout = new javax.swing.GroupLayout(deleteBtn);
+        deleteBtn.setLayout(deleteBtnLayout);
+        deleteBtnLayout.setHorizontalGroup(
+            deleteBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        completeBtnLayout.setVerticalGroup(
-            completeBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        deleteBtnLayout.setVerticalGroup(
+            deleteBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel1.add(completeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 110, 90, 30));
+        jPanel1.add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 110, 90, 30));
 
         cancelBtn.setBackground(new java.awt.Color(51, 51, 51));
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -216,10 +218,10 @@ public class FrmDeleteTask extends javax.swing.JFrame {
         getComponentAt(mPoint);
     }//GEN-LAST:event_draggablePnlMousePressed
 
-    private void completeBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeBtnMousePressed
+    private void deleteBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnMousePressed
 
         Task.deleteTask(idTxt.getText());
-    }//GEN-LAST:event_completeBtnMousePressed
+    }//GEN-LAST:event_deleteBtnMousePressed
 
     private void cancelBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtnMousePressed
         this.dispose();
@@ -264,7 +266,7 @@ public class FrmDeleteTask extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionBar;
     private javax.swing.JPanel cancelBtn;
-    private javax.swing.JPanel completeBtn;
+    private javax.swing.JPanel deleteBtn;
     private javax.swing.JLabel draggablePnl;
     private javax.swing.JPanel exitBtn;
     private javax.swing.JTextField idTxt;

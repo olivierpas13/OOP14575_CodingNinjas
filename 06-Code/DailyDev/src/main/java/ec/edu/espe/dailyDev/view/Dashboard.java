@@ -172,12 +172,16 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tasksTb = new javax.swing.JTable();
         taskActions = new javax.swing.JPanel();
+        updateBtn1 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
         addTaskBtn = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         completeTaskBtn = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         deleteBtn = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
+        updateBtn = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         scheduleTab = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -791,7 +795,7 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout dashboardTabLayout = new javax.swing.GroupLayout(dashboardTab);
@@ -862,6 +866,33 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tasksTb);
 
         taskActions.setBackground(new java.awt.Color(255, 255, 255));
+
+        updateBtn1.setBackground(new java.awt.Color(0, 0, 0));
+        updateBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateBtn1MousePressed(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Print All Tasks");
+
+        javax.swing.GroupLayout updateBtn1Layout = new javax.swing.GroupLayout(updateBtn1);
+        updateBtn1.setLayout(updateBtn1Layout);
+        updateBtn1Layout.setHorizontalGroup(
+            updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 154, Short.MAX_VALUE)
+            .addGroup(updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+        );
+        updateBtn1Layout.setVerticalGroup(
+            updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 38, Short.MAX_VALUE)
+            .addGroup(updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+        );
 
         addTaskBtn.setBackground(new java.awt.Color(0, 0, 0));
         addTaskBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -944,6 +975,33 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
         );
 
+        updateBtn.setBackground(new java.awt.Color(0, 0, 0));
+        updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                updateBtnMousePressed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Roboto Medium", 0, 16)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Update Task");
+
+        javax.swing.GroupLayout updateBtnLayout = new javax.swing.GroupLayout(updateBtn);
+        updateBtn.setLayout(updateBtnLayout);
+        updateBtnLayout.setHorizontalGroup(
+            updateBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 154, Short.MAX_VALUE)
+            .addGroup(updateBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+        );
+        updateBtnLayout.setVerticalGroup(
+            updateBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+            .addGroup(updateBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout taskActionsLayout = new javax.swing.GroupLayout(taskActions);
         taskActions.setLayout(taskActionsLayout);
         taskActionsLayout.setHorizontalGroup(
@@ -953,7 +1011,9 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(taskActionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addTaskBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(completeTaskBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         taskActionsLayout.setVerticalGroup(
@@ -965,6 +1025,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(completeTaskBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(updateBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -989,7 +1053,7 @@ public class Dashboard extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(taskActions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
+                .addGap(0, 30, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1168,7 +1232,7 @@ public class Dashboard extends javax.swing.JFrame {
         );
         adminTabLayout.setVerticalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGap(0, 675, Short.MAX_VALUE)
         );
 
         TBPMain.addTab("tab5", adminTab);
@@ -1291,8 +1355,9 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_taskActnMousePressed
 
     private void addTaskBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTaskBtnMousePressed
-        FrmTask frm = new FrmTask();
+        FrmTask frm = new FrmTask(this);
         frm.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_addTaskBtnMousePressed
 
     private void completeTaskBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeTaskBtnMousePressed
@@ -1324,6 +1389,14 @@ public class Dashboard extends javax.swing.JFrame {
     private void deleteBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteBtnMousePressed
+
+    private void updateBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBtnMousePressed
+
+    private void updateBtn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtn1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateBtn1MousePressed
 
     /**
      * @param args the command line arguments
@@ -1401,6 +1474,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1434,6 +1509,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel taskLbl;
     private javax.swing.JPanel tasksTab;
     private javax.swing.JTable tasksTb;
+    private javax.swing.JPanel updateBtn;
+    private javax.swing.JPanel updateBtn1;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

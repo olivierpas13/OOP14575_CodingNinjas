@@ -23,6 +23,7 @@ raven\calendar\PanelYear$2.class
 ec\edu\espe\dailyDev\view\FrmCompleteTask.class
 ec\edu\espe\dailyDev\view\TasksTab$1.class
 ec\edu\espe\dailyDev\view\FrmSprint$4.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask$5.class
 ec\edu\espe\dailyDev\view\Calendar.class
 ec\edu\espe\dailyDev\view\FrmEvent$1.class
 raven\calendar\utils\CellRenderCustom.class
@@ -34,6 +35,7 @@ ec\edu\espe\dailyDev\view\Modal.class
 ec\edu\espe\dailyDev\view\Dashboard$11.class
 ec\edu\espe\dailyDev\view\FrmCompleteTask$6.class
 ec\edu\espe\dailyDev\view\Modal$ButtonClickListener.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask$2.class
 ec\edu\espe\dailyDev\view\FrmCompleteTask$5.class
 ec\edu\espe\dailyDev\model\Schedule.class
 ec\edu\espe\dailyDev\view\Calendar$4.class
@@ -51,6 +53,7 @@ ec\edu\espe\dailyDev\view\ImageDecore.class
 raven\calendar\PanelYear$3.class
 ec\edu\espe\dailyDev\view\FrmEvent$2.class
 ec\edu\espe\dailyDev\view\FrmMeeting.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask$3.class
 raven\calendar\utils\CalendarCellListener.class
 ec\edu\espe\dailyDev\model\User$1.class
 ec\edu\espe\dailyDev\view\FrmSprint$3.class
@@ -71,6 +74,7 @@ ec\edu\espe\dailyDev\model\Task.class
 ec\edu\espe\dailyDev\utils\GPTHandler.class
 raven\calendar\utils\PanelDateListener.class
 ec\edu\espe\dailyDev\view\ActionBtns.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask$4.class
 ec\edu\espe\dailyDev\view\FrmMeeting$1.class
 ec\edu\espe\dailyDev\view\FrmAdmin.class
 raven\swing\DynamicCell$1.class
@@ -85,11 +89,13 @@ raven\calendar\PanelHeader$HeaderLayout.class
 ec\edu\espe\dailyDev\model\Task$1.class
 ec\edu\espe\dailyDev\view\GPTRes$1.class
 ec\edu\espe\dailyDev\view\Dashboard$13.class
+ec\edu\espe\dailyDev\view\Dashboard$20.class
 raven\swing\DynamicCell$2.class
 ec\edu\espe\dailyDev\utils\ValidationHandler.class
 ec\edu\espe\dailyDev\view\FrmSprint$5.class
 ec\edu\espe\dailyDev\view\Dashboard$10.class
 ec\edu\espe\dailyDev\view\Calendar$3.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask$6.class
 raven\swing\DynamicCell.class
 ec\edu\espe\dailyDev\view\FrmTask$3.class
 ec\edu\espe\dailyDev\view\PanelDay$1.class
@@ -105,9 +111,11 @@ ec\edu\espe\dailyDev\view\FrmAdmin$2.class
 ec\edu\espe\dailyDev\view\FrmTask.class
 ec\edu\espe\dailyDev\view\Dashboard$2.class
 ec\edu\espe\dailyDev\model\Organization$1.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask.class
 ec\edu\espe\dailyDev\view\PanelDay.class
 ec\edu\espe\dailyDev\model\User$2.class
 ec\edu\espe\dailyDev\view\PanelDay$2.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask$7.class
 ec\edu\espe\dailyDev\utils\FileHandler.class
 ec\edu\espe\dailyDev\view\Splash.class
 raven\calendar\utils\CalendarSelectedListener.class
@@ -122,6 +130,7 @@ ec\edu\espe\dailyDev\view\FrmEvent.class
 ec\edu\espe\dailyDev\utils\DataFormatter.class
 ec\edu\espe\dailyDev\view\FrmAdmin$3.class
 raven\calendar\PanelHeader.class
+ec\edu\espe\dailyDev\view\FrmDeleteTask$1.class
 ec\edu\espe\dailyDev\view\FrmEvent$5.class
 ec\edu\espe\dailyDev\view\TasksTab.class
 raven\calendar\model\ModelDate.class
@@ -139,4 +148,5 @@ raven\swing\DynamicCellRender.class
 ec\edu\espe\dailyDev\view\FrmLogin$4.class
 raven\calendar\PanelYear$1.class
 ec\edu\espe\dailyDev\view\Dashboard$7.class
+ec\edu\espe\dailyDev\view\Dashboard$21.class
 ec\edu\espe\dailyDev\view\FrmCompleteTask$1.class
