@@ -1334,7 +1334,7 @@
                                       <Component id="completeTaskBtn" alignment="1" max="32767" attributes="0"/>
                                       <Component id="deleteBtn" alignment="1" max="32767" attributes="0"/>
                                       <Component id="updateBtn" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="updateBtn1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="printBtn" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -1352,21 +1352,21 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="updateBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="updateBtn1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="printBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JPanel" name="updateBtn1">
+                        <Container class="javax.swing.JPanel" name="printBtn">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="0" green="0" red="0" type="rgb"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updateBtn1MousePressed"/>
+                            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="printBtnMousePressed"/>
                           </Events>
 
                           <Layout>

@@ -18,8 +18,10 @@ ec\edu\espe\dailyDev\view\FrmTask$2.class
 ec\edu\espe\dailyDev\utils\MenuUtils.class
 ec\edu\espe\dailyDev\view\Dashboard$14.class
 ec\edu\espe\dailyDev\view\FrmMeeting$3.class
+ec\edu\espe\unittest\controller\TablePrinter$1.class
 ec\edu\espe\dailyDev\view\FrmMeeting$5.class
 raven\calendar\PanelYear$2.class
+ec\edu\espe\dailyDev\view\Dashboard$22.class
 ec\edu\espe\dailyDev\view\FrmCompleteTask.class
 ec\edu\espe\dailyDev\view\TasksTab$1.class
 ec\edu\espe\dailyDev\view\FrmSprint$4.class
@@ -95,6 +97,7 @@ ec\edu\espe\dailyDev\utils\ValidationHandler.class
 ec\edu\espe\dailyDev\view\FrmSprint$5.class
 ec\edu\espe\dailyDev\view\Dashboard$10.class
 ec\edu\espe\dailyDev\view\Calendar$3.class
+ec\edu\espe\unittest\controller\TablePrinter.class
 ec\edu\espe\dailyDev\view\FrmDeleteTask$6.class
 raven\swing\DynamicCell.class
 ec\edu\espe\dailyDev\view\FrmTask$3.class

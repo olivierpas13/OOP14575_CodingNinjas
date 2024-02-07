@@ -15,7 +15,7 @@ import javax.swing.JTable;
 
 public class TablePrinter {
 
-    public static void printTable(JTable table, JPanel headerPanel, String logoPath, String title) {
+    public static void printTable(JTable table, String logoPath, String title) {
         try {
             PrinterJob printerJob = PrinterJob.getPrinterJob();
 

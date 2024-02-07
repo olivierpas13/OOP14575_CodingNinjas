@@ -8,6 +8,7 @@ import ec.edu.espe.dailyDev.utils.DataFormatter;
 import static ec.edu.espe.dailyDev.utils.FiltersHandler.createFilterTasksById;
 import ec.edu.espe.dailyDev.utils.GPTHandler;
 import ec.edu.espe.dailyDev.utils.MongoDBHandler;
+import static ec.edu.espe.unittest.controller.TablePrinter.printTable;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
@@ -67,15 +68,16 @@ public class Dashboard extends javax.swing.JFrame {
                     clipboard.setContents(new StringSelection(id), null);
                     JOptionPane.showMessageDialog(null, "ID copied: " + id);
                 }
-            }});
-            for(Task task : tasks) {
+            }
+        });
+        for (Task task : tasks) {
             String formattedDate = DataFormatter.formatDate(task.getDueDate(), "yyyy/MM/dd");
 
-                String completedStatus = DataFormatter.formatBooleanAsYesNo(task.isCompleted());
+            String completedStatus = DataFormatter.formatBooleanAsYesNo(task.isCompleted());
 
-                model.addRow(new Object[]{task.getId(), task.getName(), task.getPriority(), formattedDate, completedStatus});
-            }
+            model.addRow(new Object[]{task.getId(), task.getName(), task.getPriority(), formattedDate, completedStatus});
         }
+    }
 
     public static void createChart(JInternalFrame frame, String type, List<Task> tasks) {
 
@@ -172,7 +174,7 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tasksTb = new javax.swing.JTable();
         taskActions = new javax.swing.JPanel();
-        updateBtn1 = new javax.swing.JPanel();
+        printBtn = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         addTaskBtn = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -867,10 +869,10 @@ public class Dashboard extends javax.swing.JFrame {
 
         taskActions.setBackground(new java.awt.Color(255, 255, 255));
 
-        updateBtn1.setBackground(new java.awt.Color(0, 0, 0));
-        updateBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+        printBtn.setBackground(new java.awt.Color(0, 0, 0));
+        printBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                updateBtn1MousePressed(evt);
+                printBtnMousePressed(evt);
             }
         });
 
@@ -879,18 +881,18 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel22.setText("Print All Tasks");
 
-        javax.swing.GroupLayout updateBtn1Layout = new javax.swing.GroupLayout(updateBtn1);
-        updateBtn1.setLayout(updateBtn1Layout);
-        updateBtn1Layout.setHorizontalGroup(
-            updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout printBtnLayout = new javax.swing.GroupLayout(printBtn);
+        printBtn.setLayout(printBtnLayout);
+        printBtnLayout.setHorizontalGroup(
+            printBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 154, Short.MAX_VALUE)
-            .addGroup(updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(printBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
         );
-        updateBtn1Layout.setVerticalGroup(
-            updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        printBtnLayout.setVerticalGroup(
+            printBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 38, Short.MAX_VALUE)
-            .addGroup(updateBtn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(printBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
         );
 
@@ -1013,7 +1015,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(completeTaskBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(printBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         taskActionsLayout.setVerticalGroup(
@@ -1028,7 +1030,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(updateBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(printBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1394,9 +1396,10 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateBtnMousePressed
 
-    private void updateBtn1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtn1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateBtn1MousePressed
+    private void printBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBtnMousePressed
+        printTable(tasksTb, "/imgs/dailyDevTBG.png", "Tasks Table");
+
+    }//GEN-LAST:event_printBtnMousePressed
 
     /**
      * @param args the command line arguments
@@ -1498,6 +1501,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel minimizeBtn;
+    private javax.swing.JPanel printBtn;
     private javax.swing.JInternalFrame priorityChartIFrm;
     private javax.swing.JPanel scheduleActn;
     private javax.swing.JLabel scheduleLbl;
@@ -1510,7 +1514,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel tasksTab;
     private javax.swing.JTable tasksTb;
     private javax.swing.JPanel updateBtn;
-    private javax.swing.JPanel updateBtn1;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }
