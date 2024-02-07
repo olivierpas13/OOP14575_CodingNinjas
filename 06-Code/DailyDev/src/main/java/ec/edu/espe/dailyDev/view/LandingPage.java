@@ -194,33 +194,33 @@ public class LandingPage {
         } while (optionMain != 3);
     }
 
-    private static void taskMenu() {
-        String[] taskOptions = {
-            "Create Task",
-            "Show Tasks",
-            "Show today's pending tasks",
-            "Back to Main Menu"
-        };
-
-        int optionTask;
-
-        do {
-            optionTask = MenuUtils.getUserOption("Task", taskOptions);
-
-            switch (optionTask) {
-//                case 1 ->
-//                    Task.create();
-                case 2 ->
-                    Task.show();
-                case 3 ->
-                    Task.showTasksTodays();
-                case 4 ->
-                    MenuUtils.backToMainMenu();
-                default ->
-                    System.out.println("Invalid option. Please try again.");
-            }
-        } while (optionTask != 4);
-    }
+//    private static void taskMenu() {
+//        String[] taskOptions = {
+//            "Create Task",
+//            "Show Tasks",
+//            "Show today's pending tasks",
+//            "Back to Main Menu"
+//        };
+//
+//        int optionTask;
+//
+//        do {
+//            optionTask = MenuUtils.getUserOption("Task", taskOptions);
+//
+//            switch (optionTask) {
+////                case 1 ->
+////                    Task.create();
+//                case 2 ->
+//                    Task.show();
+//                case 3 ->
+//                    Task.showTasksTodays();
+//                case 4 ->
+//                    MenuUtils.backToMainMenu();
+//                default ->
+//                    System.out.println("Invalid option. Please try again.");
+//            }
+//        } while (optionTask != 4);
+//    }
 
 //    public static void meetingMenu() {
 //        while (true) {

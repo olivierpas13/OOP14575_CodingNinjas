@@ -5,6 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import ec.edu.espe.dailyDev.utils.FileHandler;
 import ec.edu.espe.dailyDev.utils.MenuUtils;
 import com.google.gson.GsonBuilder;
+import static com.mongodb.client.model.Updates.set;
+import static ec.edu.espe.dailyDev.utils.MongoDBHandler.updateDocument;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +16,8 @@ import java.util.UUID;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Scanner;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 /**
  *
@@ -43,36 +46,33 @@ public class Task {
         this.completed = completed;
     }
 
-
-
-    public void showMenu() {
-        String[] taskOptions = {
-            "Create Task",
-            "Show Tasks",
-            "Update Task",
-            "Back to Main Menu"
-        };
-
-        int option;
-
-        do {
-            option = MenuUtils.getUserOption("Task", taskOptions);
-
-            switch (option) {
-//                case 1 ->
-//                    create();
-                case 2 ->
-                    show();
-                case 3 ->
-                    showTasksTodays();
-                case 4 ->
-                    MenuUtils.backToMainMenu();
-                default ->
-                    System.out.println("Invalid option. Please try again.");
-            }
-        } while (option != 4);
-    }
-
+//    public void showMenu() {
+//        String[] taskOptions = {
+//            "Create Task",
+//            "Show Tasks",
+//            "Update Task",
+//            "Back to Main Menu"
+//        };
+//
+//        int option;
+//
+//        do {
+//            option = MenuUtils.getUserOption("Task", taskOptions);
+//
+//            switch (option) {
+////                case 1 ->
+////                    create();
+//                case 2 ->
+//                    show();
+//                case 3 ->
+//                    showTasksTodays();
+//                case 4 ->
+//                    MenuUtils.backToMainMenu();
+//                default ->
+//                    System.out.println("Invalid option. Please try again.");
+//            }
+//        } while (option != 4);
+//    }
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
@@ -117,7 +117,6 @@ public class Task {
 //        public static void create(String title, String description, ) {
 //        
 //        }
-    
 //    public static void create() {
 //        String collectionName = "Tasks";
 //
@@ -171,9 +170,6 @@ public class Task {
 //        System.out.println(newTask);
 //        MenuUtils.backToMainMenu();
 //    }
-    
-    
-
     public static void writeTasksToFile(String filePath, ArrayList<Task> tasks) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(tasks);
@@ -189,80 +185,73 @@ public class Task {
         }
     }
 
-    public static void show() {
-        System.out.println("\nShowing tasks...");
+//    public static void show() {
+//        System.out.println("\nShowing tasks...");
+//
+//        UUID userId = User.getCurrentUserId();
+//        if (userId == null) {
+//            System.out.println("No user logged in. Please log in to view tasks.");
+//            MenuUtils.backToMainMenu();
+//            return;
+//        }
+//
+//        ArrayList<Task> tasks = getTasksFromFile("./db/tasks.json");
+//
+//        System.out.println("Tasks created by the current user:");
+//
+//        // Imprimir la cabecera una vez antes de las tareas
+//        Task.printFormattedTaskHeader();
+//
+//        for (Task task : tasks) {
+//            if (task.getUserId() != null && task.getUserId().equals(userId)) {
+//                task.printFormattedTask();
+//            }
+//        }
+//
+//        if (tasks.isEmpty()) {
+//            System.out.println("No tasks found for the current user.");
+//        } else {
+//            System.out.println("\nOptions:");
+//
+//            int option = MenuUtils.getUserOption("Select an option", new String[]{" Complete Tasks", " Back to Menu"});
+//
+//            switch (option) {
+//                case 1:
+//                    completeTask(tasks);
+//                    break;
+//                case 2:
+//                    MenuUtils.backToMainMenu();
+//                    break;
+//                default:
+//                    System.out.println("Invalid option. Returning to the main menu.");
+//                    MenuUtils.backToMainMenu();
+//            }
+//        }
+//    }
+    public static Document completeTask(String taskId) {
+        // Construct the query to find the task document by its ID
+        Document query = new Document("id", taskId);
 
-        UUID userId = User.getCurrentUserId();
-        if (userId == null) {
-            System.out.println("No user logged in. Please log in to view tasks.");
-            MenuUtils.backToMainMenu();
-            return;
-        }
+        // Construct the update to set the completed field to true
+        Bson updates = set("completed", true);
 
-        ArrayList<Task> tasks = getTasksFromFile("./db/tasks.json");
+        // Call the updateDocument method to update the task document
+        Document updatedDocument = updateDocument(query, updates);
 
-        System.out.println("Tasks created by the current user:");
-
-        // Imprimir la cabecera una vez antes de las tareas
-        Task.printFormattedTaskHeader();
-
-        for (Task task : tasks) {
-            if (task.getUserId() != null && task.getUserId().equals(userId)) {
-                task.printFormattedTask();
-            }
-        }
-
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks found for the current user.");
-        } else {
-            System.out.println("\nOptions:");
-
-            int option = MenuUtils.getUserOption("Select an option", new String[]{" Complete Tasks", " Back to Menu"});
-
-            switch (option) {
-                case 1:
-                    completeTask(tasks);
-                    break;
-                case 2:
-                    MenuUtils.backToMainMenu();
-                    break;
-                default:
-                    System.out.println("Invalid option. Returning to the main menu.");
-                    MenuUtils.backToMainMenu();
-            }
-        }
+        return updatedDocument;
     }
 
-    public static void completeTask(ArrayList<Task> tasks) {
-        Scanner scanner = new Scanner(System.in);
+    public static Document deleteTask(String taskId) {
+        // Construct the query to find the task document by its ID
+        Document query = new Document("id", taskId);
 
-        System.out.println("\nComplete Task:");
+        // Construct the update to set the completed field to true
+        Bson updates = set("completed", true);
 
-        System.out.println("Enter the ID of the task to complete:");
-        UUID taskIdToComplete = UUID.fromString(scanner.nextLine());
+        // Call the updateDocument method to update the task document
+        Document updatedDocument = updateDocument(query, updates);
 
-        // Buscar la tarea por ID
-        Task selectedTask = null;
-        for (Task task : tasks) {
-            if (task.getId().equals(taskIdToComplete)) {
-                selectedTask = task;
-                break;
-            }
-        }
-
-        if (selectedTask != null) {
-            // Actualizar el estado de completitud de la tarea seleccionada
-            selectedTask.setCompleted(true);
-
-            // Guardar los cambios en el archivo
-            writeTasksToFile("tasks.json", tasks);
-
-            System.out.println("Task completed successfully!");
-        } else {
-            System.out.println("Task not found with the specified ID. Returning to the main menu.");
-        }
-
-        show();
+        return updatedDocument;
     }
 
     public static void showTasksTodays() {

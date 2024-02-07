@@ -12,6 +12,11 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
+import com.mongodb.client.model.ReturnDocument;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.currentDate;
+import static com.mongodb.client.model.Updates.set;
 import com.mongodb.client.result.InsertOneResult;
 import ec.edu.espe.dailyDev.model.Task;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -138,9 +143,23 @@ public class MongoDBHandler {
         Gson gson = new Gson();
 
         String task = gson.toJson(document);
-        
+
         return gson.fromJson(task, Task.class);
         // Example: return new Task(document.getString("taskId"), document.getString("taskName"), ...);
+    }
+
+    public static Document updateDocument(Document query, Bson updates) {
+        MongoCollection<Document> collection = connectToCollection("Tasks");
+        try {
+            Document updatedDocument = collection.findOneAndUpdate(query, updates,
+                    new FindOneAndUpdateOptions().returnDocument(ReturnDocument.AFTER));
+
+            System.out.println("Document updated successfully");
+            return updatedDocument;
+        } catch (MongoException me) {
+            System.err.println("Unable to update due to an error: " + me);
+            return null;
+        }
     }
 
 }

@@ -7,6 +7,7 @@ ec\edu\espe\dailyDev\view\FrmEvent$4.class
 ec\edu\espe\dailyDev\utils\DailyHandler.class
 raven\calendar\PanelMonth$3.class
 raven\calendar\utils\CalendarEventCellRender.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask$3.class
 ec\edu\espe\dailyDev\utils\MongoDBHandler.class
 ec\edu\espe\dailyDev\view\FrmLogin$6.class
 ec\edu\espe\dailyDev\view\Dashboard$17.class
@@ -19,6 +20,7 @@ ec\edu\espe\dailyDev\view\Dashboard$14.class
 ec\edu\espe\dailyDev\view\FrmMeeting$3.class
 ec\edu\espe\dailyDev\view\FrmMeeting$5.class
 raven\calendar\PanelYear$2.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask.class
 ec\edu\espe\dailyDev\view\TasksTab$1.class
 ec\edu\espe\dailyDev\view\FrmSprint$4.class
 ec\edu\espe\dailyDev\view\Calendar.class
@@ -30,12 +32,15 @@ ec\edu\espe\dailyDev\model\User$InvalidCredentialsException.class
 ec\edu\espe\dailyDev\utils\FiltersHandler.class
 ec\edu\espe\dailyDev\view\Modal.class
 ec\edu\espe\dailyDev\view\Dashboard$11.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask$6.class
 ec\edu\espe\dailyDev\view\Modal$ButtonClickListener.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask$5.class
 ec\edu\espe\dailyDev\model\Schedule.class
 ec\edu\espe\dailyDev\view\Calendar$4.class
 raven\calendar\PanelMonth$1.class
 ec\edu\espe\dailyDev\view\Dashboard$4.class
 ec\edu\espe\dailyDev\view\Calendar$CalendarLayout.class
+ec\edu\espe\dailyDev\view\Dashboard$18.class
 ec\edu\espe\dailyDev\view\FrmLogin$1.class
 ec\edu\espe\dailyDev\model\Administrator.class
 ec\edu\espe\dailyDev\view\FrmMeeting$2.class
@@ -52,11 +57,13 @@ ec\edu\espe\dailyDev\view\FrmSprint$3.class
 ec\edu\espe\dailyDev\view\DailyDevSystem.class
 raven\swing\DynamicCellListener.class
 ec\edu\espe\dailyDev\view\LandingPage.class
+ec\edu\espe\dailyDev\view\Dashboard$19.class
 ec\edu\espe\dailyDev\view\Dashboard.class
 ec\edu\espe\dailyDev\view\NewJFrame$2.class
 ec\edu\espe\dailyDev\view\Dashboard$12.class
 ec\edu\espe\dailyDev\view\scheduleTest$1.class
 ec\edu\espe\dailyDev\view\FrmAdmin$1.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask$4.class
 ec\edu\espe\dailyDev\view\FrmTask$5.class
 ec\edu\espe\dailyDev\view\FrmEvent$3.class
 ec\edu\espe\dailyDev\view\FrmSprint$2.class
@@ -72,6 +79,7 @@ ec\edu\espe\dailyDev\model\Team$1.class
 ec\edu\espe\dailyDev\view\FrmMeeting$4.class
 ec\edu\espe\dailyDev\model\Developer.class
 ec\edu\espe\dailyDev\model\Team.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask$7.class
 ec\edu\espe\dailyDev\view\NewJFrame$1.class
 raven\calendar\PanelHeader$HeaderLayout.class
 ec\edu\espe\dailyDev\model\Task$1.class
@@ -105,6 +113,7 @@ ec\edu\espe\dailyDev\view\Splash.class
 raven\calendar\utils\CalendarSelectedListener.class
 ec\edu\espe\dailyDev\view\Calendar$1.class
 ec\edu\espe\dailyDev\model\Reminder.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask$2.class
 ec\edu\espe\dailyDev\view\FrmLogin$5.class
 ec\edu\espe\dailyDev\view\scheduleTest.class
 ec\edu\espe\dailyDev\view\Dashboard$15.class
@@ -130,3 +139,4 @@ raven\swing\DynamicCellRender.class
 ec\edu\espe\dailyDev\view\FrmLogin$4.class
 raven\calendar\PanelYear$1.class
 ec\edu\espe\dailyDev\view\Dashboard$7.class
+ec\edu\espe\dailyDev\view\FrmCompleteTask$1.class

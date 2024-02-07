@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author dvill
+ * @author Coding Ninjas
  */
 public class FrmLogin extends javax.swing.JFrame {
 
