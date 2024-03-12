@@ -15,6 +15,7 @@ import org.bson.Document;
  *
  * @author Team Number: 4 - CodingNinjas
  */
+
 public class Administrator extends User {
 
     private final String role = "admin";
@@ -108,5 +109,4 @@ public class Administrator extends User {
     public static void setNameCollection(String aNameCollection) {
         nameCollection = aNameCollection;
     }
-
 }

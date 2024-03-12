@@ -84,9 +84,7 @@ public class MongoDBHandler {
 
     public boolean checkCredentials(String username, String password, String collectionName) {
         try {
-//            MongoDatabase database = mongoClient.getDatabase("DailyDevDB");
-//            MongoCollection<Document> collection = database.getCollection(collectionName);
-
+            
             MongoCollection<Document> collection = connectToCollection(collectionName);
 
             Document query = new Document("username", username)
@@ -120,17 +118,15 @@ public class MongoDBHandler {
     }
 
     public static List<Task> findAllTasks(Bson filter) {
-//        MongoCollection<Document> collection = connectToCollection(collectionName);
         FindIterable<Document> documents = findAllDocs(filter, "Tasks");
 
         System.out.println(documents);
         List<Task> taskList = new ArrayList<>();
 
         for (Document document : documents) {
-            // Convert each Document to a Task object
+            
             Task task = convertDocumentToTask(document);
 
-            // Add the Task object to the list
             taskList.add(task);
         }
 
@@ -138,14 +134,13 @@ public class MongoDBHandler {
     }
 
     private static Task convertDocumentToTask(Document document) {
-        // Implement logic to convert Document to Task object
+        
         Gson gson = new Gson();
 
         String task = gson.toJson(document);
 
         return gson.fromJson(task, Task.class);
-        // Example: return new Task(document.getString("taskId"), document.getString("taskName"), ...);
-    }
+        }
 
     public static Document updateDocument(Document query, Bson updates, String collectionName) {
         MongoCollection<Document> collection = connectToCollection(collectionName);
@@ -171,7 +166,6 @@ public class MongoDBHandler {
         try {
             UpdateResult result = collection.replaceOne(query, replacement);
 
-            // Check if the document was replaced successfully
             if (result.getModifiedCount() > 0) {
                 System.out.println("Document replaced successfully");
                 return query;
@@ -193,13 +187,11 @@ public class MongoDBHandler {
         }
 
         try {
-            // Call the deleteOne method to delete the document
             DeleteResult result = collection.deleteOne(query);
 
-            // Check if the document was deleted successfully
             if (result.getDeletedCount() == 1) {
                 System.out.println("Document deleted successfully");
-                return true; // Document deletion was successful
+                return true;
             } else {
                 System.out.println("No document found matching the query: " + query);
                 return false;
@@ -228,24 +220,3 @@ public class MongoDBHandler {
     }
 
 }
-
-//    @Override
-//    public String read(String filterKey, String filterValue, String table) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public String readAll(String table) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public boolean update(String filterKey, String filterValue, String newData, String table) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//
-//    @Override
-//    public boolean delete(String filterKey, String filterValue, String table) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-

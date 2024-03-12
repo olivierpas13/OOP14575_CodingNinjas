@@ -20,7 +20,6 @@ public class DailyHandler {
 
         message.append("Good morning team! Here's my daily update:\n\n");
 
-        // Completed tasks
         if (!completedTasks.isEmpty()) {
             message.append("Completed Tasks:\n");
             for (Task task : completedTasks) {
@@ -31,7 +30,6 @@ public class DailyHandler {
             message.append("No completed tasks today!\n\n");
         }
 
-        // Upcoming tasks
         if (!upcomingTasks.isEmpty()) {
             message.append("Upcoming Tasks:\n");
             for (Task task : upcomingTasks) {
@@ -42,11 +40,9 @@ public class DailyHandler {
             message.append("All tasks completed! Ready for new challenges!\n\n");
         }
 
-        // Additional information or personalized message
         message.append("Remember, every task completed brings us closer to our goals. Let's rock the day!\n");
         message.append("Thank you!\n\n");
 
-        // Personalized closing based on the user's name
         message.append("Best regards,\n").append(userName);
 
         return message.toString();

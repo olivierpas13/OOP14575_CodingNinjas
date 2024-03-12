@@ -21,10 +21,7 @@ public class GPTHandler {
     public static String generateHtmlMessage(List<Task> tasks) {
         StringBuilder tasksStr = new StringBuilder("");
 
-        // Iterate through tasks and append information to the HTML
         for (Task task : tasks) {
-//            String taskHtml = String.format("<b>Title:</b> %s<br><b>Status:</b> %s<br><b>Priority:</b> %s<br><b>Due Date:</b> %s<br><br>",
-//                    task.getName(), (task.isCompleted() ? "Completed" : "Incomplete"), task.getPriority(), formatDate(task.getDueDate()));
 
             tasksStr.append(task.getName()).append(task.isCompleted());
             tasksStr.append("||");
@@ -37,8 +34,7 @@ public class GPTHandler {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(date);
     }
-
-    // 
+ 
     public static String getDailyMessage(List<Task> tasks) {
 
         Dotenv dotenv = Dotenv.load();
@@ -47,10 +43,9 @@ public class GPTHandler {
         String message = "Answer with html, using <br> instead of \n. Create a daily message that a developer would use to present his work status, make it short and concise" + htmlMessage;
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = GPT_KEY;
-        String model = "gpt-3.5-turbo"; // current model of chatgpt api
+        String model = "gpt-3.5-turbo"; 
 
         try {
-            // Create the HTTP POST request
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("POST");

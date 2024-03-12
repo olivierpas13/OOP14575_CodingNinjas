@@ -23,9 +23,6 @@ public class Project {
     public String toString() {
         return "Project{" + "AssignedTeam=" + AssignedTeam + ", name=" + name + ", tasks=" + tasks + '}';
     }
-
-
-
  
     public static void create() {
         System.out.println("Creating a new project...");

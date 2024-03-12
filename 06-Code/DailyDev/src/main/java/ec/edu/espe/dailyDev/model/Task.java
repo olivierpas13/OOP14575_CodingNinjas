@@ -50,33 +50,6 @@ public class Task {
         this.completed = completed;
     }
 
-//    public void showMenu() {
-//        String[] taskOptions = {
-//            "Create Task",
-//            "Show Tasks",
-//            "Update Task",
-//            "Back to Main Menu"
-//        };
-//
-//        int option;
-//
-//        do {
-//            option = MenuUtils.getUserOption("Task", taskOptions);
-//
-//            switch (option) {
-////                case 1 ->
-////                    create();
-//                case 2 ->
-//                    show();
-//                case 3 ->
-//                    showTasksTodays();
-//                case 4 ->
-//                    MenuUtils.backToMainMenu();
-//                default ->
-//                    System.out.println("Invalid option. Please try again.");
-//            }
-//        } while (option != 4);
-//    }
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
@@ -118,62 +91,6 @@ public class Task {
         }.getType());
     }
 
-//        public static void create(String title, String description, ) {
-//        
-//        }
-//    public static void create() {
-//        String collectionName = "Tasks";
-//
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.println("Creating a new task...");
-//
-//        UUID taskId = UUID.randomUUID();
-//
-//        System.out.println("Enter the task name:");
-//        String taskName = scanner.nextLine();
-//
-//        System.out.println("Enter the task description:");
-//        String taskDescription = scanner.nextLine();
-//
-//        System.out.println("Enter the due date (yyyy-MM-dd):");
-//        String dueDateInput = scanner.nextLine();
-//        Date dueDate;
-//        try {
-//            dueDate = truncateTime(new SimpleDateFormat("yyyy-MM-dd").parse(dueDateInput));
-//        } catch (ParseException e) {
-//            System.out.println("Invalid date format. Using the current date as the due date.");
-//            dueDate = truncateTime(new Date());
-//        }
-//
-//        // Estado de completitud predeterminado al crear una nueva tarea
-//        boolean completed = false;
-//
-//        UUID userId = User.getCurrentUserId();
-//
-//        // Validar que la fecha de vencimiento sea después de la fecha de creación
-//        Date creationDate = truncateTime(new Date());
-//        if (dueDate.before(creationDate)) {
-//            System.out.println("Error: Due date must be after the creation date.");
-//            MenuUtils.backToMainMenu();
-//            return;
-//        }
-//
-//        Task newTask = new Task(taskId, taskName, taskDescription, dueDate, creationDate, userId, completed);
-//
-//        newTask.setUserId(userId);
-//
-//        MongoDBHandler mdbHandler = new MongoDBHandler();
-//        mdbHandler.createDocument("Tasks", Document.parse(new Gson().toJson(newTask)));
-//
-////        ArrayList<Task> existingTasks = getTasksFromFile("./db/tasks.json");
-////        existingTasks.add(newTask);
-////        writeTasksToFile("tasks.json", existingTasks);
-//        System.out.println("Task created!");
-//        System.out.println("UserID: " + userId);
-//        System.out.println(newTask);
-//        MenuUtils.backToMainMenu();
-//    }
     public static void writeTasksToFile(String filePath, ArrayList<Task> tasks) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(tasks);
@@ -188,87 +105,38 @@ public class Task {
             System.err.println("Error writing tasks to file: " + e.getMessage());
         }
     }
-
-//    public static void show() {
-//        System.out.println("\nShowing tasks...");
-//
-//        UUID userId = User.getCurrentUserId();
-//        if (userId == null) {
-//            System.out.println("No user logged in. Please log in to view tasks.");
-//            MenuUtils.backToMainMenu();
-//            return;
-//        }
-//
-//        ArrayList<Task> tasks = getTasksFromFile("./db/tasks.json");
-//
-//        System.out.println("Tasks created by the current user:");
-//
-//        // Imprimir la cabecera una vez antes de las tareas
-//        Task.printFormattedTaskHeader();
-//
-//        for (Task task : tasks) {
-//            if (task.getUserId() != null && task.getUserId().equals(userId)) {
-//                task.printFormattedTask();
-//            }
-//        }
-//
-//        if (tasks.isEmpty()) {
-//            System.out.println("No tasks found for the current user.");
-//        } else {
-//            System.out.println("\nOptions:");
-//
-//            int option = MenuUtils.getUserOption("Select an option", new String[]{" Complete Tasks", " Back to Menu"});
-//
-//            switch (option) {
-//                case 1:
-//                    completeTask(tasks);
-//                    break;
-//                case 2:
-//                    MenuUtils.backToMainMenu();
-//                    break;
-//                default:
-//                    System.out.println("Invalid option. Returning to the main menu.");
-//                    MenuUtils.backToMainMenu();
-//            }
-//        }
-//    }
+    
     public static Document updateTask(String taskId, String newTitle, String newDescription, String newStatus) {
         // Construct the query to find the task document by its ID
         Document query = new Document("id", taskId);
 
-        // Construct the replacement document with updated fields
         Document replacement = new Document();
         replacement.put("title", newTitle);
         replacement.put("description", newDescription);
         replacement.put("status", newStatus);
-
-        // Call the replaceDocument method to update the task document
+        
         return replaceDocument(query, replacement, "Tasks");
     }
 
     public static Document completeTask(String taskId) {
-        // Construct the query to find the task document by its ID
         Document query = new Document("id", taskId);
 
-        // Construct the update to set the completed field to true
         Bson updates = set("completed", true);
 
-        // Call the updateDocument method to update the task document
         Document updatedDocument = updateDocument(query, updates, "Tasks");
 
         return updatedDocument;
     }
 
     public static boolean deleteTask(String taskId) {
-        // Construct the query to find the task document by its ID
+
         Document query = new Document("id", taskId);
 
-        // Call the deleteDocument method to delete the task document
         return deleteDocument(query, "Tasks");
     }
 
     public static boolean createTask(String title, String description, String priority, String dueDate) {
-        // Convert due date string to Date object
+
         UUID id = UUID.randomUUID();
 
         Date dueDateObj = null;
@@ -281,7 +149,6 @@ public class Task {
         }
         System.out.println(dueDateObj);
 
-        // Create a Document representing the new task
         Document newTask = new Document("id", id)
                 .append("name", title)
                 .append("description", description)
@@ -291,7 +158,6 @@ public class Task {
                 .append("creationDate", new Date())
                 .append("completed", false);
 
-        // Call the createDocument method to insert the task document into the "Tasks" collection
         return createDocument(newTask, "Tasks");
     }
 
@@ -309,10 +175,8 @@ public class Task {
 
         System.out.println("Tasks due today:");
 
-        // Imprimir la cabecera una vez antes de las tareas
         Task.printFormattedTaskHeader();
 
-        // Obtener la fecha actual sin tener en cuenta la parte de hora
         Date currentDate = truncateTime(new Date());
 
         for (Task task : tasks) {
@@ -334,7 +198,6 @@ public class Task {
         return fmt.format(truncateTime(date1)).equals(fmt.format(truncateTime(date2)));
     }
 
-    // Método auxiliar para truncar la parte de hora de una fecha
     private static Date truncateTime(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

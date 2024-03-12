@@ -31,38 +31,32 @@ public class Sprint {
         return "Sprint{" + "id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", tasks=" + tasks + '}';
     }
 
-
-
     public static void create() {
         System.out.println("Creating a new sprint...");
-        // Lógica para crear un sprint
         System.out.println("Sprint created!");
     }
 
     public static void show() {
         System.out.println("Showing sprints...");
         // Lógica para mostrar sprints
-        System.out.println("No sprints found.");  // Ajusta según tu lógica real
+        System.out.println("No sprints found.");  
         MenuUtils.backToMainMenu();
     }
 
     public static void update() {
         System.out.println("Updating a sprint...");
-        // Lógica para la actualización de sprints
         System.out.println("Sprint updated!");
         MenuUtils.backToMainMenu();
     }
 
     public static void complete() {
         System.out.println("Completing a sprint...");
-        // Lógica para completar sprints
         System.out.println("Sprint completed!");
         MenuUtils.backToMainMenu();
     }
 
     public static void delete() {
         System.out.println("Deleting a sprint...");
-        // Lógica para eliminar sprints
         System.out.println("Sprint deleted!");
         MenuUtils.backToMainMenu();
     }
