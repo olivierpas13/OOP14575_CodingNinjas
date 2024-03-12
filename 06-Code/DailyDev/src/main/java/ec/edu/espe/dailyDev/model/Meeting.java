@@ -94,10 +94,10 @@ public class Meeting {
     }
 
     public static Meeting fromDocument(Document document) {
-        UUID id = (UUID) document.get("id");
-        String title = document.getString("title");
-        Date startTime = document.getDate("startTime");
-        Date endTime = document.getDate("endTime");
+        UUID id = (UUID) document.get("Id");
+        String title = document.getString("Title");
+        Date startTime = document.getDate("StartTime");
+        Date endTime = document.getDate("EndTime");
         Meeting meeting = new Meeting(title, startTime, endTime);
 
         return meeting;
